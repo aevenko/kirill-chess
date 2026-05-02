@@ -1224,7 +1224,7 @@ function applyData(D) {
         <td>${t.format}</td>
         <td>${t.score}</td>
         <td><span class="place-tag ${t.place_tag}">${t.place}</span></td>
-        <td class="delta-pos">+${t.delta.replace('+','')}</td>
+        <td class="${t.delta ? (t.delta.startsWith('-') ? 'delta-neg' : 'delta-pos') : ''}">${t.delta ? (t.delta.startsWith('+') || t.delta.startsWith('-') ? t.delta : '+' + t.delta) : '—'}</td>
       </tr>
     `).join('');
   }
