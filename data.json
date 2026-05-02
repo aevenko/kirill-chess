@@ -182,6 +182,16 @@
       "moves": "65 moves",
       "opening": "Queen's Gambit",
       "lichess": ""
+    },
+    {
+      "event": "Chambly April 2026 R4",
+      "white": "Tse, Chun Wing 1899",
+      "black": "Evenko, Kirill 1680",
+      "result": "0 - 1",
+      "type": "Classical",
+      "moves": "43 moves",
+      "opening": "",
+      "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/gt2Yja7Z#0\" frameborder=0></iframe>"
     }
   ],
   "gallery": [
