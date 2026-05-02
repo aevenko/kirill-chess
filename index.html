@@ -925,15 +925,16 @@
 <nav>
   <div class="nav-logo">KE ♟</div>
   <div class="nav-links">
-    <a href="#about"       data-en="About"       data-ru="О нас">About</a>
-    <a href="#tournaments" data-en="Tournaments"  data-ru="Турниры">Tournaments</a>
-    <a href="#games"       data-en="Games"        data-ru="Партии">Games</a>
-    <a href="#gallery"     data-en="Gallery"      data-ru="Галерея">Gallery</a>
-    <a href="#contact"     data-en="Contact"      data-ru="Контакт">Contact</a>
+    <a href="#about"       data-en="About" data-ru="О нас" data-fr="À propos">About</a>
+    <a href="#tournaments" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
+    <a href="#games"       data-en="Games" data-ru="Партии" data-fr="Parties">Games</a>
+    <a href="#gallery"     data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</a>
+    <a href="#contact"     data-en="Contact" data-ru="Контакт" data-fr="Contact">Contact</a>
   </div>
   <div class="nav-lang">
     <button onclick="setLang('en')" class="active">EN</button>
     <button onclick="setLang('ru')">RU</button>
+    <button onclick="setLang('fr')">FR</button>
   </div>
   <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -942,21 +943,21 @@
 
 <!-- MOBILE MENU -->
 <div id="mobileMenu" style="display:none">
-  <a href="#about"       onclick="toggleMenu()" data-en="About"       data-ru="О нас">About</a>
-  <a href="#tournaments" onclick="toggleMenu()" data-en="Tournaments"  data-ru="Турниры">Tournaments</a>
-  <a href="#games"       onclick="toggleMenu()" data-en="Games"        data-ru="Партии">Games</a>
-  <a href="#gallery"     onclick="toggleMenu()" data-en="Gallery"      data-ru="Галерея">Gallery</a>
-  <a href="#contact"     onclick="toggleMenu()" data-en="Contact"      data-ru="Контакт">Contact</a>
+  <a href="#about"       onclick="toggleMenu()" data-en="About" data-ru="О нас" data-fr="À propos">About</a>
+  <a href="#tournaments" onclick="toggleMenu()" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
+  <a href="#games"       onclick="toggleMenu()" data-en="Games" data-ru="Партии" data-fr="Parties">Games</a>
+  <a href="#gallery"     onclick="toggleMenu()" data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</a>
+  <a href="#contact"     onclick="toggleMenu()" data-en="Contact" data-ru="Контакт" data-fr="Contact">Contact</a>
   <button style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:24px;color:inherit;cursor:pointer" onclick="toggleMenu()">CLOSE</button>
 </div>
 
 <!-- HERO -->
 <section id="hero" class="reveal">
   <div class="hero-content">
-    <div class="hero-eyebrow" id="hero_eyebrow" data-en="♟ Canadian Chess Player · Montréal, QC" data-ru="♟ Канадский шахматист · Монреаль, КК">♟ Canadian Chess Player · Montréal, QC</div>
+    <div class="hero-eyebrow" id="hero_eyebrow" data-en="♟ Canadian Chess Player · Montréal, QC" data-ru="♟ Канадский шахматист · Монреаль, КК" data-fr="♟ Joueur d'échecs canadien · Montréal, QC">♟ Canadian Chess Player · Montréal, QC</div>
     <h1 class="hero-name">
-      <span id="hero_name_first" data-en="KIRILL" data-ru="КИРИЛЛ">KIRILL</span><br>
-      <span id="hero_name_last"  data-en="EVENKO" data-ru="ЕВЕНКО">EVENKO</span>
+      <span id="hero_name_first" data-en="KIRILL" data-ru="КИРИЛЛ" data-fr="KIRILL">KIRILL</span><br>
+      <span id="hero_name_last"  data-en="EVENKO" data-ru="ЕВЕНКО" data-fr="EVENKO">EVENKO</span>
     </h1>
     <p class="hero-slogan" id="hero_slogan" data-en="Young champion in the making" data-ru="Будущий чемпион">Young champion in the making</p>
     <div class="hero-stats">
@@ -971,14 +972,14 @@
         <div class="stat-sub" data-en="Chess Canada" data-ru="Chess Canada">Chess Canada</div>
       </div>
       <div class="stat-block">
-        <div class="stat-label" data-en="Age" data-ru="Возраст">Age</div>
+        <div class="stat-label" data-en="Age" data-ru="Возраст" data-fr="Âge">Age</div>
         <div class="stat-num" id="stat_age">12</div>
         <div class="stat-sub" id="stat_since" data-en="Since 2018" data-ru="С 2018 года">Since 2018</div>
       </div>
     </div>
     <div class="hero-btns">
-      <a href="#tournaments" class="btn-primary" data-en="View Record" data-ru="Турниры">View Record</a>
-      <a href="#games"       class="btn-outline" data-en="Watch Games" data-ru="Партии">Watch Games</a>
+      <a href="#tournaments" class="btn-primary" data-en="View Record" data-ru="Турниры" data-fr="Voir le palmarès">View Record</a>
+      <a href="#games"       class="btn-outline" data-en="Watch Games" data-ru="Партии" data-fr="Voir les parties">Watch Games</a>
     </div>
   </div>
   <div class="hero-photo-wrap">
@@ -991,14 +992,14 @@
     </div>
     <div class="photo-caption">
       <p class="photo-quote">Just make a move</p>
-      <p class="photo-label" data-en="Kirill's photo here" data-ru="Фото Кирилла">Kirill's photo here</p>
+      <p class="photo-label" data-en="Kirill's photo here" data-ru="Фото Кирилла" data-fr="Photo de Kirill">Kirill's photo here</p>
     </div>
   </div>
 </section>
 
 <!-- RATINGS BAR -->
 <div class="ratings-bar">
-  <span class="ratings-label" data-en="Live Ratings" data-ru="Рейтинги">Live Ratings</span>
+  <span class="ratings-label" data-en="Live Ratings" data-ru="Рейтинги" data-fr="Classements">Live Ratings</span>
   <div class="ratings-items" id="ratingsBar">
     <!-- filled by JS -->
   </div>
@@ -1006,8 +1007,8 @@
 
 <!-- ABOUT -->
 <section id="about" class="reveal">
-  <div class="section-label" data-en="About" data-ru="О Кирилле">About</div>
-  <h2 class="section-title" id="about_title" data-en="The Player<br>Behind the Board" data-ru="Игрок за<br>доской">The Player<br>Behind the Board</h2>
+  <div class="section-label" data-en="About" data-ru="О Кирилле" data-fr="À propos">About</div>
+  <h2 class="section-title" id="about_title" data-en="The Player<br>Behind the Board" data-ru="Игрок за<br>доской" data-fr="Le joueur<br>derrière l'échiquier">The Player<br>Behind the Board</h2>
   <div class="about-grid">
     <div class="about-text">
       <p id="about_p1" class="about-para" data-en="" data-ru=""></p>
@@ -1016,11 +1017,11 @@
     </div>
     <div class="about-stats-card reveal">
       <div class="about-card-location">♛<br>BROSSARD, QC</div>
-      <div class="about-card-sub" id="about_card_since" data-en="Home · Playing since 2018" data-ru="Дом · Играет с 2018">Home · Playing since 2018</div>
+      <div class="about-card-sub" id="about_card_since" data-en="Home · Playing since 2018" data-ru="Дом · Играет с 2018" data-fr="Domicile · Joue depuis 2018">Home · Playing since 2018</div>
       <div class="mini-stats">
-        <div class="mini-stat"><span class="mini-stat-val" id="about_years">7</span><span class="mini-stat-lbl" data-en="Years in chess" data-ru="Лет в шахматах">Years in chess</span></div>
-        <div class="mini-stat"><span class="mini-stat-val" id="about_prizes">3</span><span class="mini-stat-lbl" data-en="Prize places" data-ru="Призовых мест">Prize places</span></div>
-        <div class="mini-stat"><span class="mini-stat-val" id="about_games_count">48</span><span class="mini-stat-lbl" data-en="Games recorded" data-ru="Партий записано">Games recorded</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_years">7</span><span class="mini-stat-lbl" data-en="Years in chess" data-ru="Лет в шахматах" data-fr="Années aux échecs">Years in chess</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_prizes">3</span><span class="mini-stat-lbl" data-en="Prize places" data-ru="Призовых мест" data-fr="Podiums">Prize places</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_games_count">48</span><span class="mini-stat-lbl" data-en="Games recorded" data-ru="Партий записано" data-fr="Parties enregistrées">Games recorded</span></div>
       </div>
     </div>
   </div>
@@ -1028,21 +1029,21 @@
 
 <!-- TOURNAMENTS -->
 <section id="tournaments" class="reveal">
-  <div class="section-label" data-en="Tournaments" data-ru="Турниры">Tournaments</div>
-  <h2 class="section-title" data-en="Tournament<br>Record" data-ru="Турнирный<br>путь">Tournament<br>Record</h2>
+  <div class="section-label" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</div>
+  <h2 class="section-title" data-en="Tournament<br>Record" data-ru="Турнирный<br>путь" data-fr="Palmarès des<br>tournois">Tournament<br>Record</h2>
   <div class="tabs">
-    <button class="tab-btn active" id="tab-past"     onclick="switchTab('past')"     data-en="Played"    data-ru="Сыгранные">Played</button>
-    <button class="tab-btn"        id="tab-upcoming" onclick="switchTab('upcoming')" data-en="Upcoming"  data-ru="Предстоящие">Upcoming</button>
+    <button class="tab-btn active" id="tab-past"     onclick="switchTab('past')"     data-en="Played" data-ru="Сыгранные" data-fr="Joués">Played</button>
+    <button class="tab-btn"        id="tab-upcoming" onclick="switchTab('upcoming')" data-en="Upcoming" data-ru="Предстоящие" data-fr="À venir">Upcoming</button>
   </div>
   <div id="panel-past">
     <table class="tournament-table">
       <thead><tr>
-        <th data-en="Tournament" data-ru="Турнир">Tournament</th>
-        <th data-en="Date"       data-ru="Дата">Date</th>
-        <th data-en="City"       data-ru="Город">City</th>
-        <th data-en="Format"     data-ru="Формат">Format</th>
-        <th data-en="Score"      data-ru="Счёт">Score</th>
-        <th data-en="Place"      data-ru="Место">Place</th>
+        <th data-en="Tournament" data-ru="Турнир" data-fr="Tournoi">Tournament</th>
+        <th data-en="Date" data-ru="Дата" data-fr="Date">Date</th>
+        <th data-en="City" data-ru="Город" data-fr="Ville">City</th>
+        <th data-en="Format" data-ru="Формат" data-fr="Format">Format</th>
+        <th data-en="Score" data-ru="Счёт" data-fr="Score">Score</th>
+        <th data-en="Place" data-ru="Место" data-fr="Place">Place</th>
         <th>Δ Rating</th>
       </tr></thead>
       <tbody id="pastTbody"></tbody>
@@ -1055,8 +1056,8 @@
         <th data-en="Date"       data-ru="Дата">Date</th>
         <th data-en="City"       data-ru="Город">City</th>
         <th data-en="Format"     data-ru="Формат">Format</th>
-        <th data-en="Category"   data-ru="Категория">Category</th>
-        <th data-en="Status"     data-ru="Статус">Status</th>
+        <th data-en="Category" data-ru="Категория" data-fr="Catégorie">Category</th>
+        <th data-en="Status" data-ru="Статус" data-fr="Statut">Status</th>
       </tr></thead>
       <tbody id="upcomingTbody"></tbody>
     </table>
@@ -1065,37 +1066,37 @@
 
 <!-- GAMES -->
 <section id="games" class="reveal">
-  <div class="section-label" data-en="Games" data-ru="Партии">Games</div>
-  <h2 class="section-title" data-en="Featured<br>Games" data-ru="Избранные<br>партии">Featured<br>Games</h2>
-  <p class="section-sub" data-en="Games &amp; Analysis" data-ru="Партии и анализ">Games &amp; Analysis</p>
+  <div class="section-label" data-en="Games" data-ru="Партии" data-fr="Parties">Games</div>
+  <h2 class="section-title" data-en="Featured<br>Games" data-ru="Избранные<br>партии" data-fr="Meilleures<br>parties">Featured<br>Games</h2>
+  <p class="section-sub" data-en="Games &amp; Analysis" data-ru="Партии и анализ" data-fr="Parties &amp; analyses">Games &amp; Analysis</p>
   <div class="games-grid" id="gamesGrid"></div>
-  <div class="lichess-note" data-en="♟ Interactive review via Lichess — click a game card" data-ru="♟ Интерактивный просмотр через Lichess — нажмите на карточку партии">♟ Interactive review via Lichess — click a game card</div>
+  <div class="lichess-note" data-en="♟ Interactive review via Lichess — click a game card" data-ru="♟ Интерактивный просмотр через Lichess — нажмите на карточку партии" data-fr="♟ Analyse interactive via Lichess — cliquez sur une carte">♟ Interactive review via Lichess — click a game card</div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery" class="reveal">
-  <div class="section-label" data-en="Gallery" data-ru="Галерея">Gallery</div>
-  <h2 class="section-title" data-en="Moments" data-ru="Моменты">Moments</h2>
+  <div class="section-label" data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</div>
+  <h2 class="section-title" data-en="Moments" data-ru="Моменты" data-fr="Moments">Moments</h2>
   <div class="gallery-grid" id="galleryGrid"></div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="reveal">
-  <div class="section-label" data-en="Contact" data-ru="Контакт">Contact</div>
-  <h2 class="section-title" data-en="Write<br>to Us" data-ru="Напишите<br>нам">Write<br>to Us</h2>
-  <p class="section-sub" data-en="Want to invite Kirill to a tournament, play a friendly game, or just follow his journey? Write to us." data-ru="Хотите пригласить Кирилла на турнир, сыграть товарищескую партию или просто следить за его путём? Напишите нам.">Want to invite Kirill to a tournament, play a friendly game, or just follow his journey? Write to us.</p>
+  <div class="section-label" data-en="Contact" data-ru="Контакт" data-fr="Contact">Contact</div>
+  <h2 class="section-title" data-en="Write<br>to Us" data-ru="Напишите<br>нам" data-fr="Écrivez-<br>nous">Write<br>to Us</h2>
+  <p class="section-sub" data-en="Want to invite Kirill to a tournament, play a friendly game, or just follow his journey? Write to us." data-ru="Хотите пригласить Кирилла на турнир, сыграть товарищескую партию или просто следить за его путём? Напишите нам." data-fr="Vous souhaitez inviter Kirill à un tournoi, jouer une partie amicale ou suivre son parcours ? Écrivez-nous.">Want to invite Kirill to a tournament, play a friendly game, or just follow his journey? Write to us.</p>
   <div class="contact-grid">
     <div class="contact-info">
       <p>📍 Brossard, Québec, Canada</p>
       <p>✉️ <a href="mailto:a.evenko@gmail.com" style="color:var(--gold);text-decoration:none">a.evenko@gmail.com</a></p>
-      <p data-en="♟ Member — Chess Canada (CFC) · FQÉ" data-ru="♟ Член — Chess Canada (CFC) · FQÉ">♟ Member — Chess Canada (CFC) · FQÉ</p>
+      <p data-en="♟ Member — Chess Canada (CFC) · FQÉ" data-ru="♟ Член — Chess Canada (CFC) · FQÉ" data-fr="♟ Membre — Chess Canada (CFC) · FQÉ">♟ Member — Chess Canada (CFC) · FQÉ</p>
     </div>
     <form class="contact-form" onsubmit="return false">
-      <input type="text"  name="name"    data-en="Name"    data-ru="Имя"       placeholder="Name">
-      <input type="email" name="email"   data-en="Email"   data-ru="Email"     placeholder="Email">
-      <input type="text"  name="subject" data-en="Subject" data-ru="Тема"      placeholder="Subject">
-      <textarea           name="message" data-en="Message" data-ru="Сообщение" placeholder="Message" rows="4"></textarea>
-      <button type="submit" class="btn-primary" data-en="Send" data-ru="Отправить">Send</button>
+      <input type="text"  name="name"    data-en="Name" data-ru="Имя" data-fr="Nom"       placeholder="Name">
+      <input type="email" name="email"   data-en="Email" data-ru="Email" data-fr="Courriel"     placeholder="Email">
+      <input type="text"  name="subject" data-en="Subject" data-ru="Тема" data-fr="Sujet"      placeholder="Subject">
+      <textarea           name="message" data-en="Message" data-ru="Сообщение" data-fr="Message" placeholder="Message" rows="4"></textarea>
+      <button type="submit" class="btn-primary" data-en="Send" data-ru="Отправить" data-fr="Envoyer">Send</button>
     </form>
   </div>
 </section>
@@ -1103,7 +1104,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="nav-logo">KE ♟</div>
-  <p data-en="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada" data-ru="© 2025 Kirill Evenko · kirill-evenko.com · Броссар, Квебек · Канада">© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada</p>
+  <p data-en="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada" data-ru="© 2025 Kirill Evenko · kirill-evenko.com · Броссар, Квебек · Канада" data-fr="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada">© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada</p>
 </footer>
 
 <!-- LIGHTBOX -->
@@ -1145,6 +1146,7 @@ function applyData(D) {
     const sinceEl = document.getElementById('stat_since');
     sinceEl.setAttribute('data-en', 'Since ' + (hs.since_year||2018));
     sinceEl.setAttribute('data-ru', 'С ' + (hs.since_year||2018) + ' года');
+    sinceEl.setAttribute('data-fr', 'Depuis ' + (hs.since_year||2018));
     sinceEl.textContent = 'Since ' + (hs.since_year||2018);
   }
   // Hero text
@@ -1152,6 +1154,7 @@ function applyData(D) {
     const slogan = document.getElementById('hero_slogan');
     slogan.setAttribute('data-en', D.hero.slogan_en || '');
     slogan.setAttribute('data-ru', D.hero.slogan_ru || '');
+    slogan.setAttribute('data-fr', D.hero.slogan_fr || D.hero.slogan_en || '');
     slogan.textContent = D.hero.slogan_en || '';
   }
   // Hero photo
@@ -1198,19 +1201,23 @@ function applyData(D) {
     if (cardSince && D.hero_stats) {
       cardSince.setAttribute('data-en', 'Home · Playing since ' + D.hero_stats.since_year);
       cardSince.setAttribute('data-ru', 'Дом · Играет с ' + D.hero_stats.since_year);
+      cardSince.setAttribute('data-fr', 'Domicile · Joue depuis ' + D.hero_stats.since_year);
     }
     // Paragraphs
     const p1 = document.getElementById('about_p1');
     p1.setAttribute('data-en', ab.para1_en || '');
     p1.setAttribute('data-ru', ab.para1_ru || '');
+    p1.setAttribute('data-fr', ab.para1_fr || ab.para1_en || '');
     p1.innerHTML = ab.para1_en || '';
     const p2 = document.getElementById('about_p2');
     p2.setAttribute('data-en', ab.para2_en || '');
     p2.setAttribute('data-ru', ab.para2_ru || '');
+    p2.setAttribute('data-fr', ab.para2_fr || ab.para2_en || '');
     p2.innerHTML = ab.para2_en || '';
     const p3 = document.getElementById('about_p3');
     p3.setAttribute('data-en', ab.para3_en || '');
     p3.setAttribute('data-ru', ab.para3_ru || '');
+    p3.setAttribute('data-fr', ab.para3_fr || ab.para3_en || '');
     p3.innerHTML = ab.para3_en || '';
   }
   // Tournaments past
