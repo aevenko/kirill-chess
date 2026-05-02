@@ -53,8 +53,8 @@
     "label_ru": "О Кирилле",
     "title_en": "The Player<br>Behind the Board",
     "title_ru": "Игрок за<br>доской",
-    "para1_en": "Kirill Evenko is a 12-year-old chess player from Brossard, Québec — a Canadian with Russian roots. His story with chess started at five years old, when his father sat him down and showed him the basics. That one afternoon changed everything. Chess became not just a hobby, but a passion — and a mission.",
-    "para1_ru": "Кирилл Евенко — 12-летний шахматист из Броссара, Квебек. Канадец с русскими корнями. Его история с шахматами началась в пять лет, когда папа показал ему основные принципы игры. Тот день изменил всё. Шахматы стали не просто увлечением, а настоящей страстью — и целью.",
+    "para1_en": "Kirill Evenko is a 13-year-old chess player from Brossard, Québec — a Canadian with Russian roots. His story with chess started at five years old, when his father sat him down and showed him the basics. That one afternoon changed everything. Chess became not just a hobby, but a passion — and a mission.",
+    "para1_ru": "Кирилл Евенко — 13-летний шахматист из Броссара, Квебек. Канадец с русскими корнями. Его история с шахматами началась в пять лет, когда папа показал ему основные принципы игры. Тот день изменил всё. Шахматы стали не просто увлечением, а настоящей страстью — и целью.",
     "para2_en": "Today Kirill competes in Canadian and international tournaments, but what defines him most is what happens away from the board — training every day with fire in his eyes, studying openings, middlegames and endgames with a focus that goes far beyond his age. He is on the road to the grandmaster title — and every step counts.",
     "para2_ru": "Сегодня Кирилл участвует в канадских и международных турнирах. Но главное — это то, что происходит вне соревнований. Он тренируется каждый день с огнём в глазах, разучивает дебюты, миттельшпили и эндшпили с сосредоточенностью, которая удивляет. Он идёт к титулу гроссмейстера семимильными шагами.",
     "para1_fr": "Kirill Evenko est un joueur d'échecs de 12 ans originaire de Brossard, au Québec — un Canadien aux racines russes. Son histoire avec les échecs a commencé à l'âge de cinq ans, lorsque son père lui a enseigné les bases du jeu. Cet après-midi-là a tout changé. Les échecs sont devenus non seulement un passe-temps, mais une véritable passion — et une mission.",
@@ -62,7 +62,7 @@
     "para3_fr": "Ce site a été créé pour suivre chaque étape de ce parcours — victoires et défaites, percées et leçons. Pour préserver les meilleurs moments d'une histoire qui s'écrit encore.",
     "para3_en": "This site was created to follow each step of that journey — wins and losses, breakthroughs and lessons. To preserve the best moments of a story still being written.",
     "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
-    "years_playing": 7,
+    "years_playing": 8,
     "prize_places": 3,
     "games_recorded": 48
   },
@@ -489,7 +489,7 @@
       "year": "2026",
       "tournaments": [
         {
-          "name": "Tournois de Germain Laplante",
+          "name": "Tournois de Mercredi à Chambly",
           "location": "Chambly",
           "date": "Apr 2026",
           "games": [
@@ -522,6 +522,26 @@
               "moves": "",
               "opening": "",
               "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/0bfOp7l2\" frameborder=0></iframe>"
+            },
+            {
+              "event": "Chambly Apr 2026 · R4",
+              "white": "Evenko, Kirill 1644",
+              "black": "Cournoyer, Raphael 1775",
+              "result": "1 - 0",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/4CYVXCTj\" frameborder=0></iframe>"
+            },
+            {
+              "event": "Chambly Apr 2026 · R5",
+              "white": "Evenko, Kirill 1644",
+              "black": "Cousineau, Francois 1793",
+              "result": "1/2 - 1/2",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/f7t4YZDL\" frameborder=0></iframe>"
             }
           ]
         },
@@ -529,25 +549,65 @@
           "name": "Championnat Ouvert de la Mauricie",
           "location": "Trois-Rivières",
           "date": "Mar 2026",
-          "games": []
-        },
-        {
-          "name": "New York State Scholastic Championships",
-          "location": "Saratoga, NY",
-          "date": "Mar 2026",
-          "games": []
+          "games": [
+            {
+              "event": "Trois-Riviers Game 1",
+              "white": " Cote, Claude 1513",
+              "black": "Evenko, Kirill 1672",
+              "result": "0 - 1",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/bY02sRWD\" frameborder=0></iframe>"
+            },
+            {
+              "event": "",
+              "white": "Evenko, Kirill 1672",
+              "black": "Montreuil, Carl 1426",
+              "result": "1 - 0",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/MDSv7x66\" frameborder=0></iframe>"
+            }
+          ]
         },
         {
           "name": "Ottawa March Open",
           "location": "Ottawa, ON",
           "date": "Mar 2026",
-          "games": []
-        },
-        {
-          "name": "Tournoi d'échecs du Carnaval",
-          "location": "Québec City",
-          "date": "Feb 2026",
-          "games": []
+          "games": [
+            {
+              "event": "Ottawa Open 2026 R1",
+              "white": "Mahdjoubi, Abdelaziz 1868",
+              "black": "Evenko, Kirill 1679",
+              "result": "1 - 0",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/TgReTxTx\" frameborder=0></iframe>"
+            },
+            {
+              "event": "Ottawa Open 2026 R2",
+              "white": "Evenko, Kirill 1679",
+              "black": "Player 1889",
+              "result": "1 - 0",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/wPM4RGAp\" frameborder=0></iframe>"
+            },
+            {
+              "event": "Ottawa Open 2026 R2",
+              "white": "Evenko, Kirill",
+              "black": " Banami, Jonathan 1826",
+              "result": "1 - 0",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/1H6HEyqh\" frameborder=0></iframe>"
+            }
+          ]
         }
       ]
     },
@@ -564,24 +624,6 @@
           "name": "Championnat d'échecs du Haut-Richelieu",
           "location": "St-Jean-sur-Richelieu",
           "date": "Oct 2025",
-          "games": []
-        },
-        {
-          "name": "Le Grand Tour Jeunesse",
-          "location": "Montréal",
-          "date": "Nov 2025",
-          "games": []
-        },
-        {
-          "name": "Tournoi Régulier de la Rive-Sud (CAM)",
-          "location": "Brossard",
-          "date": "Dec 2025",
-          "games": []
-        },
-        {
-          "name": "Le Tournoi du Père-Noël",
-          "location": "Montréal",
-          "date": "Dec 2025",
           "games": []
         }
       ]
