@@ -802,6 +802,95 @@
     .btn-primary, .btn-outline { text-align: center; }
   }
 
+  /* ── LIGHTBOX ── */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(16,13,10,.93);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 90vw;
+    max-height: 88vh;
+    border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.7);
+    object-fit: contain;
+    cursor: default;
+  }
+  #lightbox-close {
+    position: absolute;
+    top: 22px; right: 28px;
+    font-size: 36px;
+    color: rgba(255,255,255,.7);
+    cursor: pointer;
+    line-height: 1;
+    transition: color .2s;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  #lightbox-close:hover { color: #fff; }
+
+  /* ── LICHESS MODAL ── */
+  #lichessModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(16,13,10,.93);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #lichessModal.open { display: flex; }
+  #lichessModal-inner {
+    position: relative;
+    width: min(680px, 95vw);
+    background: var(--bg-dark);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: default;
+    box-shadow: 0 24px 80px rgba(0,0,0,.7);
+  }
+  #lichessModal iframe {
+    width: 100%;
+    height: 420px;
+    border: none;
+    display: block;
+  }
+  #lichessModal-close {
+    position: absolute;
+    top: 10px; right: 14px;
+    font-size: 28px;
+    color: rgba(255,255,255,.7);
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10;
+    transition: color .2s;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  #lichessModal-close:hover { color: #fff; }
+  .game-card.has-lichess { cursor: pointer; }
+  .game-card.has-lichess::after {
+    content: '♟ View on Lichess';
+    display: block;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: .8;
+  }
+
   /* Admin link */
   .admin-link {
     position: fixed; bottom: 20px; right: 20px;
@@ -1000,6 +1089,20 @@
   <p data-en="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada" data-ru="© 2025 Kirill Evenko · kirill-evenko.com · Броссар, Квебек · Канада">© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada</p>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- LICHESS MODAL -->
+<div id="lichessModal" onclick="closeLichessModal()">
+  <div id="lichessModal-inner" onclick="event.stopPropagation()">
+    <button id="lichessModal-close" onclick="closeLichessModal()">×</button>
+    <iframe id="lichessIframe" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
 <!-- Admin subtle link -->
 <a href="/admin.html" class="admin-link">⚙</a>
 
@@ -1112,20 +1215,33 @@ function applyData(D) {
     const grid = document.getElementById('gamesGrid');
     grid.innerHTML = D.games.map((g,i) => {
       const boardId = 'board' + (i+1);
-      const playerLine = g.result === '1 — 0'
+      // Determine winner for bold
+      const wWin = g.result === '1 — 0' || g.result === '1 - 0';
+      const bWin = g.result === '0 — 1' || g.result === '0 - 1';
+      const playerLine = wWin
         ? '<span class="gw">' + g.white + '</span> vs ' + g.black
-        : g.white + ' vs <span class="gw">' + g.black + '</span>';
+        : bWin
+          ? g.white + ' vs <span class="gw">' + g.black + '</span>'
+          : g.white + ' vs ' + g.black;
+      // Extract lichess iframe src
+      let lichessUrl = '';
+      if (g.lichess) {
+        const m = g.lichess.match(/src="([^"]+)"/);
+        if (m) lichessUrl = m[1];
+      }
       const cardContent = `
         <div class="game-event">${g.event}</div>
         <div class="game-players">${playerLine}</div>
         <div class="game-result">${g.result}</div>
         <div class="game-board" id="${boardId}"></div>
         <div class="game-meta">${g.type} · ${g.moves}</div>
-        <div class="game-opening">${g.opening}</div>
+        ${g.opening ? '<div class="game-opening">' + g.opening + '</div>' : ''}
       `;
-      return g.lichess
-        ? `<a href="${g.lichess}" target="_blank" class="game-card">${cardContent}</a>`
-        : `<div class="game-card">${cardContent}</div>`;
+      if (lichessUrl) {
+        return `<div class="game-card has-lichess" onclick="openLichess('${lichessUrl}')">${cardContent}</div>`;
+      } else {
+        return `<div class="game-card">${cardContent}</div>`;
+      }
     }).join('');
     // Draw mini boards
     const pieces = {0:['♜','♞','♝','♛','♚','♝','♞','♜'],1:['♟','♟','♟','♟','♟','♟','♟','♟'],6:['♙','♙','♙','♙','♙','♙','♙','♙'],7:['♖','♘','♗','♕','♔','♗','♘','♖']};
@@ -1147,7 +1263,7 @@ function applyData(D) {
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = D.gallery.map(g => {
       if (g.file) {
-        return `<div class="gallery-item"><img src="/photos/${g.file}" alt="${g.label_en}" style="width:100%;height:100%;object-fit:cover;border-radius:4px"><div class="gallery-overlay">🔍</div></div>`;
+        return `<div class="gallery-item" onclick="openLightbox('/photos/${g.file}')"><img src="/photos/${g.file}" alt="${g.label_en}" style="width:100%;height:100%;object-fit:cover;border-radius:4px"><div class="gallery-overlay">🔍</div></div>`;
       } else {
         return `<div class="gallery-item"><div class="gallery-placeholder">${g.emoji}${g.label_ru}</div><div class="gallery-overlay">🔍</div></div>`;
       }
@@ -1206,6 +1322,35 @@ function checkMobile() {
   if (window.innerWidth <= 768) { ham.style.display = 'flex'; }
   else { ham.style.display = 'none'; document.getElementById('mobileMenu').style.display = 'none'; }
 }
+
+// ── Lightbox ──
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
+  document.body.style.overflow = '';
+}
+
+// ── Lichess Modal ──
+function openLichess(url) {
+  document.getElementById('lichessIframe').src = url;
+  document.getElementById('lichessModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLichessModal() {
+  document.getElementById('lichessModal').classList.remove('open');
+  document.getElementById('lichessIframe').src = '';
+  document.body.style.overflow = '';
+}
+
+// Close modals with Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeLightbox(); closeLichessModal(); }
+});
 
 // ── Start ──
 loadSiteData();
