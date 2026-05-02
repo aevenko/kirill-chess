@@ -13,16 +13,16 @@
   --border: rgba(22,19,15,.15); --danger: #c04040; --success: #4a9a4a;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; min-height:100vh; }
+body { background:var(--bg); color:var(--text); font-family:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; font-size:16px; min-height:100vh; }
 
 /* LOGIN */
 #loginScreen { display:flex; align-items:center; justify-content:center; min-height:100vh; }
 .login-box { background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; padding:48px 40px; width:360px; text-align:center; }
 .login-logo { font-size:32px; color:var(--gold); font-weight:700; margin-bottom:8px; }
 .login-sub { color:var(--muted); margin-bottom:32px; font-size:15px; }
-.login-box input { width:100%; padding:12px 16px; border:1px solid var(--border); border-radius:4px; background:var(--bg); font-size:16px; font-family:'Outfit',sans-serif; margin-bottom:12px; }
+.login-box input { width:100%; padding:12px 16px; border:1px solid var(--border); border-radius:4px; background:var(--bg); font-size:16px; font-family:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; margin-bottom:12px; }
 .login-box input:focus { outline:2px solid var(--gold); }
-.btn-gold { width:100%; padding:13px; background:var(--gold); color:#fff; border:none; border-radius:4px; font-size:16px; font-family:'Outfit',sans-serif; font-weight:500; cursor:pointer; transition:background .2s; }
+.btn-gold { width:100%; padding:13px; background:var(--gold); color:#fff; border:none; border-radius:4px; font-size:16px; font-family:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; font-weight:500; cursor:pointer; transition:background .2s; }
 .btn-gold:hover { background:var(--gold-lt); }
 .login-error { color:var(--danger); font-size:14px; margin-top:10px; display:none; }
 
@@ -31,7 +31,7 @@ body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif;
 .admin-nav { background:var(--bg-dark); color:#f0ece4; display:flex; align-items:center; justify-content:space-between; padding:14px 32px; position:sticky; top:0; z-index:100; }
 .admin-nav-logo { color:var(--gold); font-weight:700; font-size:18px; }
 .admin-nav-right { display:flex; gap:16px; align-items:center; }
-.btn-sm { padding:7px 16px; border-radius:4px; border:none; font-family:'Outfit',sans-serif; font-size:14px; cursor:pointer; font-weight:500; }
+.btn-sm { padding:7px 16px; border-radius:4px; border:none; font-family:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; font-size:14px; cursor:pointer; font-weight:500; }
 .btn-back { background:rgba(255,255,255,.1); color:#f0ece4; text-decoration:none; display:inline-block; }
 .btn-back:hover { background:rgba(255,255,255,.2); }
 .btn-save { background:var(--gold); color:#fff; }
@@ -48,7 +48,7 @@ body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif;
 label { display:block; font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:500; text-transform:uppercase; letter-spacing:.5px; }
 input[type=text], input[type=number], textarea, select {
   width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:4px;
-  background:var(--bg); font-size:15px; font-family:'Outfit',sans-serif; color:var(--text);
+  background:var(--bg); font-size:15px; font-family:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color:var(--text);
   margin-bottom:16px;
 }
 input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus { outline:2px solid var(--gold); border-color:transparent; }
@@ -65,7 +65,7 @@ textarea { min-height:80px; resize:vertical; }
 /* Table editor */
 .table-row-editor { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:16px; margin-bottom:10px; position:relative; }
 .table-row-editor .delete-row { position:absolute; top:10px; right:10px; background:none; border:none; color:var(--danger); cursor:pointer; font-size:18px; line-height:1; }
-.add-row-btn { background:none; border:2px dashed var(--border); width:100%; padding:12px; border-radius:6px; color:var(--muted); font-family:'Outfit',sans-serif; font-size:15px; cursor:pointer; transition:all .2s; margin-top:4px; }
+.add-row-btn { background:none; border:2px dashed var(--border); width:100%; padding:12px; border-radius:6px; color:var(--muted); font-family:'Outfit',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; font-size:15px; cursor:pointer; transition:all .2s; margin-top:4px; }
 .add-row-btn:hover { border-color:var(--gold); color:var(--gold); }
 
 /* Gallery */
@@ -238,12 +238,18 @@ textarea { min-height:80px; resize:vertical; }
 <div id="toast"></div>
 
 <script>
-const ADMIN_PASSWORD = 'kirill2025';
+const ADMIN_PASSWORD_HASH = '5f4d9260d6cb9b3566020a74126cb31fa0a68752ba7c5bf03635326511577774';
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
 
 // ── AUTH ──
-function doLogin() {
+async function doLogin() {
   const pw = document.getElementById('pwInput').value;
-  if (pw === ADMIN_PASSWORD) {
+  const hash = await sha256(pw);
+  if (hash === ADMIN_PASSWORD_HASH) {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminPanel').style.display = 'block';
     loadData();
@@ -516,17 +522,4 @@ function deployToVercel() {
 }
 </script>
 </body>
-</html<div>
-          <h2>🚀 Опубликовать через Terminal</h2>
-          <p style="color:var(--muted);margin:0 0 16px">Откройте Terminal и выполните по очереди:</p>
-          <div style="background:#0a0a0a;color:#00ff88;font-family:monospace;font-size:14px;border-radius:10px;padding:18px 20px;margin-bottom:16px;line-height:2.2;user-select:all">
-            <span style="color:#888"># перейти в папку проекта:</span><br>
-            cd ~/Desktop/kirill-chess<br><br>
-            <span style="color:#888"># задеплоить:</span><br>
-            vercel deploy --prod
-          </div>
-          <div style="background:rgba(0,200,100,.07);border:1px solid rgba(0,200,100,.3);border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.8">
-            ⏱ Через 3–5 секунд сайт обновится ✅<br>
-            <span style="color:var(--muted);font-size:13px">Если папка находится не на Desktop — укажите правильный путь после cd</span>
-          </div>
-        </div>
+</html>
