@@ -154,7 +154,7 @@
   ],
   "games": [
     {
-      "event": "Chambly April 2026 R4",
+      "event": "Chambly April 2026 R2",
       "white": "Tse, Chun Wing 1899",
       "black": "Evenko, Kirill 1680",
       "result": "0 - 1",
@@ -171,17 +171,17 @@
       "type": "Classical",
       "moves": "",
       "opening": "",
-      "lichess": "https://lichess.org/study/u3lAeGTE/qApULFo1"
+      "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/qApULFo1\" frameborder=0></iframe>"
     },
     {
-      "event": "Chambly April 2026 R2",
+      "event": "Chambly April 2026 R3",
       "white": "Gagnon, Gabriel 1834",
       "black": "Evenko, Kirill 1680",
       "result": "0 - 1",
       "type": "Classical",
       "moves": "",
       "opening": "",
-      "lichess": "https://lichess.org/study/u3lAeGTE/0bfOp7l2"
+      "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/0bfOp7l2\" frameborder=0></iframe>"
     }
   ],
   "gallery": [
