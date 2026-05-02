@@ -177,12 +177,14 @@ textarea { min-height:80px; resize:vertical; }
       </div>
     </div>
 
-    <!-- GAMES -->
+    <!-- GAMES LIBRARY -->
     <div class="section-card">
-      <div class="section-card-header"><h2>♟ Games</h2></div>
+      <div class="section-card-header">
+        <h2>♟ Games Library</h2>
+        <button class="btn-sm btn-save" onclick="addYearGroup()">+ Add Year</button>
+      </div>
       <div class="section-card-body">
         <div id="gamesEditor"></div>
-        <button class="add-row-btn" onclick="addGame()">+ Add Game</button>
       </div>
     </div>
 
@@ -320,8 +322,8 @@ function renderAll() {
   // Tournaments
   renderPastTournaments();
   renderUpcomingTournaments();
-  // Games
-  renderGames();
+  // Games Library
+  renderGamesLibrary();
   // Gallery
   renderGallery();
 }
@@ -406,31 +408,108 @@ function addUpcomingTournament() {
   renderUpcomingTournaments();
 }
 
-// ── GAMES ──
-function renderGames() {
+// ── GAMES LIBRARY ──
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function extractLichessUrl(iframe) {
+  if (!iframe) return '';
+  const m = String(iframe).match(/src=["']([^"']+)["']/);
+  return m ? m[1] : iframe;
+}
+function buildLichessIframe(url) {
+  if (!url) return '';
+  return '<iframe width="600" height="371" src="' + url + '" frameborder=0></iframe>';
+}
+
+function renderGamesLibrary() {
   const el = document.getElementById('gamesEditor');
-  el.innerHTML = (D.games||[]).map((g,i) => `
-    <div class="table-row-editor">
-      <button class="delete-row" onclick="D.games.splice(${i},1);renderGames()">×</button>
-      <div><label>Event Name</label><input type="text" value="${g.event}" onchange="D.games[${i}].event=this.value"></div>
-      <div class="row3">
-        <div><label>White player</label><input type="text" value="${g.white}" onchange="D.games[${i}].white=this.value"></div>
-        <div><label>Black player</label><input type="text" value="${g.black}" onchange="D.games[${i}].black=this.value"></div>
-        <div><label>Result</label><input type="text" value="${g.result}" placeholder="1 — 0" onchange="D.games[${i}].result=this.value"></div>
+  const lib = D.games_library || [];
+  if (lib.length === 0) {
+    el.innerHTML = '<p style="color:var(--muted);font-size:14px;padding:8px 0">No years yet. Click <strong>+ Add Year</strong> above.</p>';
+    return;
+  }
+  el.innerHTML = lib.map((yg, yi) => `
+    <div style="background:var(--bg);border:2px solid var(--border);border-radius:8px;margin-bottom:20px;overflow:hidden">
+      <!-- Year header -->
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(160,104,32,.1);border-bottom:2px solid var(--border)">
+        <span style="font-size:20px">📁</span>
+        <input type="text" value="${escHtml(yg.year)}" placeholder="Year (e.g. 2026)"
+          onchange="D.games_library[${yi}].year=this.value"
+          style="font-weight:700;font-size:17px;width:110px;margin-bottom:0;padding:4px 8px;border-radius:4px">
+        <span style="color:var(--muted);font-size:13px">${(yg.tournaments||[]).length} tournament(s)</span>
+        <button onclick="if(confirm('Delete year ${escHtml(yg.year)} and ALL its tournaments?')){D.games_library.splice(${yi},1);renderGamesLibrary()}"
+          style="margin-left:auto;background:rgba(192,64,64,.12);border:1px solid rgba(192,64,64,.3);color:var(--danger);border-radius:4px;padding:4px 10px;cursor:pointer;font-size:13px;font-family:inherit">🗑 Delete Year</button>
       </div>
-      <div class="row3">
-        <div><label>Type</label><input type="text" value="${g.type}" placeholder="Classical" onchange="D.games[${i}].type=this.value"></div>
-        <div><label>Moves</label><input type="text" value="${g.moves}" placeholder="42 moves" onchange="D.games[${i}].moves=this.value"></div>
-        <div><label>Opening</label><input type="text" value="${g.opening}" placeholder="Ruy López" onchange="D.games[${i}].opening=this.value"></div>
+
+      <!-- Tournaments -->
+      <div style="padding:14px 16px">
+        ${(yg.tournaments||[]).map((t, ti) => `
+          <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;margin-bottom:14px;overflow:hidden">
+            <!-- Tournament header -->
+            <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(0,0,0,.04);border-bottom:1px solid var(--border);flex-wrap:wrap">
+              <span>📂</span>
+              <input type="text" value="${escHtml(t.name)}" placeholder="Tournament name"
+                onchange="D.games_library[${yi}].tournaments[${ti}].name=this.value"
+                style="flex:1;min-width:160px;font-weight:600;font-size:14px;margin-bottom:0;padding:3px 8px;border-radius:4px">
+              <input type="text" value="${escHtml(t.location)}" placeholder="City"
+                onchange="D.games_library[${yi}].tournaments[${ti}].location=this.value"
+                style="width:130px;font-size:13px;margin-bottom:0;padding:3px 8px;border-radius:4px">
+              <input type="text" value="${escHtml(t.date)}" placeholder="Mon YYYY"
+                onchange="D.games_library[${yi}].tournaments[${ti}].date=this.value"
+                style="width:100px;font-size:13px;margin-bottom:0;padding:3px 8px;border-radius:4px">
+              <span style="color:var(--muted);font-size:12px">${(t.games||[]).length} game(s)</span>
+              <button onclick="if(confirm('Delete tournament?')){D.games_library[${yi}].tournaments.splice(${ti},1);renderGamesLibrary()}"
+                style="background:rgba(192,64,64,.1);border:1px solid rgba(192,64,64,.25);color:var(--danger);border-radius:4px;padding:3px 9px;cursor:pointer;font-size:12px;font-family:inherit">× Remove</button>
+            </div>
+
+            <!-- Games -->
+            <div style="padding:12px 14px">
+              ${(t.games||[]).map((g, gi) => `
+                <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:10px;position:relative">
+                  <button onclick="D.games_library[${yi}].tournaments[${ti}].games.splice(${gi},1);renderGamesLibrary()"
+                    class="delete-row">×</button>
+                  <div class="row3">
+                    <div><label>White</label><input type="text" value="${escHtml(g.white)}" placeholder="Lastname, Firstname 1500" onchange="D.games_library[${yi}].tournaments[${ti}].games[${gi}].white=this.value"></div>
+                    <div><label>Black</label><input type="text" value="${escHtml(g.black)}" placeholder="Lastname, Firstname 1500" onchange="D.games_library[${yi}].tournaments[${ti}].games[${gi}].black=this.value"></div>
+                    <div><label>Result</label><input type="text" value="${escHtml(g.result)}" placeholder="1 - 0" onchange="D.games_library[${yi}].tournaments[${ti}].games[${gi}].result=this.value"></div>
+                  </div>
+                  <div class="row3">
+                    <div><label>Event / Round</label><input type="text" value="${escHtml(g.event)}" placeholder="City Apr 2026 · R1" onchange="D.games_library[${yi}].tournaments[${ti}].games[${gi}].event=this.value"></div>
+                    <div><label>Type</label><input type="text" value="${escHtml(g.type||'Classical')}" placeholder="Classical" onchange="D.games_library[${yi}].tournaments[${ti}].games[${gi}].type=this.value"></div>
+                    <div><label>Moves</label><input type="text" value="${escHtml(g.moves)}" placeholder="43 moves" onchange="D.games_library[${yi}].tournaments[${ti}].games[${gi}].moves=this.value"></div>
+                  </div>
+                  <div><label>Lichess URL (paste the study embed URL from lichess.org)</label>
+                    <input type="url" value="${escHtml(extractLichessUrl(g.lichess))}" placeholder="https://lichess.org/study/embed/XXXXXXXX/YYYYYYYY"
+                      onchange="D.games_library[${yi}].tournaments[${ti}].games[${gi}].lichess=buildLichessIframe(this.value)"
+                      style="margin-bottom:0;font-size:13px">
+                  </div>
+                </div>
+              `).join('')}
+              <button class="add-row-btn" onclick="glAddGame(${yi},${ti})">+ Add Game</button>
+            </div>
+          </div>
+        `).join('')}
+        <button class="add-row-btn" onclick="glAddTournament(${yi})">+ Add Tournament</button>
       </div>
-      <div><label>Lichess Link (optional)</label><input type="text" value="${g.lichess||''}" placeholder="https://lichess.org/..." onchange="D.games[${i}].lichess=this.value"></div>
     </div>
   `).join('');
 }
 
-function addGame() {
-  D.games.push({event:'',white:'',black:'',result:'',type:'Classical',moves:'',opening:'',lichess:''});
-  renderGames();
+function glAddGame(yi, ti) {
+  if (!D.games_library[yi].tournaments[ti].games) D.games_library[yi].tournaments[ti].games = [];
+  D.games_library[yi].tournaments[ti].games.push({event:'',white:'Evenko, Kirill',black:'',result:'',type:'Classical',moves:'',opening:'',lichess:''});
+  renderGamesLibrary();
+}
+function glAddTournament(yi) {
+  if (!D.games_library[yi].tournaments) D.games_library[yi].tournaments = [];
+  D.games_library[yi].tournaments.push({name:'',location:'',date:'',games:[]});
+  renderGamesLibrary();
+}
+function addYearGroup() {
+  if (!D.games_library) D.games_library = [];
+  D.games_library.unshift({year: String(new Date().getFullYear()), tournaments:[]});
+  renderGamesLibrary();
 }
 
 // ── GALLERY ──
