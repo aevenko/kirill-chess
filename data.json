@@ -541,7 +541,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/f7t4YZDL\" frameborder=0></iframe>"
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/f7t4YZDL\" frameborder=0></iframe>\" frameborder=0></iframe>"
             }
           ]
         },
