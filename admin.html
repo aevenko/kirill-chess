@@ -190,14 +190,7 @@ textarea { min-height:80px; resize:vertical; }
     <div class="section-card">
       <div class="section-card-header"><h2>📸 Gallery Photos</h2></div>
       <div class="section-card-body">
-        <div style="background:rgba(160,104,32,.1);border:1px solid rgba(160,104,32,.3);border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.7">
-  <strong>📸 How to add photos:</strong><br>
-  1. Click "Выберите файл" → select a photo from your computer<br>
-  2. Click <strong>💾 Save &amp; Download</strong> → a new <strong>data.json</strong> downloads<br>
-  3. <strong>Copy your photo</strong> into <strong>kirill-chess/photos/</strong> folder<br>
-  4. Replace <strong>data.json</strong> in kirill-chess folder with the downloaded one<br>
-  5. Click <strong>🚀 Deploy to Vercel</strong> below → select kirill-chess folder → done!
-</div>
+        <div style="background:rgba(160,104,32,.1);border:1px solid rgba(160,104,32,.3);border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.7"><strong>📸 Как добавить фото:</strong><br>1. Откройте <a href="https://github.com/aevenko/kirill-chess/tree/main/photos" target="_blank" style="color:#0070f3"><strong>папку photos на GitHub</strong></a><br>2. Нажмите кнопку <strong>Add file</strong> → <strong>Upload files</strong><br>3. Перетащите ваше фото в окно загрузки<br>4. Нажмите <strong>Commit changes</strong> внизу страницы<br>5. Через ~30 секунд фото появится на сайте автоматически</div>
         <div class="gallery-editor" id="galleryEditor"></div>
       </div>
     </div>
@@ -505,7 +498,7 @@ function downloadAll() {
       document.body.removeChild(b);
       URL.revokeObjectURL(u);
     });
-    showToast('✅ Saved! Move downloaded files to your kirill-chess folder, then deploy.');
+    showToast('✅ data.json скачан! Теперь загрузите его на GitHub');
   }, 300);
 }
 
