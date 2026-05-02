@@ -68,6 +68,206 @@
   },
   "tournaments_past": [
     {
+      "name": "Championnat ouvert d'échecs semi rapides de Montréal",
+      "date": "Jan 25, 2025",
+      "city": "Montréal",
+      "format": "Rapid",
+      "score": "2 / 5",
+      "place": "26 / 39",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Le Championnat jeunesse d'échecs du Québec",
+      "date": "Jan 31 – Feb 2, 2025",
+      "city": "Québec City",
+      "format": "Classical",
+      "score": "3 / 5",
+      "place": "7 / 18",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Tournoi du Carnaval",
+      "date": "Feb 21–23, 2025",
+      "city": "Montréal",
+      "format": "Rapid",
+      "score": "3 / 5",
+      "place": "14 / 51",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Qualification de Verdun",
+      "date": "Mar 2, 2025",
+      "city": "Montréal",
+      "format": "Rapid",
+      "score": "3.5 / 5",
+      "place": "4 / 20",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Championnat Scolaire de l'état de New York 2025",
+      "date": "Mar 8–9, 2025",
+      "city": "Saratoga, NY",
+      "format": "Classical",
+      "score": "3.5 / 7",
+      "place": "49 / 64",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Le Grand Tour jeunesse du Québec",
+      "date": "Mar 16, 2025",
+      "city": "Montréal",
+      "format": "Rapid",
+      "score": "4 / 5",
+      "place": "3 / 36",
+      "place_tag": "place-3",
+      "delta": ""
+    },
+    {
+      "name": "48e Championnat Ouvert de la Mauricie",
+      "date": "Mar 21–23, 2025",
+      "city": "Trois-Rivières",
+      "format": "Classical",
+      "score": "4 / 5",
+      "place": "3 / 20",
+      "place_tag": "place-3",
+      "delta": ""
+    },
+    {
+      "name": "Blitz Bliss - Tournoi de parties rapides",
+      "date": "Mar 29, 2025",
+      "city": "Montréal",
+      "format": "Blitz",
+      "score": "3 / 14",
+      "place": "19 / 23",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Qualification l'Ouest de l'Île",
+      "date": "Apr 5, 2025",
+      "city": "Montréal",
+      "format": "Rapid",
+      "score": "4.5 / 5",
+      "place": "1 / 12",
+      "place_tag": "place-1",
+      "delta": ""
+    },
+    {
+      "name": "Tournoi Bâtisseur de Pâques 2025",
+      "date": "Apr 7, 2025",
+      "city": "Montréal",
+      "format": "Classical",
+      "score": "4 / 5",
+      "place": "3 / 16",
+      "place_tag": "place-3",
+      "delta": ""
+    },
+    {
+      "name": "Tournoi de Qualification 3",
+      "date": "Apr 13, 2025",
+      "city": "Montréal",
+      "format": "Rapid",
+      "score": "4 / 5",
+      "place": "2 / 30",
+      "place_tag": "place-2",
+      "delta": ""
+    },
+    {
+      "name": "Défi Échiquéen du Québec 2025",
+      "date": "Apr 27, 2025",
+      "city": "Montréal",
+      "format": "Rapid",
+      "score": "3.5 / 5",
+      "place": "10 / 64",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Finale des Bâtisseurs",
+      "date": "May 4, 2025",
+      "city": "Montréal",
+      "format": "Classical",
+      "score": "3 / 5",
+      "place": "5 / 17",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Grand Prix Scolaire 2024–2025",
+      "date": "May 11, 2025",
+      "city": "Montréal",
+      "format": "Classical",
+      "score": "4 / 5",
+      "place": "6 / 54",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Capablanca Inmemorial 58",
+      "date": "May 17–21, 2025",
+      "city": "Varadero, Cuba",
+      "format": "Classical",
+      "score": "5 / 8",
+      "place": "22 / 106",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Classical Bliss v. 6",
+      "date": "May 20, 2025",
+      "city": "Montréal",
+      "format": "Classical",
+      "score": "3 / 4",
+      "place": "7 / 24",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Championnat Jeunesse du Québec",
+      "date": "May 25, 2025",
+      "city": "Montréal",
+      "format": "Classical",
+      "score": "3.5 / 5",
+      "place": "12 / 53",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Tournoi Élite de Chambly (TEC) 2025",
+      "date": "Jun 15, 2025",
+      "city": "Chambly",
+      "format": "Classical",
+      "score": "4.5 / 7",
+      "place": "4 / 47",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Championnat ouvert de Laval 2025",
+      "date": "Jun 20–22, 2025",
+      "city": "Laval",
+      "format": "Classical",
+      "score": "2 / 5",
+      "place": "28 / 42",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "The 2025 North American Youth Chess Championships",
+      "date": "Aug 17–23, 2025",
+      "city": "Kingston, ON",
+      "format": "Classical",
+      "score": "4.5 / 9",
+      "place": "28 / 64",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
       "name": "Montréal Open 2025",
       "date": "Sep 3–7, 2025",
       "city": "Montréal",
@@ -230,37 +430,55 @@
   ],
   "tournaments_upcoming": [
     {
-      "name": "Echecs Québec Summer Open",
-      "date": "Jun 14, 2025",
+      "name": "Take 5 - Tournoi Classique",
+      "date": "May 8–10, 2026",
       "city": "Montréal",
       "format": "Classical",
       "link": "",
+      "status": "Планируется",
+      "status_en": "Planned"
+    },
+    {
+      "name": "Championnat Jeunesse du Québec d'Échecs Rapide 2026",
+      "date": "May 24, 2026",
+      "city": "Montréal",
+      "format": "Rapid",
+      "link": "",
       "status": "Зарегистрирован",
       "status_en": "Registered"
     },
     {
-      "name": "CFC Youth Championship",
-      "date": "Jul 8, 2025",
-      "city": "Toronto, ON",
+      "name": "Laval Open 2026",
+      "date": "Jun 26–28, 2026",
+      "city": "Laval",
+      "format": "Classical",
+      "link": "",
+      "status": "Планируется",
+      "status_en": "Planned"
+    },
+    {
+      "name": "CYCC 2026",
+      "date": "Jul 6–10, 2026",
+      "city": "Ottawa",
       "format": "Classical",
       "link": "",
       "status": "Зарегистрирован",
       "status_en": "Registered"
     },
     {
-      "name": "Blitz Open Brossard",
-      "date": "Aug 2, 2025",
-      "city": "Brossard",
-      "format": "Blitz",
+      "name": "Le Championnat ouvert d'échecs du Québec",
+      "date": "Jul 21–26, 2026",
+      "city": "Longueuil",
+      "format": "Classical",
       "link": "",
-      "status": "Рассматривается",
-      "status_en": "Considering"
+      "status": "Планируется",
+      "status_en": "Planned"
     },
     {
-      "name": "FQÉ Fall Classic",
-      "date": "Sep 20, 2025",
-      "city": "Québec City",
-      "format": "Rapid",
+      "name": "Montreal Open",
+      "date": "Sep 5–7, 2026",
+      "city": "Montréal",
+      "format": "Classical",
       "link": "",
       "status": "Планируется",
       "status_en": "Planned"
