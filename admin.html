@@ -109,7 +109,7 @@ textarea { min-height:80px; resize:vertical; }
     <div class="admin-nav-right">
       <a href="/" class="btn-sm btn-back">← View Site</a>
       <button class="btn-sm btn-save" onclick="downloadAll()">💾 Save &amp; Download</button>
-      <button class="btn-sm" id="deployBtn" onclick="deployToVercel()" style="background:#0070f3;color:#fff">🚀 Terminal deploy</button>
+      <button class="btn-sm" id="deployBtn" onclick="deployToVercel()" style="background:#0070f3;color:#fff">📁 GitHub</button>
     </div>
   </nav>
 
@@ -206,11 +206,12 @@ textarea { min-height:80px; resize:vertical; }
     <div>
           <h2>✅ Как обновить сайт</h2>
           <ol style="margin:0;padding-left:22px;line-height:2.2;font-size:15px">
-            <li>Нажмите <strong>💾 Save &amp; Download</strong> — скачается <code>data.json</code></li>
-            <li>Положите <code>data.json</code> в папку <code>kirill-chess/</code></li>
-            <li>Фото положите в <code>kirill-chess/photos/</code></li>
-            <li>Откройте Terminal и запустите две команды ↓</li>
+            <li>Нажмите <strong>💾 Save &amp; Download</strong> — скачается новый <code>data.json</code></li>
+            <li>Откройте GitHub: <a href="https://github.com/aevenko/kirill-chess" target="_blank" style="color:#0070f3">github.com/aevenko/kirill-chess</a></li>
+            <li>Нажмите на файл <code>data.json</code> → кнопка редактирования ✏️ → вставьте содержимое нового файла</li>
+            <li>Нажмите <strong>Commit changes</strong> — сайт обновится автоматически через ~30 секунд</li>
           </ol>
+          <p style="margin:14px 0 0;color:var(--muted);font-size:13px">📸 Для фото: зайдите в папку <code>photos/</code> на GitHub → кнопка <strong>+</strong> → <strong>Upload files</strong> → перетащите фото → <strong>Commit changes</strong></p>
         </div>
 
     <div>
@@ -222,12 +223,20 @@ textarea { min-height:80px; resize:vertical; }
              style="display:inline-block;background:#0070f3;color:#fff;font-weight:700;font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;margin-bottom:12px">
             &#128640; &#1054;&#1090;&#1082;&#1088;&#1099;&#1090;&#1100; Vercel Dashboard
           </a>
-          <div style="background:rgba(0,112,243,.07);border:1px solid rgba(0,112,243,.25);border-radius:10px;padding:16px;margin-top:8px;line-height:1.7;font-size:14px">
-            <strong>&#1050;&#1072;&#1082; &#1079;&#1072;&#1076;&#1077;&#1087;&#1083;&#1086;&#1080;&#1090;&#1100;:</strong><br>
-            1. &#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077; &#1082;&#1085;&#1086;&#1087;&#1082;&#1091; &#1074;&#1099;&#1096;&#1077; &#8212; &#1086;&#1090;&#1082;&#1088;&#1086;&#1077;&#1090;&#1089;&#1103; Vercel<br>
-            2. &#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077; <strong>&#171;+ New Deployment&#187;</strong> (&#1080;&#1083;&#1080; &#1087;&#1077;&#1088;&#1077;&#1090;&#1072;&#1097;&#1080;&#1090;&#1077; &#1087;&#1072;&#1087;&#1082;&#1091; <code>kirill-chess</code> &#1087;&#1088;&#1103;&#1084;&#1086; &#1085;&#1072; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1091; &#1087;&#1088;&#1086;&#1077;&#1082;&#1090;&#1072;)<br>
-            3. &#1055;&#1086;&#1076;&#1086;&#1078;&#1076;&#1080;&#1090;&#1077; ~30 &#1089;&#1077;&#1082;&#1091;&#1085;&#1076; &#8212; &#1089;&#1072;&#1081;&#1090; &#1086;&#1073;&#1085;&#1086;&#1074;&#1080;&#1090;&#1089;&#1103; &#9989;
+          <div>
+          <h2>🚀 Открыть GitHub</h2>
+          <p style="color:var(--muted);margin:0 0 16px">Все обновления сайта делаются через GitHub. Нажмите кнопку ниже:</p>
+          <a href="https://github.com/aevenko/kirill-chess" target="_blank"
+             style="display:inline-block;background:#24292f;color:#fff;font-weight:700;font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;margin-bottom:16px">
+            📁 Открыть GitHub репозиторий
+          </a>
+          <div style="background:rgba(0,200,100,.07);border:1px solid rgba(0,200,100,.3);border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.8">
+            <strong>Как это работает:</strong><br>
+            1. Обновите файл на GitHub (data.json или фото)<br>
+            2. Нажмите <strong>Commit changes</strong><br>
+            3. Vercel автоматически задеплоит изменения за ~30 секунд ✅
           </div>
+        </div>
         </div>
 
   </div>
@@ -508,9 +517,9 @@ function showToast(msg) {
 }
 
 
-// ══ DEPLOY TO VERCEL ══
+// ══ OPEN GITHUB ══
 function deployToVercel() {
-  alert('Откройте Terminal и выполните по очереди:\n\n  cd путь/к/kirill-chess\n  vercel deploy --prod\n\nЧерез 3-5 секунд сайт обновится!');
+  window.open('https://github.com/aevenko/kirill-chess', '_blank');
 }
 </script>
 </body>
