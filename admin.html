@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Kirill Chess</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e8e2d8; --bg-alt: #d8d0c4; --bg-dark: #1a1714;
+  --text: #16130f; --muted: #7a7268; --gold: #a06820; --gold-lt: #b87c30;
+  --border: rgba(22,19,15,.15); --danger: #c04040; --success: #4a9a4a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-size:16px; min-height:100vh; }
+
+/* LOGIN */
+#loginScreen { display:flex; align-items:center; justify-content:center; min-height:100vh; }
+.login-box { background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; padding:48px 40px; width:360px; text-align:center; }
+.login-logo { font-size:32px; color:var(--gold); font-weight:700; margin-bottom:8px; }
+.login-sub { color:var(--muted); margin-bottom:32px; font-size:15px; }
+.login-box input { width:100%; padding:12px 16px; border:1px solid var(--border); border-radius:4px; background:var(--bg); font-size:16px; font-family:'Outfit',sans-serif; margin-bottom:12px; }
+.login-box input:focus { outline:2px solid var(--gold); }
+.btn-gold { width:100%; padding:13px; background:var(--gold); color:#fff; border:none; border-radius:4px; font-size:16px; font-family:'Outfit',sans-serif; font-weight:500; cursor:pointer; transition:background .2s; }
+.btn-gold:hover { background:var(--gold-lt); }
+.login-error { color:var(--danger); font-size:14px; margin-top:10px; display:none; }
+
+/* ADMIN PANEL */
+#adminPanel { display:none; }
+.admin-nav { background:var(--bg-dark); color:#f0ece4; display:flex; align-items:center; justify-content:space-between; padding:14px 32px; position:sticky; top:0; z-index:100; }
+.admin-nav-logo { color:var(--gold); font-weight:700; font-size:18px; }
+.admin-nav-right { display:flex; gap:16px; align-items:center; }
+.btn-sm { padding:7px 16px; border-radius:4px; border:none; font-family:'Outfit',sans-serif; font-size:14px; cursor:pointer; font-weight:500; }
+.btn-back { background:rgba(255,255,255,.1); color:#f0ece4; text-decoration:none; display:inline-block; }
+.btn-back:hover { background:rgba(255,255,255,.2); }
+.btn-save { background:var(--gold); color:#fff; }
+.btn-save:hover { background:var(--gold-lt); }
+.btn-danger { background:rgba(192,64,64,.2); color:#e07070; }
+.btn-danger:hover { background:rgba(192,64,64,.35); }
+
+.admin-body { max-width:960px; margin:0 auto; padding:32px 24px 80px; }
+.section-card { background:var(--bg-alt); border:1px solid var(--border); border-radius:8px; margin-bottom:24px; }
+.section-card-header { padding:20px 24px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.section-card-header h2 { font-size:17px; font-weight:600; }
+.section-card-body { padding:24px; }
+
+label { display:block; font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:500; text-transform:uppercase; letter-spacing:.5px; }
+input[type=text], input[type=number], textarea, select {
+  width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:4px;
+  background:var(--bg); font-size:15px; font-family:'Outfit',sans-serif; color:var(--text);
+  margin-bottom:16px;
+}
+input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus { outline:2px solid var(--gold); border-color:transparent; }
+textarea { min-height:80px; resize:vertical; }
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+.row4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; }
+
+/* Rating items */
+.rating-row { display:grid; grid-template-columns:1fr 80px 80px 80px; gap:12px; align-items:end; margin-bottom:12px; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:14px; }
+.rating-row label { margin-bottom:4px; }
+.rating-row input { margin-bottom:0; }
+
+/* Table editor */
+.table-row-editor { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:16px; margin-bottom:10px; position:relative; }
+.table-row-editor .delete-row { position:absolute; top:10px; right:10px; background:none; border:none; color:var(--danger); cursor:pointer; font-size:18px; line-height:1; }
+.add-row-btn { background:none; border:2px dashed var(--border); width:100%; padding:12px; border-radius:6px; color:var(--muted); font-family:'Outfit',sans-serif; font-size:15px; cursor:pointer; transition:all .2s; margin-top:4px; }
+.add-row-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+/* Gallery */
+.gallery-editor { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+.gallery-slot { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:14px; text-align:center; }
+.gallery-slot .emoji { font-size:24px; margin-bottom:8px; }
+.gallery-slot input[type=text] { font-size:13px; text-align:center; margin-bottom:8px; }
+.gallery-slot input[type=file] { font-size:12px; width:100%; }
+.gallery-img-preview { width:100%; height:70px; object-fit:cover; border-radius:4px; margin-bottom:8px; display:none; }
+
+/* Toast */
+#toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%); background:#2a2a2a; color:#fff; padding:13px 28px; border-radius:6px; font-size:15px; opacity:0; pointer-events:none; transition:opacity .3s; z-index:9999; }
+#toast.show { opacity:1; }
+
+/* Download area */
+.download-area { background:rgba(74,154,74,.08); border:1px solid rgba(74,154,74,.3); border-radius:6px; padding:20px 24px; margin-top:24px; }
+.download-area h3 { color:var(--success); margin-bottom:8px; font-size:16px; }
+.download-area p { color:var(--muted); font-size:14px; margin-bottom:16px; }
+.download-steps { list-style:none; counter-reset:steps; }
+.download-steps li { counter-increment:steps; padding:6px 0 6px 28px; position:relative; font-size:14px; color:var(--text-mid); }
+.download-steps li::before { content:counter(steps); position:absolute; left:0; background:var(--gold); color:#fff; width:18px; height:18px; border-radius:50%; font-size:11px; display:flex; align-items:center; justify-content:center; top:8px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">KE ♟</div>
+    <p class="login-sub">Admin Panel — Kirill Chess</p>
+    <input type="password" id="pwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-gold" onclick="doLogin()">Login</button>
+    <div class="login-error" id="loginError">Wrong password. Try again.</div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+  <nav class="admin-nav">
+    <div class="admin-nav-logo">♟ Admin Panel</div>
+    <div class="admin-nav-right">
+      <a href="/" class="btn-sm btn-back">← View Site</a>
+      <button class="btn-sm btn-save" onclick="downloadAll()">💾 Save &amp; Download</button>
+      <button class="btn-sm" id="deployBtn" onclick="deployToVercel()" style="background:#0070f3;color:#fff">🚀 Terminal deploy</button>
+    </div>
+  </nav>
+
+  <div class="admin-body">
+
+    <!-- RATINGS -->
+    <div class="section-card">
+      <div class="section-card-header"><h2>📊 Ratings</h2></div>
+      <div class="section-card-body" id="ratingsEditor"></div>
+    </div>
+
+    <!-- HERO TEXT -->
+    <div class="section-card">
+      <div class="section-card-header"><h2>🏠 Hero Section</h2></div>
+      <div class="section-card-body">
+        <div class="row2">
+          <div><label>Slogan (English)</label><input type="text" id="hero_slogan_en"></div>
+          <div><label>Slogan (Russian)</label><input type="text" id="hero_slogan_ru"></div>
+        </div>
+        <div class="row3">
+          <div><label>FIDE Rating (Hero)</label><input type="number" id="hero_fide"></div>
+          <div><label>FIDE Delta (Hero, e.g. +38)</label><input type="text" id="hero_fide_delta"></div>
+          <div><label>CFC Rating (Hero)</label><input type="number" id="hero_cfc"></div>
+        </div>
+        <div class="row2">
+          <div><label>Age</label><input type="number" id="hero_age"></div>
+          <div><label>Playing Since (year)</label><input type="number" id="hero_since"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="section-card">
+      <div class="section-card-header"><h2>👤 About Kirill</h2></div>
+      <div class="section-card-body">
+        <div class="row2">
+          <div><label>Years Playing</label><input type="number" id="about_years"></div>
+          <div><label>Prize Places</label><input type="number" id="about_prizes"></div>
+        </div>
+        <div><label>Games Recorded</label><input type="number" id="about_games" style="max-width:200px"></div>
+        <label>Paragraph 1 (English)</label><textarea id="about_p1_en"></textarea>
+        <label>Paragraph 1 (Russian)</label><textarea id="about_p1_ru"></textarea>
+        <label>Paragraph 2 (English)</label><textarea id="about_p2_en"></textarea>
+        <label>Paragraph 2 (Russian)</label><textarea id="about_p2_ru"></textarea>
+        <label>Paragraph 3 (English)</label><textarea id="about_p3_en"></textarea>
+        <label>Paragraph 3 (Russian)</label><textarea id="about_p3_ru"></textarea>
+      </div>
+    </div>
+
+    <!-- TOURNAMENTS PAST -->
+    <div class="section-card">
+      <div class="section-card-header"><h2>🏆 Past Tournaments</h2></div>
+      <div class="section-card-body">
+        <div id="pastTournamentsEditor"></div>
+        <button class="add-row-btn" onclick="addPastTournament()">+ Add Tournament</button>
+      </div>
+    </div>
+
+    <!-- TOURNAMENTS UPCOMING -->
+    <div class="section-card">
+      <div class="section-card-header"><h2>📅 Upcoming Tournaments</h2></div>
+      <div class="section-card-body">
+        <div id="upcomingTournamentsEditor"></div>
+        <button class="add-row-btn" onclick="addUpcomingTournament()">+ Add Tournament</button>
+      </div>
+    </div>
+
+    <!-- GAMES -->
+    <div class="section-card">
+      <div class="section-card-header"><h2>♟ Games</h2></div>
+      <div class="section-card-body">
+        <div id="gamesEditor"></div>
+        <button class="add-row-btn" onclick="addGame()">+ Add Game</button>
+      </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="section-card">
+      <div class="section-card-header"><h2>📸 Gallery Photos</h2></div>
+      <div class="section-card-body">
+        <div style="background:rgba(160,104,32,.1);border:1px solid rgba(160,104,32,.3);border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.7">
+  <strong>📸 How to add photos:</strong><br>
+  1. Click "Выберите файл" → select a photo from your computer<br>
+  2. Click <strong>💾 Save &amp; Download</strong> → a new <strong>data.json</strong> downloads<br>
+  3. <strong>Copy your photo</strong> into <strong>kirill-chess/photos/</strong> folder<br>
+  4. Replace <strong>data.json</strong> in kirill-chess folder with the downloaded one<br>
+  5. Click <strong>🚀 Deploy to Vercel</strong> below → select kirill-chess folder → done!
+</div>
+        <div class="gallery-editor" id="galleryEditor"></div>
+      </div>
+    </div>
+
+    <!-- SAVE INSTRUCTIONS -->
+    <div>
+          <h2>✅ Как обновить сайт</h2>
+          <ol style="margin:0;padding-left:22px;line-height:2.2;font-size:15px">
+            <li>Нажмите <strong>💾 Save &amp; Download</strong> — скачается <code>data.json</code></li>
+            <li>Положите <code>data.json</code> в папку <code>kirill-chess/</code></li>
+            <li>Фото положите в <code>kirill-chess/photos/</code></li>
+            <li>Откройте Terminal и запустите две команды ↓</li>
+          </ol>
+        </div>
+
+    <div>
+          <h2>&#128640; &#1054;&#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1086;&#1074;&#1072;&#1090;&#1100; &#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103;</h2>
+          <p style="color:var(--muted);margin:0 0 16px">
+            &#1055;&#1086;&#1089;&#1083;&#1077; &#1090;&#1086;&#1075;&#1086; &#1082;&#1072;&#1082; &#1085;&#1072;&#1078;&#1072;&#1083;&#1080; <strong>&#128190; &#1057;&#1086;&#1093;&#1088;&#1072;&#1085;&#1080;&#1090;&#1100; &#1080; &#1057;&#1082;&#1072;&#1095;&#1072;&#1090;&#1100;</strong> &#8212; &#1089;&#1082;&#1072;&#1095;&#1072;&#1085;&#1085;&#1099;&#1081; <code>data.json</code> (&#1080; &#1092;&#1086;&#1090;&#1086;, &#1077;&#1089;&#1083;&#1080; &#1076;&#1086;&#1073;&#1072;&#1074;&#1083;&#1103;&#1083;&#1080;) &#1085;&#1091;&#1078;&#1085;&#1086; &#1087;&#1086;&#1083;&#1086;&#1078;&#1080;&#1090;&#1100; &#1074; &#1087;&#1072;&#1087;&#1082;&#1091; <code>kirill-chess</code>. &#1055;&#1086;&#1090;&#1086;&#1084; &#1085;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077; &#1082;&#1085;&#1086;&#1087;&#1082;&#1091; &#1085;&#1080;&#1078;&#1077;.
+          </p>
+          <a href="https://vercel.com/anton-evenkos-projects/project-w45ap" target="_blank"
+             style="display:inline-block;background:#0070f3;color:#fff;font-weight:700;font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;margin-bottom:12px">
+            &#128640; &#1054;&#1090;&#1082;&#1088;&#1099;&#1090;&#1100; Vercel Dashboard
+          </a>
+          <div style="background:rgba(0,112,243,.07);border:1px solid rgba(0,112,243,.25);border-radius:10px;padding:16px;margin-top:8px;line-height:1.7;font-size:14px">
+            <strong>&#1050;&#1072;&#1082; &#1079;&#1072;&#1076;&#1077;&#1087;&#1083;&#1086;&#1080;&#1090;&#1100;:</strong><br>
+            1. &#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077; &#1082;&#1085;&#1086;&#1087;&#1082;&#1091; &#1074;&#1099;&#1096;&#1077; &#8212; &#1086;&#1090;&#1082;&#1088;&#1086;&#1077;&#1090;&#1089;&#1103; Vercel<br>
+            2. &#1053;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077; <strong>&#171;+ New Deployment&#187;</strong> (&#1080;&#1083;&#1080; &#1087;&#1077;&#1088;&#1077;&#1090;&#1072;&#1097;&#1080;&#1090;&#1077; &#1087;&#1072;&#1087;&#1082;&#1091; <code>kirill-chess</code> &#1087;&#1088;&#1103;&#1084;&#1086; &#1085;&#1072; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094;&#1091; &#1087;&#1088;&#1086;&#1077;&#1082;&#1090;&#1072;)<br>
+            3. &#1055;&#1086;&#1076;&#1086;&#1078;&#1076;&#1080;&#1090;&#1077; ~30 &#1089;&#1077;&#1082;&#1091;&#1085;&#1076; &#8212; &#1089;&#1072;&#1081;&#1090; &#1086;&#1073;&#1085;&#1086;&#1074;&#1080;&#1090;&#1089;&#1103; &#9989;
+          </div>
+        </div>
+
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const ADMIN_PASSWORD = 'kirill2025';
+
+// ── AUTH ──
+function doLogin() {
+  const pw = document.getElementById('pwInput').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    loadData();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+// ── DATA ──
+let D = {};
+
+async function loadData() {
+  try {
+    const r = await fetch('/data.json?_=' + Date.now());
+    D = await r.json();
+  } catch(e) {
+    showToast('Could not load data.json — using defaults');
+    D = getDefaultData();
+  }
+  renderAll();
+}
+
+function getDefaultData() {
+  return {
+    hero: { slogan_en:'Young champion in the making', slogan_ru:'Будущий чемпион' },
+    hero_stats: { fide_rating:1247, fide_delta:'+38', cfc_rating:1389, age:12, since_year:2018 },
+    ratings: [
+      {org:'FIDE',value:1247,delta:'+12',direction:'up'},
+      {org:'CFC (Chess Canada)',value:1389,delta:'+24',direction:'up'},
+      {org:'FQÉ (Québec)',value:1420,delta:'+18',direction:'up'},
+      {org:'Chess.com',value:1340,delta:'−15',direction:'down'}
+    ],
+    about: { para1_en:'', para1_ru:'', para2_en:'', para2_ru:'', para3_en:'', para3_ru:'', years_playing:7, prize_places:3, games_recorded:48 },
+    tournaments_past: [],
+    tournaments_upcoming: [],
+    games: [],
+    gallery: [
+      {emoji:'🏆',label_en:'Main photo',label_ru:'Главное фото',file:''},
+      {emoji:'♟',label_en:'Tournament',label_ru:'Турнир',file:''},
+      {emoji:'🎯',label_en:'Training',label_ru:'Тренировка',file:''},
+      {emoji:'📸',label_en:'Memories',label_ru:'Воспоминания',file:''},
+      {emoji:'🤝',label_en:'With coach',label_ru:'С тренером',file:''}
+    ]
+  };
+}
+
+function renderAll() {
+  // Hero
+  document.getElementById('hero_slogan_en').value = D.hero?.slogan_en || '';
+  document.getElementById('hero_slogan_ru').value = D.hero?.slogan_ru || '';
+  document.getElementById('hero_fide').value = D.hero_stats?.fide_rating || '';
+  document.getElementById('hero_fide_delta').value = D.hero_stats?.fide_delta || '';
+  document.getElementById('hero_cfc').value = D.hero_stats?.cfc_rating || '';
+  document.getElementById('hero_age').value = D.hero_stats?.age || '';
+  document.getElementById('hero_since').value = D.hero_stats?.since_year || '';
+  // About
+  document.getElementById('about_years').value = D.about?.years_playing || '';
+  document.getElementById('about_prizes').value = D.about?.prize_places || '';
+  document.getElementById('about_games').value = D.about?.games_recorded || '';
+  document.getElementById('about_p1_en').value = D.about?.para1_en || '';
+  document.getElementById('about_p1_ru').value = D.about?.para1_ru || '';
+  document.getElementById('about_p2_en').value = D.about?.para2_en || '';
+  document.getElementById('about_p2_ru').value = D.about?.para2_ru || '';
+  document.getElementById('about_p3_en').value = D.about?.para3_en || '';
+  document.getElementById('about_p3_ru').value = D.about?.para3_ru || '';
+  // Ratings
+  renderRatings();
+  // Tournaments
+  renderPastTournaments();
+  renderUpcomingTournaments();
+  // Games
+  renderGames();
+  // Gallery
+  renderGallery();
+}
+
+// ── RATINGS ──
+function renderRatings() {
+  const el = document.getElementById('ratingsEditor');
+  el.innerHTML = (D.ratings||[]).map((r,i) => `
+    <div class="rating-row">
+      <div><label>Organization</label><input type="text" value="${r.org}" onchange="D.ratings[${i}].org=this.value"></div>
+      <div><label>Rating</label><input type="number" value="${r.value}" onchange="D.ratings[${i}].value=+this.value"></div>
+      <div><label>Change</label><input type="text" value="${r.delta}" placeholder="+12" onchange="D.ratings[${i}].delta=this.value"></div>
+      <div><label>Direction</label>
+        <select onchange="D.ratings[${i}].direction=this.value">
+          <option value="up" ${r.direction==='up'?'selected':''}>▲ Up</option>
+          <option value="down" ${r.direction==='down'?'selected':''}>▼ Down</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:8px"><label>Profile Link (optional — visitors can click rating to open)</label><input type="url" value="${r.link||''}" placeholder="https://ratings.fide.com/profile/..." onchange="D.ratings[${i}].link=this.value" style="margin-bottom:0"></div>
+  `).join('');
+}
+
+// ── PAST TOURNAMENTS ──
+function renderPastTournaments() {
+  const el = document.getElementById('pastTournamentsEditor');
+  el.innerHTML = (D.tournaments_past||[]).map((t,i) => `
+    <div class="table-row-editor">
+      <button class="delete-row" onclick="D.tournaments_past.splice(${i},1);renderPastTournaments()">×</button>
+      <div class="row2">
+        <div><label>Tournament Name</label><input type="text" value="${t.name}" onchange="D.tournaments_past[${i}].name=this.value"></div>
+        <div><label>Date</label><input type="text" value="${t.date}" placeholder="Mar 2025" onchange="D.tournaments_past[${i}].date=this.value"></div>
+      </div>
+      <div class="row4">
+        <div><label>City</label><input type="text" value="${t.city}" onchange="D.tournaments_past[${i}].city=this.value"></div>
+        <div><label>Format</label><input type="text" value="${t.format}" placeholder="Classical" onchange="D.tournaments_past[${i}].format=this.value"></div>
+        <div><label>Score</label><input type="text" value="${t.score}" placeholder="4.5 / 6" onchange="D.tournaments_past[${i}].score=this.value"></div>
+        <div><label>Place</label><input type="text" value="${t.place}" placeholder="1-е" onchange="D.tournaments_past[${i}].place=this.value"></div>
+      </div>
+      <div class="row2">
+        <div><label>Rating Change</label><input type="text" value="${t.delta}" placeholder="+24" onchange="D.tournaments_past[${i}].delta=this.value"></div>
+        <div><label>Place Tag Style</label>
+          <select onchange="D.tournaments_past[${i}].place_tag=this.value">
+            <option value="place-1" ${t.place_tag==='place-1'?'selected':''}>🥇 Gold (1st)</option>
+            <option value="place-2" ${t.place_tag==='place-2'?'selected':''}>🥈 Silver (2nd)</option>
+            <option value="place-3" ${t.place_tag==='place-3'?'selected':''}>🥉 Bronze (3rd)</option>
+            <option value="place-other" ${t.place_tag==='place-other'?'selected':''}>— Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addPastTournament() {
+  D.tournaments_past.push({name:'',date:'',city:'',format:'Classical',score:'',place:'',place_tag:'place-other',delta:''});
+  renderPastTournaments();
+}
+
+// ── UPCOMING TOURNAMENTS ──
+function renderUpcomingTournaments() {
+  const el = document.getElementById('upcomingTournamentsEditor');
+  el.innerHTML = (D.tournaments_upcoming||[]).map((t,i) => `
+    <div class="table-row-editor">
+      <button class="delete-row" onclick="D.tournaments_upcoming.splice(${i},1);renderUpcomingTournaments()">×</button>
+      <div class="row2">
+        <div><label>Tournament Name</label><input type="text" value="${t.name}" onchange="D.tournaments_upcoming[${i}].name=this.value"></div>
+        <div><label>Date</label><input type="text" value="${t.date}" placeholder="Jun 14, 2025" onchange="D.tournaments_upcoming[${i}].date=this.value"></div>
+      </div>
+      <div class="row4">
+        <div><label>City</label><input type="text" value="${t.city}" onchange="D.tournaments_upcoming[${i}].city=this.value"></div>
+        <div><label>Format</label><input type="text" value="${t.format}" placeholder="Classical" onchange="D.tournaments_upcoming[${i}].format=this.value"></div>
+        <div><label>Category</label><input type="text" value="${t.category}" placeholder="U14" onchange="D.tournaments_upcoming[${i}].category=this.value"></div>
+        <div><label>Status (RU)</label><input type="text" value="${t.status}" placeholder="Зарегистрирован" onchange="D.tournaments_upcoming[${i}].status=this.value"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addUpcomingTournament() {
+  D.tournaments_upcoming.push({name:'',date:'',city:'',format:'Classical',category:'',status:'Планируется',status_en:'Planned'});
+  renderUpcomingTournaments();
+}
+
+// ── GAMES ──
+function renderGames() {
+  const el = document.getElementById('gamesEditor');
+  el.innerHTML = (D.games||[]).map((g,i) => `
+    <div class="table-row-editor">
+      <button class="delete-row" onclick="D.games.splice(${i},1);renderGames()">×</button>
+      <div><label>Event Name</label><input type="text" value="${g.event}" onchange="D.games[${i}].event=this.value"></div>
+      <div class="row3">
+        <div><label>White player</label><input type="text" value="${g.white}" onchange="D.games[${i}].white=this.value"></div>
+        <div><label>Black player</label><input type="text" value="${g.black}" onchange="D.games[${i}].black=this.value"></div>
+        <div><label>Result</label><input type="text" value="${g.result}" placeholder="1 — 0" onchange="D.games[${i}].result=this.value"></div>
+      </div>
+      <div class="row3">
+        <div><label>Type</label><input type="text" value="${g.type}" placeholder="Classical" onchange="D.games[${i}].type=this.value"></div>
+        <div><label>Moves</label><input type="text" value="${g.moves}" placeholder="42 moves" onchange="D.games[${i}].moves=this.value"></div>
+        <div><label>Opening</label><input type="text" value="${g.opening}" placeholder="Ruy López" onchange="D.games[${i}].opening=this.value"></div>
+      </div>
+      <div><label>Lichess Link (optional)</label><input type="text" value="${g.lichess||''}" placeholder="https://lichess.org/..." onchange="D.games[${i}].lichess=this.value"></div>
+    </div>
+  `).join('');
+}
+
+function addGame() {
+  D.games.push({event:'',white:'',black:'',result:'',type:'Classical',moves:'',opening:'',lichess:''});
+  renderGames();
+}
+
+// ── GALLERY ──
+function renderGallery() {
+  const el = document.getElementById('galleryEditor');
+  el.innerHTML = (D.gallery||[]).map((g,i) => `
+    <div class="gallery-slot">
+      <div class="emoji">${g.emoji}</div>
+      <img id="gimg_${i}" class="gallery-img-preview" src="${g.file ? '/photos/'+g.file : ''}" style="${g.file?'display:block':'display:none'}">
+      <input type="text" value="${g.label_ru}" placeholder="Label (RU)" onchange="D.gallery[${i}].label_ru=this.value">
+      <input type="file" accept="image/*" onchange="handlePhoto(${i},this)">
+      ${g.file ? `<small style="color:var(--muted);font-size:11px">${g.file}</small>` : ''}
+    </div>
+  `).join('');
+}
+
+const photoFiles = {};
+function handlePhoto(i, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const ext = file.name.split('.').pop();
+  const fname = 'photo_' + i + '_' + Date.now() + '.' + ext;
+  D.gallery[i].file = fname;
+  photoFiles[fname] = file;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('gimg_' + i);
+    img.src = e.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── COLLECT & DOWNLOAD ──
+function collectData() {
+  D.hero.slogan_en = document.getElementById('hero_slogan_en').value;
+  D.hero.slogan_ru = document.getElementById('hero_slogan_ru').value;
+  D.hero_stats.fide_rating = +document.getElementById('hero_fide').value;
+  D.hero_stats.fide_delta = document.getElementById('hero_fide_delta').value;
+  D.hero_stats.cfc_rating = +document.getElementById('hero_cfc').value;
+  D.hero_stats.age = +document.getElementById('hero_age').value;
+  D.hero_stats.since_year = +document.getElementById('hero_since').value;
+  D.about.years_playing = +document.getElementById('about_years').value;
+  D.about.prize_places = +document.getElementById('about_prizes').value;
+  D.about.games_recorded = +document.getElementById('about_games').value;
+  D.about.para1_en = document.getElementById('about_p1_en').value;
+  D.about.para1_ru = document.getElementById('about_p1_ru').value;
+  D.about.para2_en = document.getElementById('about_p2_en').value;
+  D.about.para2_ru = document.getElementById('about_p2_ru').value;
+  D.about.para3_en = document.getElementById('about_p3_en').value;
+  D.about.para3_ru = document.getElementById('about_p3_ru').value;
+}
+
+function downloadAll() {
+  collectData();
+  // Download data.json
+  const blob = new Blob([JSON.stringify(D, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'data.json';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  // Download photos
+  setTimeout(() => {
+    Object.entries(photoFiles).forEach(([name, file]) => {
+      const u = URL.createObjectURL(file);
+      const b = document.createElement('a');
+      b.href = u; b.download = name;
+      document.body.appendChild(b); b.click();
+      document.body.removeChild(b);
+      URL.revokeObjectURL(u);
+    });
+    showToast('✅ Saved! Move downloaded files to your kirill-chess folder, then deploy.');
+  }, 300);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+
+// ══ DEPLOY TO VERCEL ══
+function deployToVercel() {
+  alert('Откройте Terminal и выполните по очереди:\n\n  cd путь/к/kirill-chess\n  vercel deploy --prod\n\nЧерез 3-5 секунд сайт обновится!');
+}
+</script>
+</body>
+</html<div>
+          <h2>🚀 Опубликовать через Terminal</h2>
+          <p style="color:var(--muted);margin:0 0 16px">Откройте Terminal и выполните по очереди:</p>
+          <div style="background:#0a0a0a;color:#00ff88;font-family:monospace;font-size:14px;border-radius:10px;padding:18px 20px;margin-bottom:16px;line-height:2.2;user-select:all">
+            <span style="color:#888"># перейти в папку проекта:</span><br>
+            cd ~/Desktop/kirill-chess<br><br>
+            <span style="color:#888"># задеплоить:</span><br>
+            vercel deploy --prod
+          </div>
+          <div style="background:rgba(0,200,100,.07);border:1px solid rgba(0,200,100,.3);border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.8">
+            ⏱ Через 3–5 секунд сайт обновится ✅<br>
+            <span style="color:var(--muted);font-size:13px">Если папка находится не на Desktop — укажите правильный путь после cd</span>
+          </div>
+        </div>

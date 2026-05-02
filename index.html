@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirill Evenko — Chess</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+  :root {
+    --bg:       #e8e2d8;
+    --bg-alt:   #d8d0c4;
+    --bg-dark:  #1a1714;
+    --text:     #16130f;
+    --text-mid: #3a3530;
+    --muted:    #7a7268;
+    --gold:     #a06820;
+    --gold-lt:  #b87c30;
+    --gold-dim: rgba(160,104,32,.14);
+    --border:   rgba(22,19,15,.13);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 19px;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 5vw;
+    background: rgba(232,226,216,.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-lang { display:flex; gap:6px; }
+
+  .nav-lang button {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-mid);
+    padding: 5px 13px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: all .2s;
+    border-radius: 2px;
+  }
+
+  .nav-lang button.active,
+  .nav-lang button:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+    font-weight: 500;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 130px 5vw 80px 5vw;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp .7s .1s ease forwards;
+  }
+
+  .hero-name {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(64px, 7.5vw, 110px);
+    line-height: .92;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp .7s .2s ease forwards;
+  }
+
+  .hero-name span { color: var(--gold); }
+
+  .hero-slogan {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 26px);
+    color: var(--muted);
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp .7s .3s ease forwards;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 44px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp .7s .4s ease forwards;
+  }
+
+  .stat-block { display:flex; flex-direction:column; gap:3px; }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stat-value {
+    font-family: 'Anton', sans-serif;
+    font-size: 46px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp .7s .5s ease forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 15px 34px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: background .2s, transform .2s;
+    border-radius: 2px;
+  }
+
+  .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text-mid);
+    border: 1px solid rgba(30,28,25,.25);
+    padding: 15px 34px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color .2s, color .2s;
+    border-radius: 2px;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Hero right */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-alt);
+  }
+
+  .chess-board-deco {
+    position: absolute;
+    width: 420px; height: 420px;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(8,1fr);
+    opacity: .07;
+    animation: rotateSlow 50s linear infinite;
+  }
+
+  .sq-deco-w { background: var(--gold); }
+  .sq-deco-b { background: transparent; }
+
+  .hero-photo-placeholder {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .photo-circle {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 90px;
+    background: rgba(176,125,46,.05);
+    animation: pulse 3.5s ease-in-out infinite;
+  }
+
+  .photo-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp .7s .6s ease forwards;
+  }
+
+  .photo-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: .6;
+  }
+
+  .hero-cut {
+    position: absolute;
+    left: -1px; top: 0; bottom: 0;
+    width: 70px;
+    background: var(--bg);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    z-index: 3;
+  }
+
+  /* ── RATINGS BAR ── */
+  .ratings-bar {
+    background: var(--bg-dark);
+    padding: 26px 5vw;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  .ratings-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+    margin-right: 48px;
+    flex-shrink: 0;
+  }
+
+  .ratings-grid {
+    display: flex;
+    gap: 52px;
+    flex-shrink: 0;
+  }
+
+  .rating-item { display:flex; flex-direction:column; gap:2px; }
+
+  .rating-org {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+  }
+
+  .rating-num {
+    font-family: 'Anton', sans-serif;
+    font-size: 34px;
+    color: #f7f4ef;
+    line-height: 1;
+  }
+
+  .rating-change { font-size: 11px; color: #6dbb6d; }
+  .rating-change.down { color: #e07070; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 5vw; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(44px, 5vw, 68px);
+    line-height: 1;
+    margin-bottom: 44px;
+    color: var(--text);
+  }
+
+  .gold-line { width: 48px; height: 2px; background: var(--gold); margin: 20px 0 36px; }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--bg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--text-mid);
+    margin-bottom: 22px;
+  }
+
+  /* About right stats card */
+  .about-stats-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 44px;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .big-symbol { font-size: 100px; line-height:1; margin-bottom: 24px; }
+
+  .city-tag {
+    font-family: 'Anton', sans-serif;
+    font-size: 30px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+
+  .city-sub {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .mini-stats {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+
+  .mini-stat-val {
+    font-family: 'Anton', sans-serif;
+    font-size: 38px;
+    color: var(--text);
+  }
+
+  .mini-stat-lbl {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── TOURNAMENTS ── */
+  #tournaments { background: var(--bg-alt); }
+
+  .tournament-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .tournament-table th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 12px 18px;
+    border-bottom: 2px solid var(--gold-dim);
+    font-weight: 400;
+  }
+
+  .tournament-table td {
+    padding: 18px 18px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-mid);
+    transition: background .2s;
+  }
+
+  .tournament-table tr:hover td { background: rgba(176,125,46,.05); }
+
+  .place-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 12px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .place-1 { background: rgba(176,125,46,.15); color: var(--gold); }
+  .place-2 { background: rgba(150,150,150,.15); color: #777; }
+  .place-3 { background: rgba(180,110,60,.12); color: #a06030; }
+  .place-other { background: rgba(0,0,0,.06); color: var(--muted); }
+
+  .delta-pos { color: #4a9a4a; font-weight:500; }
+  .delta-neg { color: #c04040; font-weight:500; }
+
+  /* ── GAMES ── */
+  #games { background: var(--bg); }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+
+  .game-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 24px;
+    cursor: pointer;
+    transition: border-color .2s, transform .2s, box-shadow .2s;
+    position: relative;
+    border-radius: 4px;
+  }
+
+  .game-card::before {
+    content:'';
+    position: absolute;
+    left:0; top:0; bottom:0;
+    width: 3px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform .25s;
+    transform-origin: bottom;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .game-card:hover {
+    border-color: rgba(176,125,46,.4);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,0,0,.08);
+  }
+
+  .game-card:hover::before { transform: scaleY(1); }
+
+  .game-event {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .game-players {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  .game-result {
+    font-family: 'Anton', sans-serif;
+    font-size: 30px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .game-meta {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 14px;
+  }
+
+  .mini-board {
+    width: 100%;
+    aspect-ratio: 1;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(8,1fr);
+    margin-top: 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .sq-w { background: #f0d9b5; }
+  .sq-b { background: #b58863; }
+
+  .lichess-placeholder {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--muted);
+    margin-top: 40px;
+  }
+
+  .lichess-placeholder .icon { font-size: 52px; }
+  .lichess-placeholder p { font-size: 14px; color: var(--text-mid); }
+  .lichess-placeholder strong { color: var(--gold); }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--bg-alt); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(2,210px);
+    gap: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .gallery-item {
+    background: #ddd9d0;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(4) { grid-column: span 2; }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(176,125,46,.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .3s;
+    font-size: 28px;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 30px;
+    color: rgba(30,28,25,.2);
+  }
+
+  .gallery-placeholder span {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--bg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    color: var(--text-mid);
+    margin-bottom: 14px;
+  }
+
+  .contact-info-item span { font-size: 18px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .form-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-input, .form-textarea {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 13px 16px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    outline: none;
+    transition: border-color .2s;
+    border-radius: 2px;
+    width: 100%;
+  }
+
+  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg-dark);
+    padding: 36px 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+
+  .footer-text { font-size: 12px; color: rgba(255,255,255,.35); }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 32px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    padding: 14px 28px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+    font-weight: 400;
+  }
+
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    font-weight: 500;
+  }
+
+  .tab-btn:hover:not(.active) { color: var(--text-mid); }
+
+  .tab-panel { animation: fadeUp .3s ease; }
+
+  .status-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 12px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .status-registered { background: rgba(76,155,76,.12); color: #3a8a3a; }
+  .status-pending    { background: rgba(200,140,30,.12); color: var(--gold); }
+  .status-planned    { background: rgba(100,100,200,.1); color: #5555aa; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(24px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(176,125,46,.2); }
+    50%      { box-shadow: 0 0 0 22px rgba(176,125,46,0); }
+  }
+
+  @keyframes rotateSlow {
+    from { transform: translate(-50%,-50%) rotate(0deg); }
+    to   { transform: translate(-50%,-50%) rotate(360deg); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .65s ease, transform .65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 5vw; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--text); display: block; }
+
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 100px 5vw 48px; order: 2; }
+    .hero-right { order: 1; height: 320px; }
+    .hero-cut { display: none; }
+    .hero-name { font-size: 60px; }
+    .hero-stats { gap: 24px; }
+    .stat-value { font-size: 38px; }
+    .photo-circle { width: 190px; height: 190px; font-size: 60px; }
+    .photo-tagline { font-size: 17px; }
+
+    .ratings-bar { padding: 20px 5vw; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .ratings-grid { gap: 24px; flex-wrap: wrap; }
+
+    #about { grid-template-columns: 1fr; gap: 40px; padding: 64px 5vw; }
+    section { padding: 64px 5vw; }
+    .games-grid { grid-template-columns: 1fr; }
+
+    .gallery-grid {
+      grid-template-columns: repeat(2,1fr);
+      grid-template-rows: auto;
+    }
+    .gallery-item { height: 160px; }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; height: 200px; }
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+
+    #contact { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .section-title { font-size: 40px; }
+    footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .tournament-table { display: block; overflow-x: auto; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-name { font-size: 50px; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+    .stat-value { font-size: 32px; }
+    .hero-cta { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+  }
+
+  /* Admin link */
+  .admin-link {
+    position: fixed; bottom: 20px; right: 20px;
+    background: rgba(22,19,15,.7); color: rgba(240,236,228,.5);
+    padding: 6px 12px; border-radius: 4px; font-size: 12px;
+    text-decoration: none; z-index: 300; transition: all .2s;
+    backdrop-filter: blur(4px);
+  }
+  .admin-link:hover { color: rgba(240,236,228,.9); background: rgba(22,19,15,.9); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">KE ♟</div>
+  <div class="nav-links">
+    <a href="#about"       data-en="About"       data-ru="О нас">About</a>
+    <a href="#tournaments" data-en="Tournaments"  data-ru="Турниры">Tournaments</a>
+    <a href="#games"       data-en="Games"        data-ru="Партии">Games</a>
+    <a href="#gallery"     data-en="Gallery"      data-ru="Галерея">Gallery</a>
+    <a href="#contact"     data-en="Contact"      data-ru="Контакт">Contact</a>
+  </div>
+  <div class="nav-lang">
+    <button onclick="setLang('en')" class="active">EN</button>
+    <button onclick="setLang('ru')">RU</button>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" style="display:none">
+  <a href="#about"       onclick="toggleMenu()" data-en="About"       data-ru="О нас">About</a>
+  <a href="#tournaments" onclick="toggleMenu()" data-en="Tournaments"  data-ru="Турниры">Tournaments</a>
+  <a href="#games"       onclick="toggleMenu()" data-en="Games"        data-ru="Партии">Games</a>
+  <a href="#gallery"     onclick="toggleMenu()" data-en="Gallery"      data-ru="Галерея">Gallery</a>
+  <a href="#contact"     onclick="toggleMenu()" data-en="Contact"      data-ru="Контакт">Contact</a>
+  <button style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:24px;color:inherit;cursor:pointer" onclick="toggleMenu()">CLOSE</button>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="reveal">
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="hero_eyebrow" data-en="♟ Canadian Chess Player · Montréal, QC" data-ru="♟ Канадский шахматист · Монреаль, КК">♟ Canadian Chess Player · Montréal, QC</div>
+    <h1 class="hero-name">
+      <span id="hero_name_first" data-en="KIRILL" data-ru="КИРИЛЛ">KIRILL</span><br>
+      <span id="hero_name_last"  data-en="EVENKO" data-ru="ЕВЕНКО">EVENKO</span>
+    </h1>
+    <p class="hero-slogan" id="hero_slogan" data-en="Young champion in the making" data-ru="Будущий чемпион">Young champion in the making</p>
+    <div class="hero-stats">
+      <div class="stat-block">
+        <div class="stat-label">FIDE</div>
+        <div class="stat-num" id="stat_fide">1247</div>
+        <div class="stat-sub" id="stat_fide_delta">↑ +38 this year</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">CFC</div>
+        <div class="stat-num" id="stat_cfc">1389</div>
+        <div class="stat-sub" data-en="Chess Canada" data-ru="Chess Canada">Chess Canada</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label" data-en="Age" data-ru="Возраст">Age</div>
+        <div class="stat-num" id="stat_age">12</div>
+        <div class="stat-sub" id="stat_since" data-en="Since 2018" data-ru="С 2018 года">Since 2018</div>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#tournaments" class="btn-primary" data-en="View Record" data-ru="Турниры">View Record</a>
+      <a href="#games"       class="btn-outline" data-en="Watch Games" data-ru="Партии">Watch Games</a>
+    </div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div id="chessBoard" class="chess-board-deco"></div>
+    <div class="photo-circle">
+      <img id="heroPhoto" src="" alt="Kirill Evenko" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%">
+      <svg id="heroPhotoPlaceholder" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:56px;height:56px">
+        <path d="M40 8C33.4 8 28 13.4 28 20s5.4 12 12 12 12-5.4 12-12S46.6 8 40 8zm0 28C26.8 36 16 41.8 16 49v5h48v-5c0-7.2-10.8-13-24-13z" fill="#16130f"/>
+      </svg>
+    </div>
+    <div class="photo-caption">
+      <p class="photo-quote">Just make a move</p>
+      <p class="photo-label" data-en="Kirill's photo here" data-ru="Фото Кирилла">Kirill's photo here</p>
+    </div>
+  </div>
+</section>
+
+<!-- RATINGS BAR -->
+<div class="ratings-bar">
+  <span class="ratings-label" data-en="Live Ratings" data-ru="Рейтинги">Live Ratings</span>
+  <div class="ratings-items" id="ratingsBar">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="reveal">
+  <div class="section-label" data-en="About" data-ru="О Кирилле">About</div>
+  <h2 class="section-title" id="about_title" data-en="The Player<br>Behind the Board" data-ru="Игрок за<br>доской">The Player<br>Behind the Board</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p id="about_p1" class="about-para" data-en="" data-ru=""></p>
+      <p id="about_p2" class="about-para" data-en="" data-ru=""></p>
+      <p id="about_p3" class="about-para" data-en="" data-ru=""></p>
+    </div>
+    <div class="about-stats-card reveal">
+      <div class="about-card-location">♛<br>BROSSARD, QC</div>
+      <div class="about-card-sub" id="about_card_since" data-en="Home · Playing since 2018" data-ru="Дом · Играет с 2018">Home · Playing since 2018</div>
+      <div class="mini-stats">
+        <div class="mini-stat"><span class="mini-stat-val" id="about_years">7</span><span class="mini-stat-lbl" data-en="Years in chess" data-ru="Лет в шахматах">Years in chess</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_prizes">3</span><span class="mini-stat-lbl" data-en="Prize places" data-ru="Призовых мест">Prize places</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_games_count">48</span><span class="mini-stat-lbl" data-en="Games recorded" data-ru="Партий записано">Games recorded</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOURNAMENTS -->
+<section id="tournaments" class="reveal">
+  <div class="section-label" data-en="Tournaments" data-ru="Турниры">Tournaments</div>
+  <h2 class="section-title" data-en="Tournament<br>Record" data-ru="Турнирный<br>путь">Tournament<br>Record</h2>
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-past"     onclick="switchTab('past')"     data-en="Played"    data-ru="Сыгранные">Played</button>
+    <button class="tab-btn"        id="tab-upcoming" onclick="switchTab('upcoming')" data-en="Upcoming"  data-ru="Предстоящие">Upcoming</button>
+  </div>
+  <div id="panel-past">
+    <table class="tournament-table">
+      <thead><tr>
+        <th data-en="Tournament" data-ru="Турнир">Tournament</th>
+        <th data-en="Date"       data-ru="Дата">Date</th>
+        <th data-en="City"       data-ru="Город">City</th>
+        <th data-en="Format"     data-ru="Формат">Format</th>
+        <th data-en="Score"      data-ru="Счёт">Score</th>
+        <th data-en="Place"      data-ru="Место">Place</th>
+        <th>Δ Rating</th>
+      </tr></thead>
+      <tbody id="pastTbody"></tbody>
+    </table>
+  </div>
+  <div id="panel-upcoming" style="display:none">
+    <table class="tournament-table">
+      <thead><tr>
+        <th data-en="Tournament" data-ru="Турнир">Tournament</th>
+        <th data-en="Date"       data-ru="Дата">Date</th>
+        <th data-en="City"       data-ru="Город">City</th>
+        <th data-en="Format"     data-ru="Формат">Format</th>
+        <th data-en="Category"   data-ru="Категория">Category</th>
+        <th data-en="Status"     data-ru="Статус">Status</th>
+      </tr></thead>
+      <tbody id="upcomingTbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section id="games" class="reveal">
+  <div class="section-label" data-en="Games" data-ru="Партии">Games</div>
+  <h2 class="section-title" data-en="Featured<br>Games" data-ru="Избранные<br>партии">Featured<br>Games</h2>
+  <p class="section-sub" data-en="Games &amp; Analysis" data-ru="Партии и анализ">Games &amp; Analysis</p>
+  <div class="games-grid" id="gamesGrid"></div>
+  <div class="lichess-note" data-en="♟ Interactive review via Lichess — click a game card" data-ru="♟ Интерактивный просмотр через Lichess — нажмите на карточку партии">♟ Interactive review via Lichess — click a game card</div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="reveal">
+  <div class="section-label" data-en="Gallery" data-ru="Галерея">Gallery</div>
+  <h2 class="section-title" data-en="Moments" data-ru="Моменты">Moments</h2>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+  <div class="section-label" data-en="Contact" data-ru="Контакт">Contact</div>
+  <h2 class="section-title" data-en="Write<br>to Us" data-ru="Напишите<br>нам">Write<br>to Us</h2>
+  <p class="section-sub" data-en="Want to invite Kirill to a tournament, play a friendly game, or just follow his journey? Write to us." data-ru="Хотите пригласить Кирилла на турнир, сыграть товарищескую партию или просто следить за его путём? Напишите нам.">Want to invite Kirill to a tournament, play a friendly game, or just follow his journey? Write to us.</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>📍 Brossard, Québec, Canada</p>
+      <p>✉️ <a href="mailto:a.evenko@gmail.com" style="color:var(--gold);text-decoration:none">a.evenko@gmail.com</a></p>
+      <p data-en="♟ Member — Chess Canada (CFC) · FQÉ" data-ru="♟ Член — Chess Canada (CFC) · FQÉ">♟ Member — Chess Canada (CFC) · FQÉ</p>
+    </div>
+    <form class="contact-form" onsubmit="return false">
+      <input type="text"  name="name"    data-en="Name"    data-ru="Имя"       placeholder="Name">
+      <input type="email" name="email"   data-en="Email"   data-ru="Email"     placeholder="Email">
+      <input type="text"  name="subject" data-en="Subject" data-ru="Тема"      placeholder="Subject">
+      <textarea           name="message" data-en="Message" data-ru="Сообщение" placeholder="Message" rows="4"></textarea>
+      <button type="submit" class="btn-primary" data-en="Send" data-ru="Отправить">Send</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="nav-logo">KE ♟</div>
+  <p data-en="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada" data-ru="© 2025 Kirill Evenko · kirill-evenko.com · Броссар, Квебек · Канада">© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada</p>
+</footer>
+
+<!-- Admin subtle link -->
+<a href="/admin.html" class="admin-link">⚙</a>
+
+<script>
+// ── Load data from data.json ──
+async function loadSiteData() {
+  try {
+    const r = await fetch('/data.json?_=' + Date.now());
+    const D = await r.json();
+    applyData(D);
+  } catch(e) {
+    console.warn('Could not load data.json, using static content');
+  }
+  initPage();
+}
+
+function applyData(D) {
+  // Hero stats
+  if (D.hero_stats) {
+    const hs = D.hero_stats;
+    document.getElementById('stat_fide').textContent = hs.fide_rating || '1247';
+    document.getElementById('stat_fide_delta').textContent = '↑ ' + (hs.fide_delta||'+38') + ' this year';
+    document.getElementById('stat_cfc').textContent = hs.cfc_rating || '1389';
+    document.getElementById('stat_age').textContent = hs.age || '12';
+    const sinceEl = document.getElementById('stat_since');
+    sinceEl.setAttribute('data-en', 'Since ' + (hs.since_year||2018));
+    sinceEl.setAttribute('data-ru', 'С ' + (hs.since_year||2018) + ' года');
+    sinceEl.textContent = 'Since ' + (hs.since_year||2018);
+  }
+  // Hero text
+  if (D.hero) {
+    const slogan = document.getElementById('hero_slogan');
+    slogan.setAttribute('data-en', D.hero.slogan_en || '');
+    slogan.setAttribute('data-ru', D.hero.slogan_ru || '');
+    slogan.textContent = D.hero.slogan_en || '';
+  }
+  // Hero photo
+  if (D.hero && D.hero.photo) {
+    const img = document.getElementById('heroPhoto');
+    const ph = document.getElementById('heroPhotoPlaceholder');
+    img.src = '/photos/' + D.hero.photo;
+    img.style.display = 'block';
+    if (ph) ph.style.display = 'none';
+  }
+  // Ratings bar
+  if (D.ratings) {
+    const bar = document.getElementById('ratingsBar');
+    bar.innerHTML = D.ratings.map(function(r) {
+      var inner = '<span class="rating-org">' + r.org + '</span><span class="rating-num">' + r.value + '</span>';
+      return r.link ? '<a href="' + r.link + '" target="_blank" rel="noopener" class="rating-item" style="text-decoration:none">' + inner + '</a>' : '<div class="rating-item">' + inner + '</div>';
+    }).join('');
+  }
+  // About
+  if (D.about) {
+    const ab = D.about;
+    document.getElementById('about_years').textContent = ab.years_playing || 7;
+    document.getElementById('about_prizes').textContent = ab.prize_places || 3;
+    document.getElementById('about_games_count').textContent = ab.games_recorded || 48;
+    // About card since year
+    const cardSince = document.getElementById('about_card_since');
+    if (cardSince && D.hero_stats) {
+      cardSince.setAttribute('data-en', 'Home · Playing since ' + D.hero_stats.since_year);
+      cardSince.setAttribute('data-ru', 'Дом · Играет с ' + D.hero_stats.since_year);
+    }
+    // Paragraphs
+    const p1 = document.getElementById('about_p1');
+    p1.setAttribute('data-en', ab.para1_en || '');
+    p1.setAttribute('data-ru', ab.para1_ru || '');
+    p1.innerHTML = ab.para1_en || '';
+    const p2 = document.getElementById('about_p2');
+    p2.setAttribute('data-en', ab.para2_en || '');
+    p2.setAttribute('data-ru', ab.para2_ru || '');
+    p2.innerHTML = ab.para2_en || '';
+    const p3 = document.getElementById('about_p3');
+    p3.setAttribute('data-en', ab.para3_en || '');
+    p3.setAttribute('data-ru', ab.para3_ru || '');
+    p3.innerHTML = ab.para3_en || '';
+  }
+  // Tournaments past
+  if (D.tournaments_past) {
+    const tbody = document.getElementById('pastTbody');
+    tbody.innerHTML = D.tournaments_past.map(t => `
+      <tr>
+        <td><strong>${t.name}</strong></td>
+        <td>${t.date}</td>
+        <td>${t.city}</td>
+        <td>${t.format}</td>
+        <td>${t.score}</td>
+        <td><span class="place-tag ${t.place_tag}">${t.place}</span></td>
+        <td class="delta-pos">+${t.delta.replace('+','')}</td>
+      </tr>
+    `).join('');
+  }
+  // Tournaments upcoming
+  if (D.tournaments_upcoming) {
+    const tbody = document.getElementById('upcomingTbody');
+    tbody.innerHTML = D.tournaments_upcoming.map(t => `
+      <tr>
+        <td><strong>${t.name}</strong></td>
+        <td>${t.date}</td>
+        <td>${t.city}</td>
+        <td>${t.format}</td>
+        <td>${t.category}</td>
+        <td>${t.status}</td>
+      </tr>
+    `).join('');
+  }
+  // Games
+  if (D.games) {
+    const grid = document.getElementById('gamesGrid');
+    grid.innerHTML = D.games.map((g,i) => {
+      const boardId = 'board' + (i+1);
+      const playerLine = g.result === '1 — 0'
+        ? '<span class="gw">' + g.white + '</span> vs ' + g.black
+        : g.white + ' vs <span class="gw">' + g.black + '</span>';
+      const cardContent = `
+        <div class="game-event">${g.event}</div>
+        <div class="game-players">${playerLine}</div>
+        <div class="game-result">${g.result}</div>
+        <div class="game-board" id="${boardId}"></div>
+        <div class="game-meta">${g.type} · ${g.moves}</div>
+        <div class="game-opening">${g.opening}</div>
+      `;
+      return g.lichess
+        ? `<a href="${g.lichess}" target="_blank" class="game-card">${cardContent}</a>`
+        : `<div class="game-card">${cardContent}</div>`;
+    }).join('');
+    // Draw mini boards
+    const pieces = {0:['♜','♞','♝','♛','♚','♝','♞','♜'],1:['♟','♟','♟','♟','♟','♟','♟','♟'],6:['♙','♙','♙','♙','♙','♙','♙','♙'],7:['♖','♘','♗','♕','♔','♗','♘','♖']};
+    D.games.forEach((_,i) => {
+      const b = document.getElementById('board'+(i+1));
+      if (!b) return;
+      for (let r=0;r<8;r++) for (let c=0;c<8;c++) {
+        const sq = document.createElement('div');
+        sq.className = (r+c)%2===0 ? 'sq-w' : 'sq-b';
+        sq.style.cssText = 'display:flex;align-items:center;justify-content:center;font-size:9px;';
+        if (pieces[r]) sq.textContent = pieces[r][c]||'';
+        sq.style.color = r<2 ? '#3a2a10' : '#f7f4ef';
+        b.appendChild(sq);
+      }
+    });
+  }
+  // Gallery
+  if (D.gallery) {
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = D.gallery.map(g => {
+      if (g.file) {
+        return `<div class="gallery-item"><img src="/photos/${g.file}" alt="${g.label_en}" style="width:100%;height:100%;object-fit:cover;border-radius:4px"><div class="gallery-overlay">🔍</div></div>`;
+      } else {
+        return `<div class="gallery-item"><div class="gallery-placeholder">${g.emoji}${g.label_ru}</div><div class="gallery-overlay">🔍</div></div>`;
+      }
+    }).join('');
+  }
+}
+
+function initPage() {
+  // Chess board deco
+  const boardEl = document.getElementById('chessBoard');
+  if (boardEl) {
+    for (let r=0;r<8;r++) for (let c=0;c<8;c++) {
+      const sq = document.createElement('div');
+      sq.className = (r+c)%2===0 ? 'sq-deco-w' : 'sq-deco-b';
+      boardEl.appendChild(sq);
+    }
+  }
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Mobile
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+}
+
+// ── Tabs ──
+function switchTab(tab) {
+  document.getElementById('panel-past').style.display     = tab === 'past'     ? 'block' : 'none';
+  document.getElementById('panel-upcoming').style.display = tab === 'upcoming' ? 'block' : 'none';
+  document.getElementById('tab-past').classList.toggle('active',     tab === 'past');
+  document.getElementById('tab-upcoming').classList.toggle('active', tab === 'upcoming');
+}
+
+// ── Language ──
+let lang = 'en';
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.nav-lang button').forEach(b => b.classList.remove('active'));
+  document.querySelector('.nav-lang button[onclick="setLang(\''+l+'\')"]').classList.add('active');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const txt = el.getAttribute('data-'+l) || el.getAttribute('data-en');
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { el.placeholder = txt; }
+    else { el.innerHTML = txt; }
+  });
+}
+
+// ── Mobile menu ──
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+function checkMobile() {
+  const ham = document.querySelector('.nav-hamburger');
+  if (window.innerWidth <= 768) { ham.style.display = 'flex'; }
+  else { ham.style.display = 'none'; document.getElementById('mobileMenu').style.display = 'none'; }
+}
+
+// ── Start ──
+loadSiteData();
+</script>
+</body>
+</html>

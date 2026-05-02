@@ -1,0 +1,222 @@
+{
+  "hero": {
+    "tagline_en": "♟ Canadian Chess Player · Montréal, QC",
+    "tagline_ru": "♟ Канадский шахматист · Монреаль, КК",
+    "name_first_en": "KIRILL",
+    "name_first_ru": "КИРИЛЛ",
+    "name_last_en": "EVENKO",
+    "name_last_ru": "ЕВЕНКО",
+    "slogan_en": "Young champion in the making",
+    "slogan_ru": "Будущий чемпион",
+    "photo": ""
+  },
+  "ratings": [
+    {
+      "org": "FIDE",
+      "value": 1721,
+      "delta": "+12",
+      "direction": "up",
+      "link": "https://ratings.fide.com/profile/2666243"
+    },
+    {
+      "org": "CFC (Chess Canada)",
+      "value": 1831,
+      "delta": "+24",
+      "direction": "up",
+      "link": "https://www.chess.ca/en/ratings/p/?id=187189"
+    },
+    {
+      "org": "FQÉ (Québec)",
+      "value": 1782,
+      "delta": "+18",
+      "direction": "up",
+      "link": "https://www.fqechecs.qc.ca/membres/index.php?Id=109477"
+    },
+    {
+      "org": "Chess.com",
+      "value": 2200,
+      "delta": "+25",
+      "direction": "up",
+      "link": ""
+    }
+  ],
+  "hero_stats": {
+    "fide_rating": 1721,
+    "fide_delta": "+38",
+    "cfc_rating": 1831,
+    "age": 12,
+    "since_year": 2018
+  },
+  "about": {
+    "label_en": "About",
+    "label_ru": "О Кирилле",
+    "title_en": "The Player<br>Behind the Board",
+    "title_ru": "Игрок за<br>доской",
+    "para1_en": "Kirill Evenko is a 12-year-old chess player from Brossard, Québec — a Canadian with Russian roots. His story with chess started at five years old, when his father sat him down and showed him the basics. That one afternoon changed everything. Chess became not just a hobby, but a passion — and a mission.",
+    "para1_ru": "Кирилл Евенко — 12-летний шахматист из Броссара, Квебек. Канадец с русскими корнями. Его история с шахматами началась в пять лет, когда папа показал ему основные принципы игры. Тот день изменил всё. Шахматы стали не просто увлечением, а настоящей страстью — и целью.",
+    "para2_en": "Today Kirill competes in Canadian and international tournaments, but what defines him most is what happens away from the board — training every day with fire in his eyes, studying openings, middlegames and endgames with a focus that goes far beyond his age. He is on the road to the grandmaster title — and every step counts.",
+    "para2_ru": "Сегодня Кирилл участвует в канадских и международных турнирах. Но главное — это то, что происходит вне соревнований. Он тренируется каждый день с огнём в глазах, разучивает дебюты, миттельшпили и эндшпили с сосредоточенностью, которая удивляет. Он идёт к титулу гроссмейстера семимильными шагами.",
+    "para3_en": "This site was created to follow each step of that journey — wins and losses, breakthroughs and lessons. To preserve the best moments of a story still being written.",
+    "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
+    "years_playing": 7,
+    "prize_places": 3,
+    "games_recorded": 48
+  },
+  "tournaments_past": [
+    {
+      "name": "Quebec Youth Open",
+      "date": "Mar 2025",
+      "city": "Montréal",
+      "format": "Classical",
+      "score": "4.5 / 6",
+      "place": "2-е",
+      "place_tag": "place-2",
+      "delta": "+24"
+    },
+    {
+      "name": "Blitz Championship U14",
+      "date": "Jan 2025",
+      "city": "Québec City",
+      "format": "Blitz",
+      "score": "5 / 7",
+      "place": "1-е",
+      "place_tag": "place-1",
+      "delta": "+38"
+    },
+    {
+      "name": "CMA Winter Rapid",
+      "date": "Dec 2024",
+      "city": "Brossard",
+      "format": "Rapid",
+      "score": "3 / 5",
+      "place": "Топ 10",
+      "place_tag": "place-other",
+      "delta": "+12"
+    },
+    {
+      "name": "Echecs Québec Fall Open",
+      "date": "Oct 2024",
+      "city": "Montréal",
+      "format": "Classical",
+      "score": "4 / 6",
+      "place": "3-е",
+      "place_tag": "place-3",
+      "delta": "+19"
+    },
+    {
+      "name": "National Youth U12",
+      "date": "Aug 2024",
+      "city": "Ottawa, ON",
+      "format": "Classical",
+      "score": "3.5 / 7",
+      "place": "Топ 20",
+      "place_tag": "place-other",
+      "delta": "+8"
+    }
+  ],
+  "tournaments_upcoming": [
+    {
+      "name": "Echecs Québec Summer Open",
+      "date": "Jun 14, 2025",
+      "city": "Montréal",
+      "format": "Classical",
+      "category": "U14",
+      "status": "Зарегистрирован",
+      "status_en": "Registered"
+    },
+    {
+      "name": "CFC Youth Championship",
+      "date": "Jul 8, 2025",
+      "city": "Toronto, ON",
+      "format": "Classical",
+      "category": "U14 National",
+      "status": "Зарегистрирован",
+      "status_en": "Registered"
+    },
+    {
+      "name": "Blitz Open Brossard",
+      "date": "Aug 2, 2025",
+      "city": "Brossard",
+      "format": "Blitz",
+      "category": "Open",
+      "status": "Рассматривается",
+      "status_en": "Considering"
+    },
+    {
+      "name": "FQÉ Fall Classic",
+      "date": "Sep 20, 2025",
+      "city": "Québec City",
+      "format": "Rapid",
+      "category": "U16",
+      "status": "Планируется",
+      "status_en": "Planned"
+    }
+  ],
+  "games": [
+    {
+      "event": "Blitz Championship U14 · Jan 2025",
+      "white": "Evenko, K.",
+      "black": "Tremblay, M.",
+      "result": "1 — 0",
+      "type": "Classical",
+      "moves": "42 moves",
+      "opening": "Ruy López",
+      "lichess": ""
+    },
+    {
+      "event": "Quebec Youth Open · Mar 2025",
+      "white": "Chen, A.",
+      "black": "Evenko, K.",
+      "result": "0 — 1",
+      "type": "Rapid",
+      "moves": "38 moves",
+      "opening": "Sicilian",
+      "lichess": ""
+    },
+    {
+      "event": "CMA Winter Rapid · Dec 2024",
+      "white": "Evenko, K.",
+      "black": "Dubois, P.",
+      "result": "½ — ½",
+      "type": "Rapid",
+      "moves": "65 moves",
+      "opening": "Queen's Gambit",
+      "lichess": ""
+    }
+  ],
+  "gallery": [
+    {
+      "emoji": "🏆",
+      "label_en": "Main photo",
+      "label_ru": "Главное фото",
+      "file": "photo_0_1777646964872.JPG"
+    },
+    {
+      "emoji": "♟",
+      "label_en": "Tournament",
+      "label_ru": "Турнир",
+      "file": ""
+    },
+    {
+      "emoji": "🎯",
+      "label_en": "Training",
+      "label_ru": "Тренировка",
+      "file": ""
+    },
+    {
+      "emoji": "📸",
+      "label_en": "Memories",
+      "label_ru": "Воспоминания",
+      "file": ""
+    },
+    {
+      "emoji": "🤝",
+      "label_en": "With coach",
+      "label_ru": "С тренером",
+      "file": ""
+    }
+  ],
+  "contact": {
+    "email": "a.evenko@gmail.com"
+  }
+}
