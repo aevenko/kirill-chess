@@ -154,36 +154,6 @@
   ],
   "games": [
     {
-      "event": "Blitz Championship U14 · Jan 2025",
-      "white": "Evenko, K.",
-      "black": "Tremblay, M.",
-      "result": "1 — 0",
-      "type": "Classical",
-      "moves": "42 moves",
-      "opening": "Ruy López",
-      "lichess": ""
-    },
-    {
-      "event": "Quebec Youth Open · Mar 2025",
-      "white": "Chen, A.",
-      "black": "Evenko, K.",
-      "result": "0 — 1",
-      "type": "Rapid",
-      "moves": "38 moves",
-      "opening": "Sicilian",
-      "lichess": ""
-    },
-    {
-      "event": "CMA Winter Rapid · Dec 2024",
-      "white": "Evenko, K.",
-      "black": "Dubois, P.",
-      "result": "½ — ½",
-      "type": "Rapid",
-      "moves": "65 moves",
-      "opening": "Queen's Gambit",
-      "lichess": ""
-    },
-    {
       "event": "Chambly April 2026 R4",
       "white": "Tse, Chun Wing 1899",
       "black": "Evenko, Kirill 1680",
@@ -192,6 +162,26 @@
       "moves": "43 moves",
       "opening": "",
       "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/gt2Yja7Z#0\" frameborder=0></iframe>"
+    },
+    {
+      "event": "Chambly April 2026 R1",
+      "white": "Evenko, Kirill 1680",
+      "black": "Lefebvre-Langlais, Hugues 1397",
+      "result": "1 - 0",
+      "type": "Classical",
+      "moves": "",
+      "opening": "",
+      "lichess": "https://lichess.org/study/u3lAeGTE/qApULFo1"
+    },
+    {
+      "event": "Chambly April 2026 R2",
+      "white": "Gagnon, Gabriel 1834",
+      "black": "Evenko, Kirill 1680",
+      "result": "0 - 1",
+      "type": "Classical",
+      "moves": "",
+      "opening": "",
+      "lichess": "https://lichess.org/study/u3lAeGTE/0bfOp7l2"
     }
   ],
   "gallery": [
@@ -205,25 +195,25 @@
       "emoji": "♟",
       "label_en": "Tournament",
       "label_ru": "Турнир",
-      "file": ""
+      "file": "photo_1_1777730578610.jpeg"
     },
     {
       "emoji": "🎯",
       "label_en": "Training",
-      "label_ru": "Тренировка",
-      "file": ""
+      "label_ru": "Разбор Партии",
+      "file": "photo_2_1777730634778.jpeg"
     },
     {
       "emoji": "📸",
       "label_en": "Memories",
-      "label_ru": "Воспоминания",
-      "file": ""
+      "label_ru": "Первая Победа",
+      "file": "photo_3_1777730700839.jpeg"
     },
     {
       "emoji": "🤝",
       "label_en": "With coach",
-      "label_ru": "С тренером",
-      "file": ""
+      "label_ru": "С Папой",
+      "file": "photo_4_1777730868270.jpeg"
     }
   ],
   "contact": {
