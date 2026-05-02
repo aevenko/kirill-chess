@@ -291,11 +291,14 @@
 
   /* ── RATINGS BAR ── */
   .ratings-bar {
-    background: var(--bg-dark);
-    padding: 26px 5vw;
+    background: var(--bg);
+    padding: 20px 5vw;
     display: flex;
     align-items: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     overflow-x: auto;
+    gap: 0;
   }
 
   .ratings-label {
@@ -304,34 +307,54 @@
     text-transform: uppercase;
     color: var(--gold);
     white-space: nowrap;
-    margin-right: 48px;
+    margin-right: 40px;
     flex-shrink: 0;
   }
 
-  .ratings-grid {
+  .ratings-items {
     display: flex;
-    gap: 52px;
+    align-items: center;
+  }
+
+  .rating-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 28px;
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+  .rating-item:first-child { padding-left: 0; }
+  .rating-item:last-child { border-right: none; }
+
+  .rating-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 4px;
     flex-shrink: 0;
   }
 
-  .rating-item { display:flex; flex-direction:column; gap:2px; }
+  .rating-info { display: flex; flex-direction: column; gap: 2px; }
 
   .rating-org {
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,255,255,.4);
+    color: var(--muted);
   }
 
   .rating-num {
-    font-family: 'Anton', 'Arial Black', Impact, sans-serif;
-    font-size: 34px;
-    color: #f7f4ef;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--text);
     line-height: 1;
   }
 
-  .rating-change { font-size: 11px; color: #6dbb6d; }
-  .rating-change.down { color: #e07070; }
+  .rating-change { font-size: 11px; color: #4a9a4a; }
+  .rating-change.down { color: #c04040; }
 
   /* ── SECTIONS ── */
   section { padding: 100px 5vw; }
@@ -772,8 +795,11 @@
     .photo-circle { width: 190px; height: 190px; font-size: 60px; }
     .photo-tagline { font-size: 17px; }
 
-    .ratings-bar { padding: 20px 5vw; flex-direction: column; align-items: flex-start; gap: 16px; }
-    .ratings-grid { gap: 24px; flex-wrap: wrap; }
+    .ratings-bar { padding: 16px 5vw; gap: 0; }
+    .ratings-label { margin-right: 20px; }
+    .rating-item { padding: 0 16px; gap: 8px; }
+    .rating-logo { width: 24px; height: 24px; }
+    .rating-num { font-size: 22px; }
 
     #about { grid-template-columns: 1fr; gap: 40px; padding: 64px 5vw; }
     section { padding: 64px 5vw; }
@@ -1138,10 +1164,27 @@ function applyData(D) {
   }
   // Ratings bar
   if (D.ratings) {
+    const logoMap = {
+      'FIDE':             'https://ratings.fide.com/favicon.ico',
+      'CFC (Chess Canada)':'https://www.chess.ca/favicon.ico',
+      'FQÉ (Québec)':     'https://www.fqechecs.qc.ca/favicon.ico',
+      'Chess.com':        'https://www.chess.com/favicon.ico'
+    };
+    const emojiMap = {
+      'FIDE':'♔', 'CFC (Chess Canada)':'♞', 'FQÉ (Québec)':'♝', 'Chess.com':'♟'
+    };
     const bar = document.getElementById('ratingsBar');
     bar.innerHTML = D.ratings.map(function(r) {
-      var inner = '<span class="rating-org">' + r.org + '</span><span class="rating-num">' + r.value + '</span>';
-      return r.link ? '<a href="' + r.link + '" target="_blank" rel="noopener" class="rating-item" style="text-decoration:none">' + inner + '</a>' : '<div class="rating-item">' + inner + '</div>';
+      const logoUrl = logoMap[r.org] || '';
+      const fb = emojiMap[r.org] || '♟';
+      const logoHtml = logoUrl
+        ? '<img class="rating-logo" src="' + logoUrl + '" alt="' + r.org + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'inline\'">'
+          + '<span style="display:none;font-size:22px;flex-shrink:0">' + fb + '</span>'
+        : '<span style="font-size:22px;flex-shrink:0">' + fb + '</span>';
+      const inner = logoHtml + '<div class="rating-info"><span class="rating-org">' + r.org + '</span><span class="rating-num">' + r.value + '</span></div>';
+      return r.link
+        ? '<a href="' + r.link + '" target="_blank" rel="noopener" class="rating-item">' + inner + '</a>'
+        : '<div class="rating-item">' + inner + '</div>';
     }).join('');
   }
   // About
