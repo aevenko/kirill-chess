@@ -391,18 +391,18 @@ function renderUpcomingTournaments() {
         <div><label>Tournament Name</label><input type="text" value="${t.name}" onchange="D.tournaments_upcoming[${i}].name=this.value"></div>
         <div><label>Date</label><input type="text" value="${t.date}" placeholder="Jun 14, 2025" onchange="D.tournaments_upcoming[${i}].date=this.value"></div>
       </div>
-      <div class="row4">
+      <div class="row3">
         <div><label>City</label><input type="text" value="${t.city}" onchange="D.tournaments_upcoming[${i}].city=this.value"></div>
         <div><label>Format</label><input type="text" value="${t.format}" placeholder="Classical" onchange="D.tournaments_upcoming[${i}].format=this.value"></div>
-        <div><label>Category</label><input type="text" value="${t.category}" placeholder="U14" onchange="D.tournaments_upcoming[${i}].category=this.value"></div>
         <div><label>Status (RU)</label><input type="text" value="${t.status}" placeholder="Зарегистрирован" onchange="D.tournaments_upcoming[${i}].status=this.value"></div>
       </div>
+      <div><label>Registration Link (URL)</label><input type="url" value="${t.link||''}" placeholder="https://..." onchange="D.tournaments_upcoming[${i}].link=this.value" style="margin-bottom:0"></div>
     </div>
   `).join('');
 }
 
 function addUpcomingTournament() {
-  D.tournaments_upcoming.push({name:'',date:'',city:'',format:'Classical',category:'',status:'Планируется',status_en:'Planned'});
+  D.tournaments_upcoming.push({name:'',date:'',city:'',format:'Classical',link:'',status:'Планируется',status_en:'Planned'});
   renderUpcomingTournaments();
 }
 

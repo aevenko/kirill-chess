@@ -234,7 +234,7 @@
       "date": "Jun 14, 2025",
       "city": "Montréal",
       "format": "Classical",
-      "category": "U14",
+      "link": "",
       "status": "Зарегистрирован",
       "status_en": "Registered"
     },
@@ -243,7 +243,7 @@
       "date": "Jul 8, 2025",
       "city": "Toronto, ON",
       "format": "Classical",
-      "category": "U14 National",
+      "link": "",
       "status": "Зарегистрирован",
       "status_en": "Registered"
     },
@@ -252,7 +252,7 @@
       "date": "Aug 2, 2025",
       "city": "Brossard",
       "format": "Blitz",
-      "category": "Open",
+      "link": "",
       "status": "Рассматривается",
       "status_en": "Considering"
     },
@@ -261,43 +261,127 @@
       "date": "Sep 20, 2025",
       "city": "Québec City",
       "format": "Rapid",
-      "category": "U16",
+      "link": "",
       "status": "Планируется",
       "status_en": "Planned"
     }
   ],
-  "games": [
+  "games_library": [
     {
-      "event": "Chambly April 2026 R2",
-      "white": "Tse, Chun Wing 1899",
-      "black": "Evenko, Kirill 1680",
-      "result": "0 - 1",
-      "type": "Classical",
-      "moves": "43 moves",
-      "opening": "",
-      "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/gt2Yja7Z#0\" frameborder=0></iframe>"
+      "year": "2026",
+      "tournaments": [
+        {
+          "name": "Tournois de Germain Laplante",
+          "location": "Chambly",
+          "date": "Apr 2026",
+          "games": [
+            {
+              "event": "Chambly Apr 2026 · R1",
+              "white": "Evenko, Kirill 1680",
+              "black": "Lefebvre-Langlais, Hugues 1397",
+              "result": "1 - 0",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/qApULFo1\" frameborder=0></iframe>"
+            },
+            {
+              "event": "Chambly Apr 2026 · R2",
+              "white": "Tse, Chun Wing 1899",
+              "black": "Evenko, Kirill 1680",
+              "result": "0 - 1",
+              "type": "Classical",
+              "moves": "43 moves",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/gt2Yja7Z#0\" frameborder=0></iframe>"
+            },
+            {
+              "event": "Chambly Apr 2026 · R3",
+              "white": "Gagnon, Gabriel 1834",
+              "black": "Evenko, Kirill 1680",
+              "result": "0 - 1",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/0bfOp7l2\" frameborder=0></iframe>"
+            }
+          ]
+        },
+        {
+          "name": "Défi Échiquéen du Québec (CAM)",
+          "location": "Laval",
+          "date": "Apr 2026",
+          "games": []
+        },
+        {
+          "name": "Championnat Ouvert de la Mauricie",
+          "location": "Trois-Rivières",
+          "date": "Mar 2026",
+          "games": []
+        },
+        {
+          "name": "New York State Scholastic Championships",
+          "location": "Saratoga, NY",
+          "date": "Mar 2026",
+          "games": []
+        },
+        {
+          "name": "Ottawa March Open",
+          "location": "Ottawa, ON",
+          "date": "Mar 2026",
+          "games": []
+        },
+        {
+          "name": "Tournoi d'échecs du Carnaval",
+          "location": "Québec City",
+          "date": "Feb 2026",
+          "games": []
+        },
+        {
+          "name": "Championnat jeunesse du Québec",
+          "location": "Montréal",
+          "date": "Jan 2026",
+          "games": []
+        }
+      ]
     },
     {
-      "event": "Chambly April 2026 R1",
-      "white": "Evenko, Kirill 1680",
-      "black": "Lefebvre-Langlais, Hugues 1397",
-      "result": "1 - 0",
-      "type": "Classical",
-      "moves": "",
-      "opening": "",
-      "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/qApULFo1\" frameborder=0></iframe>"
-    },
-    {
-      "event": "Chambly April 2026 R3",
-      "white": "Gagnon, Gabriel 1834",
-      "black": "Evenko, Kirill 1680",
-      "result": "0 - 1",
-      "type": "Classical",
-      "moves": "",
-      "opening": "",
-      "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/0bfOp7l2\" frameborder=0></iframe>"
+      "year": "2025",
+      "tournaments": [
+        {
+          "name": "Montréal Open 2025",
+          "location": "Montréal",
+          "date": "Sep 2025",
+          "games": []
+        },
+        {
+          "name": "Championnat d'échecs du Haut-Richelieu",
+          "location": "St-Jean-sur-Richelieu",
+          "date": "Oct 2025",
+          "games": []
+        },
+        {
+          "name": "Le Grand Tour Jeunesse",
+          "location": "Montréal",
+          "date": "Nov 2025",
+          "games": []
+        },
+        {
+          "name": "Tournoi Régulier de la Rive-Sud (CAM)",
+          "location": "Brossard",
+          "date": "Dec 2025",
+          "games": []
+        },
+        {
+          "name": "Le Tournoi du Père-Noël",
+          "location": "Montréal",
+          "date": "Dec 2025",
+          "games": []
+        }
+      ]
     }
   ],
+  "games": [],
   "gallery": [
     {
       "emoji": "🏆",
