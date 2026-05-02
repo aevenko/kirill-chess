@@ -308,12 +308,6 @@
           ]
         },
         {
-          "name": "Défi Échiquéen du Québec (CAM)",
-          "location": "Laval",
-          "date": "Apr 2026",
-          "games": []
-        },
-        {
           "name": "Championnat Ouvert de la Mauricie",
           "location": "Trois-Rivières",
           "date": "Mar 2026",
@@ -335,12 +329,6 @@
           "name": "Tournoi d'échecs du Carnaval",
           "location": "Québec City",
           "date": "Feb 2026",
-          "games": []
-        },
-        {
-          "name": "Championnat jeunesse du Québec",
-          "location": "Montréal",
-          "date": "Jan 2026",
           "games": []
         }
       ]
