@@ -250,22 +250,21 @@
   }
 
   .photo-circle {
-    width: 406px; height: 406px;
+    width: 280px; height: 280px;
     border-radius: 50%;
     border: 1.5px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 130px;
+    font-size: 90px;
     background: rgba(176,125,46,.05);
     animation: pulse 3.5s ease-in-out infinite;
   }
 
-  .photo-tagline,
-  .photo-quote {
+  .photo-tagline {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
-    font-size: 33px;
+    font-size: 22px;
     color: var(--gold);
     letter-spacing: 1px;
     text-align: center;
@@ -862,8 +861,8 @@
     .hero-name { font-size: 60px; }
     .hero-stats { gap: 24px; }
     .stat-value { font-size: 38px; }
-    .photo-circle { width: 276px; height: 276px; font-size: 87px; }
-    .photo-tagline, .photo-quote { font-size: 26px; }
+    .photo-circle { width: 190px; height: 190px; font-size: 60px; }
+    .photo-tagline { font-size: 17px; }
 
     .folder-grid { grid-template-columns: 1fr 1fr; }
     .folder-name { font-size:20px; }
@@ -1063,6 +1062,17 @@
       <p id="about_p1" class="about-para" data-en="" data-ru=""></p>
       <p id="about_p2" class="about-para" data-en="" data-ru=""></p>
       <p id="about_p3" class="about-para" data-en="" data-ru=""></p>
+    </div>
+    <div class="about-stats-card reveal">
+      <div class="about-card-location">♛<br>BROSSARD, QC</div>
+      <div class="about-card-sub" id="about_card_since" data-en="Home · Playing since 2018" data-ru="Дом · Играет с 2018" data-fr="Domicile · Joue depuis 2018">Home · Playing since 2018</div>
+      <div class="mini-stats">
+        <div class="mini-stat"><span class="mini-stat-val" id="about_years">7</span><span class="mini-stat-lbl" data-en="Years in chess" data-ru="Лет в шахматах" data-fr="Années aux échecs">Years in chess</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_prizes">3</span><span class="mini-stat-lbl" data-en="Prize places" data-ru="Призовых мест" data-fr="Podiums">Prize places</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_games_classical">0</span><span class="mini-stat-lbl" data-en="Classical games" data-ru="Классических партий" data-fr="Parties classiques">Classical games</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_games_rapid">0</span><span class="mini-stat-lbl" data-en="Rapid games" data-ru="Быстрых партий" data-fr="Parties rapides">Rapid games</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_games_blitz">0</span><span class="mini-stat-lbl" data-en="Blitz games" data-ru="Блиц-партий" data-fr="Parties blitz">Blitz games</span></div>
+      </div>
     </div>
   </div>
 </section>
