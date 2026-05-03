@@ -1294,7 +1294,7 @@ function applyData(D) {
         <td>${t.city}</td>
         <td>${t.format}</td>
         <td>${t.score}</td>
-        <td><span class="place-tag ${t.place_tag}">${t.place}</span></td>
+        <td><span class="place-tag ${t.place_tag}">${t.place_tag==='place-1'?'🥇 ':t.place_tag==='place-2'?'🥈 ':t.place_tag==='place-3'?'🥉 ':''}${t.place}</span></td>
       </tr>
     `).join('');
   }
@@ -1313,11 +1313,9 @@ function applyData(D) {
     `).join('');
   }
   // Games
-  if (D.games) {
-    if (D.games_library) {
-      gamesLibrary = D.games_library;
-      renderGamesLibrary();
-    }
+  if (D.games_library) {
+    gamesLibrary = D.games_library;
+    renderGamesLibrary();
   }
   // Gallery
   if (D.gallery) {
@@ -1365,7 +1363,10 @@ function buildGameCard(g, idx) {
     : bWin ? g.white+' vs <span class="gw">'+g.black+'</span>'
     : g.white+' vs '+g.black;
   let lichessUrl = '';
-  if (g.lichess) { const m = g.lichess.match(/src="([^"]+)"/); if (m) lichessUrl = m[1]; }
+  if (g.lichess) {
+    const m = g.lichess.match(/src=["']([^"']+)["']/);
+    lichessUrl = m ? m[1] : (g.lichess.startsWith('http') ? g.lichess.trim() : '');
+  }
   const boardId = 'gb_'+idx;
   const content = `<div class="game-event">${g.event}</div>
     <div class="game-players">${playerLine}</div>

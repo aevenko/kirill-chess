@@ -63,8 +63,8 @@
     "para3_en": "This site was created to follow each step of that journey — wins and losses, breakthroughs and lessons. To preserve the best moments of a story still being written.",
     "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
     "years_playing": 8,
-    "prize_places": 3,
-    "games_recorded": 48
+    "prize_places": 12,
+    "games_recorded": 575
   },
   "tournaments_past": [
     {
@@ -501,7 +501,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/qApULFo1\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/embed/u3lAeGTE/qApULFo1"
             },
             {
               "event": "Chambly Apr 2026 · R2",
@@ -511,7 +511,7 @@
               "type": "Classical",
               "moves": "43 moves",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/gt2Yja7Z#0\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/embed/u3lAeGTE/gt2Yja7Z#0"
             },
             {
               "event": "Chambly Apr 2026 · R3",
@@ -521,7 +521,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/0bfOp7l2\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/embed/u3lAeGTE/0bfOp7l2"
             },
             {
               "event": "Chambly Apr 2026 · R4",
@@ -531,7 +531,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/4CYVXCTj\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/u3lAeGTE/4CYVXCTj"
             },
             {
               "event": "Chambly Apr 2026 · R5",
@@ -541,7 +541,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/f7t4YZDL#0\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/u3lAeGTE/f7t4YZDL"
             }
           ]
         },
@@ -558,7 +558,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/bY02sRWD\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/u3lAeGTE/bY02sRWD"
             },
             {
               "event": "",
@@ -568,7 +568,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/MDSv7x66\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/u3lAeGTE/MDSv7x66"
             }
           ]
         },
@@ -585,7 +585,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/TgReTxTx\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/u3lAeGTE/TgReTxTx"
             },
             {
               "event": "Ottawa Open 2026 R2",
@@ -595,7 +595,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/wPM4RGAp\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/u3lAeGTE/wPM4RGAp"
             },
             {
               "event": "Ottawa Open 2026 R2",
@@ -605,7 +605,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/u3lAeGTE/1H6HEyqh\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/u3lAeGTE/1H6HEyqh"
             }
           ]
         }
