@@ -35,10 +35,10 @@
     },
     {
       "org": "Chess.com",
-      "value": 2200,
-      "delta": "+25",
-      "direction": "up",
-      "link": ""
+      "value": 2186,
+      "delta": "-14",
+      "direction": "down",
+      "link": "https://www.chess.com/member/future_grandmaster14"
     }
   ],
   "hero_stats": {
