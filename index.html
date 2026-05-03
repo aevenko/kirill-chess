@@ -250,21 +250,22 @@
   }
 
   .photo-circle {
-    width: 280px; height: 280px;
+    width: 406px; height: 406px;
     border-radius: 50%;
     border: 1.5px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 90px;
+    font-size: 130px;
     background: rgba(176,125,46,.05);
     animation: pulse 3.5s ease-in-out infinite;
   }
 
-  .photo-tagline {
+  .photo-tagline,
+  .photo-quote {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
-    font-size: 22px;
+    font-size: 33px;
     color: var(--gold);
     letter-spacing: 1px;
     text-align: center;
@@ -861,8 +862,8 @@
     .hero-name { font-size: 60px; }
     .hero-stats { gap: 24px; }
     .stat-value { font-size: 38px; }
-    .photo-circle { width: 190px; height: 190px; font-size: 60px; }
-    .photo-tagline { font-size: 17px; }
+    .photo-circle { width: 276px; height: 276px; font-size: 87px; }
+    .photo-tagline, .photo-quote { font-size: 26px; }
 
     .folder-grid { grid-template-columns: 1fr 1fr; }
     .folder-name { font-size:20px; }
@@ -1031,27 +1032,6 @@
       <span id="hero_name_last"  data-en="EVENKO" data-ru="ЕВЕНКО" data-fr="EVENKO">EVENKO</span>
     </h1>
     <p class="hero-slogan" id="hero_slogan" data-en="Young champion in the making" data-ru="Будущий чемпион">Young champion in the making</p>
-    <div class="hero-stats">
-      <div class="stat-block">
-        <div class="stat-label">FIDE</div>
-        <div class="stat-num" id="stat_fide">1247</div>
-        <div class="stat-sub" id="stat_fide_delta">↑ +38 this year</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-label">CFC</div>
-        <div class="stat-num" id="stat_cfc">1389</div>
-        <div class="stat-sub" data-en="Chess Canada" data-ru="Chess Canada">Chess Canada</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-label" data-en="Age" data-ru="Возраст" data-fr="Âge">Age</div>
-        <div class="stat-num" id="stat_age">12</div>
-        <div class="stat-sub" id="stat_since" data-en="Since 2018" data-ru="С 2018 года">Since 2018</div>
-      </div>
-    </div>
-    <div class="hero-btns">
-      <a href="#tournaments" class="btn-primary" data-en="View Record" data-ru="Турниры" data-fr="Voir le palmarès">View Record</a>
-      <a href="#games"       class="btn-outline" data-en="Watch Games" data-ru="Партии" data-fr="Voir les parties">Watch Games</a>
-    </div>
   </div>
   <div class="hero-photo-wrap">
     <div id="chessBoard" class="chess-board-deco"></div>
@@ -1213,10 +1193,7 @@ function applyData(D) {
   // Hero stats
   if (D.hero_stats) {
     const hs = D.hero_stats;
-    document.getElementById('stat_fide').textContent = hs.fide_rating || '1247';
-    document.getElementById('stat_fide_delta').textContent = '↑ ' + (hs.fide_delta||'+38') + ' this year';
-    document.getElementById('stat_cfc').textContent = hs.cfc_rating || '1389';
-    document.getElementById('stat_age').textContent = hs.age || '12';
+    // Hero stat blocks (FIDE/CFC/Age) and CTA buttons removed by design.
     const sinceEl = document.getElementById('stat_since');
     sinceEl.setAttribute('data-en', 'Since ' + (hs.since_year||2018));
     sinceEl.setAttribute('data-ru', 'С ' + (hs.since_year||2018) + ' года');
