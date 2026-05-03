@@ -1031,27 +1031,6 @@
       <span id="hero_name_last"  data-en="EVENKO" data-ru="ЕВЕНКО" data-fr="EVENKO">EVENKO</span>
     </h1>
     <p class="hero-slogan" id="hero_slogan" data-en="Young champion in the making" data-ru="Будущий чемпион">Young champion in the making</p>
-    <div class="hero-stats">
-      <div class="stat-block">
-        <div class="stat-label">FIDE</div>
-        <div class="stat-num" id="stat_fide">1247</div>
-        <div class="stat-sub" id="stat_fide_delta">↑ +38 this year</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-label">CFC</div>
-        <div class="stat-num" id="stat_cfc">1389</div>
-        <div class="stat-sub" data-en="Chess Canada" data-ru="Chess Canada">Chess Canada</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-label" data-en="Age" data-ru="Возраст" data-fr="Âge">Age</div>
-        <div class="stat-num" id="stat_age">12</div>
-        <div class="stat-sub" id="stat_since" data-en="Since 2018" data-ru="С 2018 года">Since 2018</div>
-      </div>
-    </div>
-    <div class="hero-btns">
-      <a href="#tournaments" class="btn-primary" data-en="View Record" data-ru="Турниры" data-fr="Voir le palmarès">View Record</a>
-      <a href="#games"       class="btn-outline" data-en="Watch Games" data-ru="Партии" data-fr="Voir les parties">Watch Games</a>
-    </div>
   </div>
   <div class="hero-photo-wrap">
     <div id="chessBoard" class="chess-board-deco"></div>
@@ -1063,7 +1042,6 @@
     </div>
     <div class="photo-caption">
       <p class="photo-quote">Just make a move</p>
-      <p class="photo-label" data-en="Kirill's photo here" data-ru="Фото Кирилла" data-fr="Photo de Kirill">Kirill's photo here</p>
     </div>
   </div>
 </section>
@@ -1213,15 +1191,7 @@ function applyData(D) {
   // Hero stats
   if (D.hero_stats) {
     const hs = D.hero_stats;
-    document.getElementById('stat_fide').textContent = hs.fide_rating || '1247';
-    document.getElementById('stat_fide_delta').textContent = '↑ ' + (hs.fide_delta||'+38') + ' this year';
-    document.getElementById('stat_cfc').textContent = hs.cfc_rating || '1389';
-    document.getElementById('stat_age').textContent = hs.age || '12';
-    const sinceEl = document.getElementById('stat_since');
-    sinceEl.setAttribute('data-en', 'Since ' + (hs.since_year||2018));
-    sinceEl.setAttribute('data-ru', 'С ' + (hs.since_year||2018) + ' года');
-    sinceEl.setAttribute('data-fr', 'Depuis ' + (hs.since_year||2018));
-    sinceEl.textContent = 'Since ' + (hs.since_year||2018);
+    // Hero stat blocks (FIDE / CFC / Age) and CTA buttons removed by design.
   }
   // Hero text
   if (D.hero) {
