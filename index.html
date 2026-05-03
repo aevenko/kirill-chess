@@ -424,8 +424,8 @@
     border-top: 1px solid var(--border);
     padding-top: 32px;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 20px;
+    grid-template-columns: repeat(5,1fr);
+    gap: 16px;
   }
 
   .mini-stat-val {
@@ -440,6 +440,14 @@
     text-transform: uppercase;
     color: var(--muted);
     margin-top: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .mini-stats { grid-template-columns: repeat(3,1fr); row-gap: 24px; }
+    .mini-stat-val { font-size: 32px; }
+  }
+  @media (max-width: 480px) {
+    .mini-stats { grid-template-columns: repeat(2,1fr); }
   }
 
   /* ── TOURNAMENTS ── */
@@ -1083,7 +1091,9 @@
       <div class="mini-stats">
         <div class="mini-stat"><span class="mini-stat-val" id="about_years">7</span><span class="mini-stat-lbl" data-en="Years in chess" data-ru="Лет в шахматах" data-fr="Années aux échecs">Years in chess</span></div>
         <div class="mini-stat"><span class="mini-stat-val" id="about_prizes">3</span><span class="mini-stat-lbl" data-en="Prize places" data-ru="Призовых мест" data-fr="Podiums">Prize places</span></div>
-        <div class="mini-stat"><span class="mini-stat-val" id="about_games_count">48</span><span class="mini-stat-lbl" data-en="Games recorded" data-ru="Партий записано" data-fr="Parties enregistrées">Games recorded</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_games_classical">0</span><span class="mini-stat-lbl" data-en="Classical games" data-ru="Классических партий" data-fr="Parties classiques">Classical games</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_games_rapid">0</span><span class="mini-stat-lbl" data-en="Rapid games" data-ru="Быстрых партий" data-fr="Parties rapides">Rapid games</span></div>
+        <div class="mini-stat"><span class="mini-stat-val" id="about_games_blitz">0</span><span class="mini-stat-lbl" data-en="Blitz games" data-ru="Блиц-партий" data-fr="Parties blitz">Blitz games</span></div>
       </div>
     </div>
   </div>
@@ -1259,7 +1269,9 @@ function applyData(D) {
     const ab = D.about;
     document.getElementById('about_years').textContent = ab.years_playing || 7;
     document.getElementById('about_prizes').textContent = ab.prize_places || 3;
-    document.getElementById('about_games_count').textContent = ab.games_recorded || 48;
+    document.getElementById('about_games_classical').textContent = ab.games_classical || 0;
+    document.getElementById('about_games_rapid').textContent     = ab.games_rapid     || 0;
+    document.getElementById('about_games_blitz').textContent     = ab.games_blitz     || 0;
     // About card since year
     const cardSince = document.getElementById('about_card_since');
     if (cardSince && D.hero_stats) {
