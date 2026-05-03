@@ -1,9 +1,10 @@
 """
 Auto-update chess ratings in data.json.
 Sources:
-  FIDE  – https://ratings.fide.com/profile/2666243
-  CFC   – https://server.chess.ca/api/player/v1/187189  (official JSON API)
-  FQÉ   – https://www.fqechecs.qc.ca/membres/json-cote.php?id=109477&c=1
+  FIDE       – https://ratings.fide.com/profile/2666243
+  CFC        – https://server.chess.ca/api/player/v1/187189  (official JSON API)
+  FQÉ        – https://www.fqechecs.qc.ca/membres/json-cote.php?id=109477&c=1
+  Chess.com  – https://api.chess.com/pub/player/future_grandmaster14/stats  (Rapid)
 """
 
 import json, re, sys
@@ -12,6 +13,7 @@ import urllib.request
 FIDE_ID = 2666243
 CFC_ID  = 187189
 FQE_ID  = 109477
+CHESSCOM_USER = "future_grandmaster14"
 
 DATA_FILE = "data.json"
 
@@ -48,6 +50,19 @@ def fetch_fqe(fqe_id):
     return int(history[-1]["Cote"])
 
 
+def fetch_chesscom(username):
+    # Chess.com public stats API: returns Rapid rating at chess_rapid.last.rating
+    data = json.loads(get(
+        f"https://api.chess.com/pub/player/{username}/stats"
+    ))
+    rapid = data.get("chess_rapid", {})
+    last = rapid.get("last", {})
+    rating = last.get("rating")
+    if rating is None:
+        raise ValueError("Chess.com Rapid rating not found")
+    return int(rating)
+
+
 def fmt_delta(diff):
     return f"+{diff}" if diff > 0 else str(diff)
 
@@ -60,9 +75,10 @@ with open(DATA_FILE, encoding="utf-8") as f:
 new_values = {}
 
 for label, fn, args in [
-    ("FIDE",          fetch_fide, (FIDE_ID,)),
-    ("CFC",           fetch_cfc,  (CFC_ID,)),
-    ("FQÉ",           fetch_fqe,  (FQE_ID,)),
+    ("FIDE",      fetch_fide,     (FIDE_ID,)),
+    ("CFC",       fetch_cfc,      (CFC_ID,)),
+    ("FQÉ",       fetch_fqe,      (FQE_ID,)),
+    ("Chess.com", fetch_chesscom, (CHESSCOM_USER,)),
 ]:
     try:
         val = fn(*args)
