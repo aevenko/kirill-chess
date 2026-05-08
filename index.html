@@ -51,12 +51,39 @@
   .nav-logo {
     display: flex;
     align-items: center;
+    gap: 10px;
+    font-family: 'Anton', 'Arial Black', Impact, sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-decoration: none;
   }
   .nav-logo img {
     height: 44px;
     width: auto;
     display: block;
   }
+
+  /* ── MOBILE MENU OVERLAY ── */
+  #mobileMenu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+  #mobileMenu a {
+    font-family: 'Anton', 'Arial Black', Impact, sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  #mobileMenu a:hover { color: var(--gold); }
 
   .nav-links {
     display: flex;
@@ -1006,7 +1033,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess"></div>
+  <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess">KE</div>
   <div class="nav-links">
     <a href="#about"       data-en="About" data-ru="О нас" data-fr="À propos">About</a>
     <a href="#tournaments" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
@@ -1165,7 +1192,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess"></div>
+  <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess">KE</div>
   <p data-en="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada" data-ru="© 2025 Kirill Evenko · kirill-evenko.com · Броссар, Квебек · Канада" data-fr="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada">© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada</p>
 </footer>
 
