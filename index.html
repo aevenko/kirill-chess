@@ -49,10 +49,13 @@
   }
 
   .nav-logo {
-    font-family: 'Anton', 'Arial Black', Impact, sans-serif;
-    font-size: 26px;
-    letter-spacing: 3px;
-    color: var(--gold);
+    display: flex;
+    align-items: center;
+  }
+  .nav-logo img {
+    height: 44px;
+    width: auto;
+    display: block;
   }
 
   .nav-links {
@@ -776,10 +779,13 @@
   }
 
   .footer-logo {
-    font-family: 'Anton', 'Arial Black', Impact, sans-serif;
-    font-size: 22px;
-    letter-spacing: 3px;
-    color: var(--gold);
+    display: flex;
+    align-items: center;
+  }
+  .footer-logo img {
+    height: 36px;
+    width: auto;
+    display: block;
   }
 
   .footer-text { font-size: 12px; color: rgba(255,255,255,.35); }
@@ -1000,7 +1006,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">KE ♟</div>
+  <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess"></div>
   <div class="nav-links">
     <a href="#about"       data-en="About" data-ru="О нас" data-fr="À propos">About</a>
     <a href="#tournaments" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
@@ -1159,7 +1165,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="nav-logo">KE ♟</div>
+  <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess"></div>
   <p data-en="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada" data-ru="© 2025 Kirill Evenko · kirill-evenko.com · Броссар, Квебек · Канада" data-fr="© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada">© 2025 Kirill Evenko · kirill-evenko.com · Brossard, Québec · Canada</p>
 </footer>
 
@@ -1273,7 +1279,19 @@ function applyData(D) {
   // Tournaments past
   if (D.tournaments_past) {
     const tbody = document.getElementById('pastTbody');
-    tbody.innerHTML = D.tournaments_past.map(t => `
+    const parseTourneyDate = s => {
+      // Grab the last 4-digit year in the string
+      const yearMatch = s.match(/\d{4}/g);
+      const year = yearMatch ? yearMatch[yearMatch.length - 1] : '2025';
+      // Use only the part before any dash/en-dash/em-dash range
+      const start = s.split(/\s*[–—]\s*/)[0].trim();
+      const withYear = /\d{4}/.test(start) ? start : start + ', ' + year;
+      return new Date(withYear);
+    };
+    const sorted = [...D.tournaments_past].sort((a, b) =>
+      parseTourneyDate(b.date) - parseTourneyDate(a.date)
+    );
+    tbody.innerHTML = sorted.map(t => `
       <tr>
         <td><strong>${t.name}</strong></td>
         <td>${t.date}</td>
