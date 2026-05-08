@@ -43,7 +43,7 @@
   <link rel="canonical" href="https://kirillchess.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
 
   :root {
@@ -204,10 +204,9 @@
   .hero-name span { color: var(--gold); }
 
   .hero-slogan {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: clamp(20px, 2.2vw, 26px);
-    color: var(--muted);
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(36px, 4vw, 54px);
+    color: #a8b0b8;
     margin-bottom: 44px;
     opacity: 0;
     animation: fadeUp .7s .3s ease forwards;
@@ -328,12 +327,11 @@
     animation: pulse 3.5s ease-in-out infinite;
   }
 
-  .photo-tagline {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-size: 22px;
-    color: var(--gold);
-    letter-spacing: 1px;
+  .photo-tagline,
+  .photo-quote {
+    font-family: 'Great Vibes', cursive;
+    font-size: 33px;
+    color: #a8b0b8;
     text-align: center;
     opacity: 0;
     animation: fadeUp .7s .6s ease forwards;
@@ -491,10 +489,17 @@
     gap: 16px;
   }
 
+  .mini-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .mini-stat-val {
     font-family: 'Anton', 'Arial Black', Impact, sans-serif;
     font-size: 38px;
     color: var(--text);
+    line-height: 1;
   }
 
   .mini-stat-lbl {
@@ -502,7 +507,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--muted);
-    margin-top: 4px;
+    margin-top: 6px;
   }
 
   @media (max-width: 768px) {
@@ -1106,7 +1111,7 @@
       <span id="hero_name_first" data-en="KIRILL" data-ru="КИРИЛЛ" data-fr="KIRILL">KIRILL</span><br>
       <span id="hero_name_last"  data-en="EVENKO" data-ru="ЕВЕНКО" data-fr="EVENKO">EVENKO</span>
     </h1>
-    <p class="hero-slogan" id="hero_slogan" data-en="Young champion in the making" data-ru="Будущий чемпион">Young champion in the making</p>
+    <p class="hero-slogan" id="hero_slogan" data-en="Young champion in the making" data-ru="Будущий чемпион" data-fr="Un futur champion">Young champion in the making</p>
     <div class="about-stats-card hero-stats-card reveal">
       <div class="about-card-location">♛<br>BROSSARD, QC</div>
       <div class="about-card-sub" id="about_card_since" data-en="Home · Playing since 2018" data-ru="Дом · Играет с 2018" data-fr="Domicile · Joue depuis 2018">Home · Playing since 2018</div>
