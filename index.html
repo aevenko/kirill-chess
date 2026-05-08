@@ -327,11 +327,12 @@
     animation: pulse 3.5s ease-in-out infinite;
   }
 
-  .photo-tagline,
-  .photo-quote {
-    font-family: 'Great Vibes', cursive;
-    font-size: 33px;
-    color: #a8b0b8;
+  .photo-tagline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 1px;
     text-align: center;
     opacity: 0;
     animation: fadeUp .7s .6s ease forwards;
@@ -489,17 +490,10 @@
     gap: 16px;
   }
 
-  .mini-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .mini-stat-val {
     font-family: 'Anton', 'Arial Black', Impact, sans-serif;
     font-size: 38px;
     color: var(--text);
-    line-height: 1;
   }
 
   .mini-stat-lbl {
@@ -507,7 +501,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--muted);
-    margin-top: 6px;
+    margin-top: 4px;
   }
 
   @media (max-width: 768px) {
@@ -1111,7 +1105,7 @@
       <span id="hero_name_first" data-en="KIRILL" data-ru="КИРИЛЛ" data-fr="KIRILL">KIRILL</span><br>
       <span id="hero_name_last"  data-en="EVENKO" data-ru="ЕВЕНКО" data-fr="EVENKO">EVENKO</span>
     </h1>
-    <p class="hero-slogan" id="hero_slogan" data-en="On the way to Grandmaster" data-ru="На пути к гроссмейстеру" data-fr="En route vers le Grand Maître">On the way to Grandmaster</p>
+    <p class="hero-slogan" id="hero_slogan" data-en="Young champion in the making" data-ru="Будущий чемпион">Young champion in the making</p>
     <div class="about-stats-card hero-stats-card reveal">
       <div class="about-card-location">♛<br>BROSSARD, QC</div>
       <div class="about-card-sub" id="about_card_since" data-en="Home · Playing since 2018" data-ru="Дом · Играет с 2018" data-fr="Domicile · Joue depuis 2018">Home · Playing since 2018</div>

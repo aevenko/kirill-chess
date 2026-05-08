@@ -6,9 +6,9 @@
     "name_first_ru": "КИРИЛЛ",
     "name_last_en": "EVENKO",
     "name_last_ru": "ЕВЕНКО",
-    "slogan_en": "Young champion in the making",
-    "slogan_ru": "Будущий чемпион",
-    "slogan_fr": "Un futur champion",
+    "slogan_en": "On the way to Grandmaster",
+    "slogan_ru": "На пути к гроссмейстеру",
+    "slogan_fr": "En route vers le Grand Maître",
     "photo": "kirill_hero.jpg"
   },
   "ratings": [
@@ -35,8 +35,8 @@
     },
     {
       "org": "Chess.com",
-      "value": 2169,
-      "delta": "-17",
+      "value": 2186,
+      "delta": "-14",
       "direction": "down",
       "link": "https://www.chess.com/member/future_grandmaster14"
     }
