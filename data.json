@@ -94,7 +94,7 @@
       "name": "Tournoi du Carnaval",
       "date": "Feb 21–23, 2025",
       "city": "Montréal",
-      "format": "Rapid",
+      "format": "Classical",
       "score": "3 / 5",
       "place": "14 / 51",
       "place_tag": "place-other",
@@ -374,7 +374,7 @@
       "name": "Tournoi d'échecs du Carnaval",
       "date": "Feb 20–22, 2026",
       "city": "Québec City",
-      "format": "Rapid",
+      "format": "Classical",
       "score": "4.5 / 5",
       "place": "1 / 47",
       "place_tag": "place-1",
@@ -429,18 +429,19 @@
       "place": "3 / 68",
       "place_tag": "place-3",
       "delta": ""
-    }
-  ],
-  "tournaments_upcoming": [
+    },
     {
       "name": "Take 5 - Tournoi Classique",
       "date": "May 8–10, 2026",
       "city": "Montréal",
       "format": "Classical",
-      "link": "https://chesspass.blitzbishops.com/tournaments/hJmi9z69SarXI2zj70nv",
-      "status": "Планируется",
-      "status_en": "Planned"
-    },
+      "score": "3.5 / 5",
+      "place": "4 / 20",
+      "place_tag": "place-other",
+      "delta": ""
+    }
+  ],
+  "tournaments_upcoming": [
     {
       "name": "Championnat Jeunesse du Québec d'Échecs Rapide 2026",
       "date": "May 24, 2026",
