@@ -626,7 +626,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "https://lichess.org/study/u3lAeGTE/MkX5O1r5"
+              "lichess": "https://lichess.org/study/embed/u3lAeGTE/MkX5O1r5"
             },
             {
               "event": "Blitz Bishops Take5 R3",
@@ -636,7 +636,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "https://lichess.org/study/u3lAeGTE/H0MPJNwL"
+              "lichess": "https://lichess.org/study/embed/u3lAeGTE/H0MPJNwL"
             },
             {
               "event": "Blitz Bishops Take5 R4",
@@ -646,7 +646,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "https://lichess.org/study/u3lAeGTE/3wiZVail"
+              "lichess": "https://lichess.org/study/embed/u3lAeGTE/3wiZVail"
             },
             {
               "event": "Blitz Bishops Take5 R5",
@@ -656,7 +656,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/x0wPXmW3\" frameborder=0></iframe>"
+              "lichess": "https://lichess.org/study/embed/u3lAeGTE/x0wPXmW3"
             }
           ]
         }
