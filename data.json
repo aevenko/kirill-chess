@@ -612,6 +612,53 @@
               "lichess": "https://lichess.org/study/embed/u3lAeGTE/1H6HEyqh"
             }
           ]
+        },
+        {
+          "name": "Blitz Bishops Take5 May",
+          "location": "Montréal",
+          "date": "May 2026",
+          "games": [
+            {
+              "event": "Blitz Bishops Take5 R2",
+              "white": "Evenko, Kirill 1721",
+              "black": "Ramesan, Raunak Amit 1952",
+              "result": "1/2 - 1/2",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "https://lichess.org/study/u3lAeGTE/MkX5O1r5"
+            },
+            {
+              "event": "Blitz Bishops Take5 R3",
+              "white": "Paikin, Andrey 1961",
+              "black": "Evenko, Kirill 1721",
+              "result": "1/2 - 1/2",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "https://lichess.org/study/u3lAeGTE/H0MPJNwL"
+            },
+            {
+              "event": "Blitz Bishops Take5 R4",
+              "white": "Evenko, Kirill 1721",
+              "black": "Gamache, Lucien 1828",
+              "result": "1 - 0",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "https://lichess.org/study/u3lAeGTE/3wiZVail"
+            },
+            {
+              "event": "Blitz Bishops Take5 R5",
+              "white": "Kiryakov, Marin 1825",
+              "black": "Evenko, Kirill 1721",
+              "result": "1/2 - 1/2",
+              "type": "Classical",
+              "moves": "",
+              "opening": "",
+              "lichess": "https://lichess.org/study/u3lAeGTE/x0wPXmW3"
+            }
+          ]
         }
       ]
     },
