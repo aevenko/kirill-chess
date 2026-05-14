@@ -656,7 +656,7 @@
               "type": "Classical",
               "moves": "",
               "opening": "",
-              "lichess": "https://lichess.org/study/u3lAeGTE/x0wPXmW3"
+              "lichess": "<iframe width=\"600\" height=\"371\" src=\"https://lichess.org/study/embed/u3lAeGTE/x0wPXmW3\" frameborder=0></iframe>"
             }
           ]
         }
