@@ -21,8 +21,8 @@
     },
     {
       "org": "CFC (Chess Canada)",
-      "value": 1831,
-      "delta": "+24",
+      "value": 1927,
+      "delta": "+96",
       "direction": "up",
       "link": "https://www.chess.ca/en/ratings/p/?id=187189"
     },
@@ -44,7 +44,7 @@
   "hero_stats": {
     "fide_rating": 1721,
     "fide_delta": "+38",
-    "cfc_rating": 1831,
+    "cfc_rating": 1927,
     "age": 12,
     "since_year": 2018
   },
