@@ -439,18 +439,19 @@
       "place": "4 / 20",
       "place_tag": "place-other",
       "delta": ""
-    }
-  ],
-  "tournaments_upcoming": [
+    },
     {
       "name": "Championnat Jeunesse du Québec d'Échecs Rapide 2026",
       "date": "May 24, 2026",
       "city": "Montréal",
       "format": "Rapid",
-      "link": "https://www.tourdelareussite.org/championnat-jeunesse-rapide-qc",
-      "status": "Зарегистрирован",
-      "status_en": "Registered"
-    },
+      "score": "5 / 6",
+      "place": "3 / 48",
+      "place_tag": "place-other",
+      "delta": ""
+    }
+  ],
+  "tournaments_upcoming": [
     {
       "name": "Laval Open 2026",
       "date": "Jun 26–28, 2026",
