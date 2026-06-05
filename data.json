@@ -35,9 +35,9 @@
     },
     {
       "org": "Chess.com",
-      "value": 2193,
-      "delta": "+5",
-      "direction": "up",
+      "value": 2186,
+      "delta": "-7",
+      "direction": "down",
       "link": "https://www.chess.com/member/future_grandmaster14"
     }
   ],
