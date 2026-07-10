@@ -62,7 +62,7 @@
     "para3_fr": "Ce site a été créé pour suivre chaque étape de ce parcours — victoires et défaites, percées et leçons. Pour préserver les meilleurs moments d'une histoire qui s'écrit encore.",
     "para3_en": "This site was created to follow each step of that journey — wins and losses, breakthroughs and lessons. To preserve the best moments of a story still being written.",
     "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
-    "years_playing": 8,
+    "years_playing": 9,
     "prize_places": 12,
     "games_recorded": 583,
     "games_classical": 181,
@@ -447,29 +447,31 @@
       "format": "Rapid",
       "score": "5 / 6",
       "place": "3 / 48",
+      "place_tag": "place-3",
+      "delta": ""
+    },
+    {
+      "name": "Laval Open 2026",
+      "date": "Jun 26–28, 2026",
+      "city": "Laval, QC",
+      "format": "Classical",
+      "score": "2.5 / 5",
+      "place": "15 of 27",
+      "place_tag": "place-other",
+      "delta": ""
+    },
+    {
+      "name": "Canadian Youth Chess Championship (CYCC)",
+      "date": "6 - 10 July 2026",
+      "city": "Ottawa, ON",
+      "format": "Classical",
+      "score": "4.5 / 7",
+      "place": "24 of 156",
       "place_tag": "place-other",
       "delta": ""
     }
   ],
   "tournaments_upcoming": [
-    {
-      "name": "Laval Open 2026",
-      "date": "Jun 26–28, 2026",
-      "city": "Laval",
-      "format": "Classical",
-      "link": "https://www.fqechecs.qc.ca/vue/clubs/content.php?Id=15945",
-      "status": "Планируется",
-      "status_en": "Planned"
-    },
-    {
-      "name": "CYCC 2026",
-      "date": "Jul 6–10, 2026",
-      "city": "Ottawa",
-      "format": "Classical",
-      "link": "https://www.chess.ca/en/cfc/championships/bids/?utm_source=chatgpt.com",
-      "status": "Зарегистрирован",
-      "status_en": "Registered"
-    },
     {
       "name": "Le Championnat ouvert d'échecs du Québec",
       "date": "Jul 21–26, 2026",
