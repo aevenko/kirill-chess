@@ -35,9 +35,9 @@
     },
     {
       "org": "Chess.com",
-      "value": 2230,
-      "delta": "+9",
-      "direction": "up",
+      "value": 2210,
+      "delta": "-20",
+      "direction": "down",
       "link": ""
     }
   ],
