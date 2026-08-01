@@ -14,8 +14,8 @@
   "ratings": [
     {
       "org": "FIDE",
-      "value": 1776,
-      "delta": "+55",
+      "value": 1817,
+      "delta": "+41",
       "direction": "up",
       "link": "https://ratings.fide.com/profile/2666243"
     },
@@ -35,15 +35,15 @@
     },
     {
       "org": "Chess.com",
-      "value": 2249,
-      "delta": "+10",
+      "value": 2251,
+      "delta": "+2",
       "direction": "up",
       "link": ""
     }
   ],
   "hero_stats": {
-    "fide_rating": 1776,
-    "fide_delta": "+55",
+    "fide_rating": 1817,
+    "fide_delta": "+41",
     "cfc_rating": 1988,
     "age": 12,
     "since_year": 2018
