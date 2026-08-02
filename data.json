@@ -469,18 +469,19 @@
       "place": "24 of 156",
       "place_tag": "place-other",
       "delta": ""
-    }
-  ],
-  "tournaments_upcoming": [
+    },
     {
       "name": "Le Championnat ouvert d'échecs du Québec",
       "date": "Jul 21–26, 2026",
       "city": "Longueuil",
       "format": "Classical",
-      "link": "https://www.fqechecs.qc.ca/fqe/content.php?Id=16272",
-      "status": "Планируется",
-      "status_en": "Planned"
-    },
+      "score": "4.5 / 9",
+      "place": "32 of 67",
+      "place_tag": "place-other",
+      "delta": ""
+    }
+  ],
+  "tournaments_upcoming": [
     {
       "name": "Montreal Open",
       "date": "Sep 5–7, 2026",
