@@ -14,8 +14,8 @@
   "ratings": [
     {
       "org": "FIDE",
-      "value": 1817,
-      "delta": "+41",
+      "value": 1820,
+      "delta": "+44",
       "direction": "up",
       "link": "https://ratings.fide.com/profile/2666243"
     },
@@ -29,23 +29,23 @@
     {
       "org": "FQÉ (Québec)",
       "value": 1876,
-      "delta": "+100",
+      "delta": "+186",
       "direction": "up",
       "link": "https://www.fqechecs.qc.ca/membres/index.php?Id=109477"
     },
     {
       "org": "Chess.com",
-      "value": 2207,
-      "delta": "-7",
+      "value": 2222,
+      "delta": "-29",
       "direction": "down",
       "link": ""
     }
   ],
   "hero_stats": {
-    "fide_rating": 1817,
-    "fide_delta": "+41",
+    "fide_rating": 1820,
+    "fide_delta": "+44",
     "cfc_rating": 1988,
-    "age": 12,
+    "age": 13,
     "since_year": 2018
   },
   "about": {
@@ -62,12 +62,16 @@
     "para3_fr": "Ce site a été créé pour suivre chaque étape de ce parcours — victoires et défaites, percées et leçons. Pour préserver les meilleurs moments d'une histoire qui s'écrit encore.",
     "para3_en": "This site was created to follow each step of that journey — wins and losses, breakthroughs and lessons. To preserve the best moments of a story still being written.",
     "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
-    "years_playing": 9,
+    "years_playing": 8,
     "prize_places": 12,
-    "games_recorded": 514,
-    "games_classical": 173,
-    "games_rapid": 311,
-    "games_blitz": 30
+    "games_recorded": 520,
+    "games_classical": 174,
+    "games_rapid": 99,
+    "games_blitz": 30,
+    "games_federation": 303,
+    "games_scholastic_cma": 217,
+    "games_sources_note": "FQE (lente 146 / rapide 94 / blitz 30) + non-Quebec CFC/FIDE events (28 classical, 5 rapid) + CMA scholastic circuit (217). Verified 2026-08-09.",
+    "games_updated": "2026-08-09"
   },
   "tournaments_past": [
     {
