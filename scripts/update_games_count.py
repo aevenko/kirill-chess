@@ -10,9 +10,12 @@ Auto-update games-played count in data.json (Classical / Rapid / Blitz).
 Правильный подсчёт:
 
     classical = FQÉ «Lente»  n + партии турниров CFC вне Квебека (тип R)
-    rapid     = FQÉ «Rapide» n + партии турниров CFC вне Квебека (тип Q)
+    rapid     = FQÉ «Rapide» n + партии турниров CFC вне Квебека (тип Q) + все партии CMA
     blitz     = FQÉ «Blitz»  n
-    CMA       = отдельной строкой (школьный циркуит, без разбивки по контролю)
+
+Школьный циркуит CMA играется в рапид-контроле, поэтому его партии целиком
+идут в rapid. Отдельная разбивка сохраняется в data.json:
+games_federation — только федерационные партии, games_scholastic_cma — школьные.
 
 FQÉ — самая полная база по Квебеку и единственная, которая честно делит партии
 по контролю времени. Турнир считается «вне Квебека», если CFC указывает для него
@@ -310,14 +313,18 @@ def main():
         print("   Внешних турниров сверх FQÉ не найдено.")
 
     classical = fqe["classical"] + cfc["external_classical"]
-    rapid = fqe["rapid"] + cfc["external_rapid"]
+    rapid_federation = fqe["rapid"] + cfc["external_rapid"]
     blitz = fqe["blitz"]
-    federation = classical + rapid + blitz
-    total = federation + cma["total"]
+    federation = classical + rapid_federation + blitz
+
+    # Школьный циркуит CMA играется в рапид-контроле — его партии идут в rapid.
+    rapid = rapid_federation + cma["total"]
+    total = classical + rapid + blitz
 
     print("─" * 60)
-    print(f"   ИТОГО: классика {classical}, рапид {rapid}, блиц {blitz} "
-          f"= {federation} федерационных + {cma['total']} школьных = {total}")
+    print(f"   ИТОГО: классика {classical}, рапид {rapid} "
+          f"({rapid_federation} федерационных + {cma['total']} CMA), блиц {blitz} "
+          f"= {total} партий")
 
     today = datetime.date.today().isoformat()
     about = D.setdefault("about", {})
@@ -335,7 +342,8 @@ def main():
             f"FQÉ (lente {fqe['classical']} / rapide {fqe['rapid']} / blitz {fqe['blitz']})"
             f" + внешние турниры CFC ({cfc['external_classical']} классика,"
             f" {cfc['external_rapid']} рапид)"
-            f" + школьный циркуит CMA ({cma['total']}). Сверено {today}."
+            f" + школьный циркуит CMA ({cma['total']}, считается как рапид)."
+            f" Сверено {today}."
         ),
     })
 
