@@ -2,11 +2,16 @@ name: Auto-update chess ratings
 
 on:
   schedule:
+    # Рейтинги — каждый день в 07:00 UTC (как было).
     - cron: '0 7 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: update-ratings
+  cancel-in-progress: false
 
 jobs:
   update-ratings:
@@ -14,23 +19,54 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run update script
+      - name: Update ratings
         run: python scripts/update_ratings.py
+
+      # Счётчики партий меняются редко и требуют ~15 запросов к CFC,
+      # поэтому пересчитываем их только по понедельникам.
+      - name: Update games count (Mondays only)
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          DOW=$(date -u +%u)   # 1 = понедельник
+          if [ "$DOW" = "1" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            python scripts/update_games_count.py
+          else
+            echo "Сегодня не понедельник — пропускаем пересчёт партий."
+          fi
+
+      - name: Show diff
+        run: git --no-pager diff --stat -- data.json || true
 
       - name: Commit and push if changed
         run: |
+          if git diff --quiet -- data.json; then
+            echo "Изменений нет — коммит не нужен."
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json
-          git diff --staged --quiet || git commit -m "Auto-update ratings $(date -u +%Y-%m-%d)"
+          git commit -m "Auto-update ratings $(date -u +%Y-%m-%d)"
           git push
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Рейтинги и партии"
+            echo ""
+            echo '```json'
+            python -c "import json;d=json.load(open('data.json'));a=d['about'];print(json.dumps({'ratings':d['ratings'],'games':{k:a.get(k) for k in ['games_classical','games_rapid','games_blitz','games_scholastic_cma','games_recorded']}},ensure_ascii=False,indent=2))"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
