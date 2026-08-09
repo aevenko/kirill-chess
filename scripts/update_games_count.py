@@ -46,9 +46,20 @@ HOME_PROVINCE = "QC"
 DATA_FILE = "data.json"
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; KirillChessBot/2.0)",
-    "Accept-Language": "en,fr;q=0.8",
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-CA,en;q=0.9,fr;q=0.8",
 }
+
+# Зеркала CMA. chess-math.org иногда отдаёт 403 на IP дата-центров
+# (в том числе раннерам GitHub Actions) — тогда пробуем французскую версию.
+CMA_URLS = [
+    "https://chess-math.org/ratings/id/{id}",
+    "https://echecs.org/cotes/id/{id}",
+]
 
 # Запасной вариант, если CFC не отдаст карточку турнира с провинцией.
 EXTERNAL_NAME_PATTERNS = [
@@ -94,25 +105,58 @@ def fetch_fqe():
 
 
 # ── CMA (Chess'n Math) — школьный циркуит ───────────────────────────────────
-def fetch_cma():
-    html = get(f"https://chess-math.org/ratings/id/{CMA_ID}")
-    text = strip_tags(html)
+def fetch_cma(previous=None):
+    """Читает CMA. При отказе всех зеркал возвращает снимок из data.json."""
+    errors = []
+    for template in CMA_URLS:
+        url = template.format(id=CMA_ID)
+        try:
+            html = get(url)
+        except Exception as exc:
+            errors.append(f"{url}: {exc}")
+            continue
 
-    def grab(label):
-        m = re.search(label + r"[^0-9]{0,40}(\d+)", text, re.I)
-        return int(m.group(1)) if m else None
+        text = strip_tags(html)
 
-    total = grab("Total number of games")
-    if total is None:
-        raise ValueError("CMA: не найдено общее число партий")
+        def grab(*labels):
+            for label in labels:
+                m = re.search(label + r"[^0-9]{0,40}(\d+)", text, re.I)
+                if m:
+                    return int(m.group(1))
+            return None
 
-    dates = set(re.findall(r"\b(\d{4}-\d{2}-\d{2})\b", html))
-    return {
-        "total": total,
-        "this_year": grab("Games played this year"),
-        "rating": grab("Max rating"),
-        "dates": dates,
-    }
+        total = grab("Total number of games", "Total des parties jou[ée]es")
+        if total is None:
+            errors.append(f"{url}: не найдено общее число партий")
+            continue
+
+        return {
+            "total": total,
+            "this_year": grab("Games played this year", "Parties jou[ée]es cette ann[ée]e"),
+            "rating": grab("Max rating", "Cote maximale"),
+            "dates": set(re.findall(r"\b(\d{4}-\d{2}-\d{2})\b", html)),
+            "stale": False,
+            "url": url,
+        }
+
+    # Все зеркала недоступны — берём последний удачный снимок из data.json.
+    if previous and previous.get("games_total"):
+        print(
+            "⚠️  CMA недоступен (" + "; ".join(errors) + ").\n"
+            "    Использую последний снимок из data.json — счётчик CMA не обновится, "
+            "но федерационные цифры пересчитаются корректно.",
+            file=sys.stderr,
+        )
+        return {
+            "total": previous["games_total"],
+            "this_year": previous.get("games_this_year"),
+            "rating": previous.get("rating"),
+            "dates": set(previous.get("dates") or []),
+            "stale": True,
+            "url": previous.get("url", CMA_URLS[0].format(id=CMA_ID)),
+        }
+
+    raise ValueError("CMA недоступен и снимка в data.json нет: " + "; ".join(errors))
 
 
 # ── CFC ─────────────────────────────────────────────────────────────────────
@@ -234,8 +278,10 @@ def main():
     with open(DATA_FILE, encoding="utf-8") as f:
         D = json.load(f)
 
-    cma = fetch_cma()
-    print(f"✅ CMA : {cma['total']} партий, {len(cma['dates'])} турниров, рейтинг {cma['rating']}")
+    cma = fetch_cma(previous=(D.get("sources") or {}).get("cma"))
+    mark = " (снимок из data.json)" if cma["stale"] else ""
+    print(f"✅ CMA : {cma['total']} партий, {len(cma['dates'])} турниров, "
+          f"рейтинг {cma['rating']}{mark}")
 
     fqe = fetch_fqe()
     print(f"✅ FQÉ : lente {fqe['classical_rating']}/{fqe['classical']}  "
@@ -317,11 +363,15 @@ def main():
             "blitz": [fqe["blitz_rating"], fqe["blitz"]],
         },
         "cma": {
-            "url": f"https://chess-math.org/ratings/id/{CMA_ID}",
+            "url": cma["url"],
             "rating": cma["rating"],
             "games_total": cma["total"],
             "games_this_year": cma["this_year"],
             "tournaments": len(cma["dates"]),
+            "stale": cma["stale"],
+            # Даты нужны, чтобы не посчитать турнир дважды, если CMA
+            # окажется недоступен при следующем запуске.
+            "dates": sorted(cma["dates"]),
         },
     }
 
