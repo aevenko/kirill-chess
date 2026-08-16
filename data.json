@@ -82,7 +82,7 @@
       "score": "2 / 5",
       "place": "26 / 39",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Le Championnat jeunesse d'échecs du Québec",
@@ -92,7 +92,7 @@
       "score": "3 / 5",
       "place": "7 / 18",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Tournoi du Carnaval",
@@ -102,7 +102,7 @@
       "score": "3 / 5",
       "place": "14 / 51",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Qualification de Verdun",
@@ -112,7 +112,7 @@
       "score": "3.5 / 5",
       "place": "4 / 20",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Championnat Scolaire de l'état de New York 2025",
@@ -122,7 +122,7 @@
       "score": "3.5 / 7",
       "place": "49 / 64",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Le Grand Tour jeunesse du Québec",
@@ -132,7 +132,7 @@
       "score": "4 / 5",
       "place": "3 / 36",
       "place_tag": "place-3",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "48e Championnat Ouvert de la Mauricie",
@@ -142,7 +142,7 @@
       "score": "4 / 5",
       "place": "3 / 20",
       "place_tag": "place-3",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Blitz Bliss - Tournoi de parties rapides",
@@ -152,7 +152,7 @@
       "score": "3 / 14",
       "place": "19 / 23",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Qualification l'Ouest de l'Île",
@@ -162,7 +162,7 @@
       "score": "4.5 / 5",
       "place": "1 / 12",
       "place_tag": "place-1",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Tournoi Bâtisseur de Pâques 2025",
@@ -172,7 +172,7 @@
       "score": "4 / 5",
       "place": "3 / 16",
       "place_tag": "place-3",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Tournoi de Qualification 3",
@@ -182,7 +182,7 @@
       "score": "4 / 5",
       "place": "2 / 30",
       "place_tag": "place-2",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Défi Échiquéen du Québec 2025",
@@ -192,7 +192,7 @@
       "score": "3.5 / 5",
       "place": "10 / 64",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Finale des Bâtisseurs",
@@ -202,7 +202,7 @@
       "score": "3 / 5",
       "place": "5 / 17",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Grand Prix Scolaire 2024–2025",
@@ -212,7 +212,7 @@
       "score": "4 / 5",
       "place": "6 / 54",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Capablanca Inmemorial 58",
@@ -222,7 +222,7 @@
       "score": "5 / 8",
       "place": "22 / 106",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Classical Bliss v. 6",
@@ -232,7 +232,7 @@
       "score": "3 / 4",
       "place": "7 / 24",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Championnat Jeunesse du Québec",
@@ -242,7 +242,7 @@
       "score": "3.5 / 5",
       "place": "12 / 53",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Tournoi Élite de Chambly (TEC) 2025",
@@ -252,7 +252,7 @@
       "score": "4.5 / 7",
       "place": "4 / 47",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Championnat ouvert de Laval 2025",
@@ -262,7 +262,7 @@
       "score": "2 / 5",
       "place": "28 / 42",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "The 2025 North American Youth Chess Championships",
@@ -272,7 +272,7 @@
       "score": "4.5 / 9",
       "place": "28 / 64",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Montréal Open 2025",
@@ -282,7 +282,7 @@
       "score": "3 / 7",
       "place": "47 / 86",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Championnat d'échecs du Haut-Richelieu",
@@ -292,7 +292,7 @@
       "score": "3.5 / 5",
       "place": "5 / 29",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Grand Prix Régulier (CAM)",
@@ -302,7 +302,7 @@
       "score": "4 / 5",
       "place": "2nd",
       "place_tag": "place-2",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Le Grand Tour Jeunesse",
@@ -312,7 +312,7 @@
       "score": "3.5 / 5",
       "place": "2nd",
       "place_tag": "place-2",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Tournoi Régulier de la Rive-Sud (CAM)",
@@ -322,7 +322,7 @@
       "score": "4 / 5",
       "place": "2nd",
       "place_tag": "place-2",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Le Tournoi du Père-Noël",
@@ -332,7 +332,7 @@
       "score": "3 / 5",
       "place": "20 / 56",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Championnat jeunesse du Québec",
@@ -342,7 +342,7 @@
       "score": "3 / 5",
       "place": "8 / 23",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Grand Prix 2 (CAM)",
@@ -352,7 +352,7 @@
       "score": "—",
       "place": "—",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Le Grand Tour Jeunesse",
@@ -362,7 +362,7 @@
       "score": "3.5 / 5",
       "place": "—",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Tournois de qualification (CAM)",
@@ -372,7 +372,7 @@
       "score": "5 / 5",
       "place": "1 / 17",
       "place_tag": "place-1",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Tournoi d'échecs du Carnaval",
@@ -382,7 +382,7 @@
       "score": "4.5 / 5",
       "place": "1 / 47",
       "place_tag": "place-1",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Ottawa March Open",
@@ -392,7 +392,7 @@
       "score": "—",
       "place": "—",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "New York State Scholastic Championships",
@@ -402,7 +402,7 @@
       "score": "4.5 / 7",
       "place": "13 / 85",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Championnat Ouvert de la Mauricie",
@@ -412,7 +412,7 @@
       "score": "4 / 5",
       "place": "3 / 60",
       "place_tag": "place-3",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Tournois de Germain Laplante",
@@ -422,7 +422,7 @@
       "score": "2 / 5",
       "place": "19 / 25",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Défi Échiquéen du Québec (CAM)",
@@ -432,7 +432,7 @@
       "score": "4 / 5",
       "place": "3 / 68",
       "place_tag": "place-3",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Take 5 - Tournoi Classique",
@@ -442,7 +442,7 @@
       "score": "3.5 / 5",
       "place": "4 / 20",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Championnat Jeunesse du Québec d'Échecs Rapide 2026",
@@ -452,7 +452,7 @@
       "score": "5 / 6",
       "place": "3 / 48",
       "place_tag": "place-3",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Laval Open 2026",
@@ -462,7 +462,7 @@
       "score": "2.5 / 5",
       "place": "15 of 27",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Canadian Youth Chess Championship (CYCC)",
@@ -472,7 +472,7 @@
       "score": "4.5 / 7",
       "place": "24 of 156",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Le Championnat ouvert d'échecs du Québec",
@@ -482,7 +482,7 @@
       "score": "4.5 / 9",
       "place": "32 of 67",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     },
     {
       "name": "Championnat invitation du Québec 2026",
@@ -492,7 +492,7 @@
       "score": "5 / 9",
       "place": "8 of 26",
       "place_tag": "place-other",
-      "delta": ""
+      "link": ""
     }
   ],
   "tournaments_upcoming": [
