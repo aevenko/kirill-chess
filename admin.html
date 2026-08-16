@@ -240,7 +240,7 @@ textarea { min-height:80px; resize:vertical; }
 <div id="toast"></div>
 
 <script>
-const ADMIN_PASSWORD_HASH = 'bfe9586bdca203e0a6f62f3bde29dfa7245be81de9942ba05a45159ff3eeeb3a';
+const ADMIN_PASSWORD_HASH = '5f4d9260d6cb9b3566020a74126cb31fa0a68752ba7c5bf03635326511577774';
 
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));

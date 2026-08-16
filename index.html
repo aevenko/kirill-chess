@@ -1167,6 +1167,7 @@
         <th data-en="Format" data-ru="Формат" data-fr="Format">Format</th>
         <th data-en="Score" data-ru="Счёт" data-fr="Score">Score</th>
         <th data-en="Place" data-ru="Место" data-fr="Place">Place</th>
+        <th data-en="Link" data-ru="Ссылка" data-fr="Lien">Link</th>
       </tr></thead>
       <tbody id="pastTbody"></tbody>
     </table>
@@ -1362,6 +1363,7 @@ function applyData(D) {
         <td>${t.format}</td>
         <td>${t.score}</td>
         <td><span class="place-tag ${t.place_tag}">${t.place_tag==='place-1'?'🥇 ':t.place_tag==='place-2'?'🥈 ':t.place_tag==='place-3'?'🥉 ':''}${t.place}</span></td>
+        <td>${t.link ? '<a href="' + t.link + '" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-size:14px">↗</a>' : '—'}</td>
       </tr>
     `).join('');
   }
