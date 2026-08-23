@@ -1055,6 +1055,222 @@
     font-family: sans-serif;
   }
   #lichessModal-close:hover { color: #fff; }
+
+  /* ── PROGRESS: RATING CHART ── */
+  /* Series colours, in fixed order. Validated on surface #d8d0c4:
+     CVD separation for slot2↔slot3 sits in the 6–8 band, which is why every
+     series is also direct-labelled at its end point and repeated in the table view. */
+  #progress { background: var(--bg-alt); }
+
+  .chart-card {
+    background: linear-gradient(168deg, #f4efe5 0%, #ece5d8 100%);
+    border: 1px solid rgba(160,104,32,.20);
+    border-radius: 8px;
+    padding: 28px 28px 22px;
+    box-shadow: 0 2px 20px rgba(120,80,30,.07);
+  }
+
+  .chart-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .chart-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: .3px;
+  }
+  .chart-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+  .chart-hero { text-align: right; }
+  .chart-hero-val {
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .chart-hero-lbl {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  .chart-wrap { position: relative; }
+  .chart-svg { display: block; width: 100%; overflow: visible; }
+  .chart-svg:focus { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+  .chart-tip {
+    position: absolute;
+    pointer-events: none;
+    background: #2b2118;
+    color: #fff;
+    padding: 7px 11px;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.45;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .12s;
+    transform: translate(-50%, -125%);
+    z-index: 5;
+  }
+  .chart-tip.on { opacity: 1; }
+  .chart-tip b { font-weight: 600; }
+
+  .chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 16px;
+  }
+  .chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--text-mid);
+  }
+  .chart-legend-swatch { width: 14px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+
+  .chart-tablebtn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-mid);
+    padding: 7px 15px;
+    margin-top: 18px;
+    cursor: pointer;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    transition: all .2s;
+  }
+  .chart-tablebtn { border-color: rgba(160,104,32,.28); }
+  .chart-tablebtn:hover { border-color: var(--gold); color: var(--gold); background: rgba(160,104,32,.06); }
+
+  .chart-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .chart-table th, .chart-table td {
+    text-align: left;
+    padding: 7px 12px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    font-variant-numeric: tabular-nums;
+  }
+  .chart-table th {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+  }
+  .chart-table td { color: var(--text-mid); }
+
+  /* ── PROGRESS: UPSETS ── */
+  .block-heading {
+    font-family: 'Anton', 'Arial Black', Impact, sans-serif;
+    font-size: clamp(26px, 3vw, 36px);
+    color: var(--text);
+    letter-spacing: .5px;
+    margin: 72px 0 8px;
+  }
+  .block-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; max-width: 60ch; }
+
+  .upset-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .upset-tile {
+    background: linear-gradient(168deg, #f4efe5 0%, #ece5d8 100%);
+    border: 1px solid rgba(160,104,32,.20);
+    border-radius: 8px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 14px rgba(120,80,30,.05);
+  }
+  .upset-tile-val {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .upset-tile-lbl {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 9px;
+    line-height: 1.5;
+  }
+
+  .upset-list { display: flex; flex-direction: column; gap: 8px; }
+  .upset-row {
+    display: grid;
+    grid-template-columns: 54px 1fr auto auto;
+    grid-template-areas: "badge main rat diff";
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(168deg, #f4efe5 0%, #efe8dc 100%);
+    border: 1px solid rgba(160,104,32,.16);
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .2s, transform .2s;
+  }
+  a.upset-row:hover { border-color: rgba(160,104,32,.5); transform: translateX(3px);
+                      box-shadow: 0 3px 16px rgba(120,80,30,.10); }
+
+  .upset-badge {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 4px 0;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .upset-badge.win  { background: rgba(160,104,32,.16); color: var(--gold); }
+  .upset-badge.draw { background: rgba(22,19,15,.07);  color: var(--muted); }
+  .upset-badge { grid-area: badge; }
+  .upset-main  { grid-area: main; min-width: 0; }
+  .upset-rat   { grid-area: rat; }
+  .upset-diff  { grid-area: diff; }
+
+  .upset-opp { font-size: 16px; color: var(--text); line-height: 1.35; }
+  .upset-ev  { font-size: 11px; color: var(--muted); letter-spacing: .5px; margin-top: 2px; }
+  .upset-rat { font-size: 14px; color: var(--text-mid); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .upset-diff {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .upset-tiles { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .chart-card { padding: 20px 16px 16px; }
+    .chart-hero-val { font-size: 34px; }
+    .upset-tile-val { font-size: 32px; }
+    .upset-row {
+      grid-template-columns: 52px 1fr auto;
+      grid-template-areas: "badge main main" ". rat diff";
+      row-gap: 7px; column-gap: 12px; padding: 13px 14px;
+    }
+    .upset-rat { font-size: 12px; }
+    .block-heading { margin-top: 52px; }
+  }
+
   .game-card.has-lichess { cursor: pointer; }
   .game-card.has-lichess::after {
     content: '♟ View on Lichess';
@@ -1076,6 +1292,7 @@
   <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess">KE</div>
   <div class="nav-links">
     <a href="#about"       data-en="About" data-ru="О нас" data-fr="À propos">About</a>
+    <a href="#progress"    data-en="Progress" data-ru="Прогресс" data-fr="Progrès">Progress</a>
     <a href="#tournaments" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
     <a href="#games"       data-en="Games" data-ru="Партии" data-fr="Parties">Games</a>
     <a href="#gallery"     data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</a>
@@ -1094,6 +1311,7 @@
 <!-- MOBILE MENU -->
 <div id="mobileMenu" style="display:none">
   <a href="#about"       onclick="toggleMenu()" data-en="About" data-ru="О нас" data-fr="À propos">About</a>
+  <a href="#progress"    onclick="toggleMenu()" data-en="Progress" data-ru="Прогресс" data-fr="Progrès">Progress</a>
   <a href="#tournaments" onclick="toggleMenu()" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
   <a href="#games"       onclick="toggleMenu()" data-en="Games" data-ru="Партии" data-fr="Parties">Games</a>
   <a href="#gallery"     onclick="toggleMenu()" data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</a>
@@ -1140,6 +1358,40 @@
     <!-- filled by JS -->
   </div>
 </div>
+
+<!-- PROGRESS -->
+<section id="progress" class="reveal">
+  <div class="section-label" data-en="Progress" data-ru="Прогресс" data-fr="Progrès">Progress</div>
+  <h2 class="section-title" data-en="Climbing<br>the Ladder" data-ru="Шаг за<br>шагом вверх" data-fr="Marche après<br>marche">Climbing<br>the Ladder</h2>
+
+  <div class="chart-card">
+    <div class="chart-head">
+      <div>
+        <div class="chart-title" id="chartTitle" data-en="Rating progress" data-ru="Рост рейтинга" data-fr="Progression du classement">Rating progress</div>
+        <div class="chart-sub" id="chartSub"></div>
+      </div>
+      <div class="chart-hero">
+        <div class="chart-hero-val" id="chartHeroVal">—</div>
+        <div class="chart-hero-lbl" id="chartHeroLbl">Career high</div>
+      </div>
+    </div>
+    <div class="chart-wrap" id="chartWrap">
+      <svg class="chart-svg" id="ratingChart" role="img" tabindex="0"
+           aria-label="Rating progress over time"></svg>
+      <div class="chart-tip" id="chartTip"></div>
+    </div>
+    <div class="chart-legend" id="chartLegend"></div>
+    <button class="chart-tablebtn" id="chartTableBtn" onclick="toggleChartTable()"
+            data-en="Show data table" data-ru="Показать таблицу" data-fr="Afficher le tableau">Show data table</button>
+    <div id="chartTableWrap" style="display:none"></div>
+  </div>
+
+  <h3 class="block-heading" data-en="Wins over stronger opponents" data-ru="Победы над более сильными" data-fr="Victoires contre plus forts">Wins over stronger opponents</h3>
+  <p class="block-sub" data-en="Every game below was played against an opponent rated higher than Kirill at the time. Where the game was recorded, the row opens it on Lichess." data-ru="Каждая партия ниже сыграна против соперника, чей рейтинг на тот момент был выше. Если партия записана, строка открывает её на Lichess." data-fr="Chaque partie ci-dessous a été jouée contre un adversaire mieux classé que Kirill à ce moment-là. Lorsque la partie a été enregistrée, la ligne l'ouvre sur Lichess.">Every game below was played against an opponent rated higher than Kirill at the time. Where the game was recorded, the row opens it on Lichess.</p>
+  <div class="upset-tiles" id="upsetTiles"></div>
+  <div class="upset-list" id="upsetList"></div>
+  <button class="chart-tablebtn" id="upsetMore" onclick="toggleUpsetsAll()" style="display:none"></button>
+</section>
 
 <!-- ABOUT -->
 <section id="about" class="reveal">
@@ -1385,6 +1637,17 @@ function applyData(D) {
   if (D.games_library) {
     gamesLibrary = D.games_library;
     renderGamesLibrary();
+    renderUpsets();
+  }
+  // Hand-entered notable results
+  if (D.upsets_extra) {
+    upsetsExtra = D.upsets_extra;
+    renderUpsets();
+  }
+  // Rating history
+  if (D.rating_history) {
+    ratingHistory = D.rating_history;
+    renderRatingChart();
   }
   // Gallery
   if (D.gallery) {
@@ -1564,6 +1827,9 @@ function setLang(l) {
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { el.placeholder = txt; }
     else { el.innerHTML = txt; }
   });
+  // Chart + upsets carry month names and series labels — rebuild them in the new language
+  if (typeof renderRatingChart === 'function') renderRatingChart();
+  if (typeof renderUpsets === 'function') renderUpsets();
 }
 
 // ── Mobile menu ──
@@ -1604,6 +1870,413 @@ function closeLichessModal() {
 // Close modals with Escape key
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { closeLightbox(); closeLichessModal(); }
+});
+
+// ══════════════════════════════════════════
+//  RATING PROGRESS CHART
+// ══════════════════════════════════════════
+// Fixed series order — colour follows the federation, never its rank.
+const SERIES_COLORS = ['#a06820', '#8c3b5e', '#2a6f9e'];
+const NS = 'http://www.w3.org/2000/svg';
+let ratingHistory = null;
+let chartGeom = null;      // {series, dates, x, y, H}
+let chartTableOpen = false;
+
+const MONTH_NAMES = {
+  en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+  ru: ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'],
+  fr: ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre']
+};
+// Russian needs the genitive form once a day number is present ("17 августа")
+const MONTH_NAMES_DAY = {
+  ru: ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
+};
+function ymShort(ym) { const p = ym.split('-'); return p[1] + '.' + p[0].slice(2); }
+function dateLabel(y, mIdx, day) {
+  if (!day) return (MONTH_NAMES[lang] || MONTH_NAMES.en)[mIdx] + ' ' + y;
+  if (lang === 'en') return MONTH_NAMES.en[mIdx] + ' ' + day + ', ' + y;
+  const names = MONTH_NAMES_DAY[lang] || MONTH_NAMES[lang] || MONTH_NAMES.en;
+  return day + ' ' + names[mIdx] + ' ' + y;
+}
+function ymFull(ym) {
+  const p = ym.split('-');
+  return dateLabel(p[0], +p[1] - 1, p[2] ? +p[2] : null);
+}
+function tsOf(ym) { const p = ym.split('-'); return Date.UTC(+p[0], +p[1] - 1, p[2] ? +p[2] : 1); }
+function tsShort(t) {
+  const d = new Date(t);
+  return String(d.getUTCMonth() + 1).padStart(2, '0') + '.' + String(d.getUTCFullYear()).slice(2);
+}
+function seriesLabel(s) { return s['label_' + lang] || s.label_en || s.org; }
+// Ratings hold until the next event — this is the value "as of" a moment in time.
+function valueAsOf(s, t) {
+  let out = null;
+  for (const p of s.points) { if (p._t <= t) out = p; else break; }
+  return out;
+}
+
+function renderRatingChart() {
+  const svg  = document.getElementById('ratingChart');
+  const wrap = document.getElementById('chartWrap');
+  if (!svg || !wrap || !ratingHistory) return;
+
+  // Series flagged "plot": false are kept in the data but stay off the chart.
+  const series = (ratingHistory.series || [])
+    .filter(s => s.plot !== false && (s.points || []).length >= 2)
+    .map((s, i) => Object.assign({}, s, {
+      color: SERIES_COLORS[i % SERIES_COLORS.length],
+      points: s.points.slice()
+        .map(p => ({ date: p.date, value: p.value, _t: tsOf(p.date) }))
+        .sort((a, b) => a._t - b._t)
+    }));
+  if (!series.length) { svg.innerHTML = ''; return; }
+
+  const W  = Math.max(wrap.clientWidth || 640, 300);
+  const H  = W < 560 ? 250 : 320;
+  const pad = { t: 18, r: W < 560 ? 46 : 68, b: 30, l: 48 };
+  const iw = W - pad.l - pad.r;
+  const ih = H - pad.t - pad.b;
+
+  const allPts = series.reduce((a, s) => a.concat(s.points), []);
+  const t0 = Math.min.apply(null, allPts.map(p => p._t));
+  const t1 = Math.max.apply(null, allPts.map(p => p._t));
+  const vals  = allPts.map(p => p.value);
+  const rawLo = Math.min.apply(null, vals), rawHi = Math.max.apply(null, vals);
+  const vPad  = Math.max((rawHi - rawLo) * 0.12, 15);
+  const lo = rawLo - vPad, hi = rawHi + vPad;
+
+  // Round gridline values inside the padded range
+  const NICE = [5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
+  const tickStep = NICE.filter(n => n >= (hi - lo) / 5)[0] || 1000;
+  const ticks = [];
+  for (let v = Math.ceil(lo / tickStep) * tickStep; v <= hi; v += tickStep) ticks.push(v);
+
+  const xAt = t => pad.l + (t1 === t0 ? 0.5 : (t - t0) / (t1 - t0)) * iw;
+  const yAt = v => pad.t + (1 - (v - lo) / (hi - lo)) * ih;
+
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  svg.style.height = H + 'px';
+
+  // The line that covers the most time carries the wash — it gives the card depth
+  const fillIdx = series.reduce((best, s, i) => {
+    const span = s.points[s.points.length-1]._t - s.points[0]._t;
+    return span > (series[best].points[series[best].points.length-1]._t - series[best].points[0]._t) ? i : best;
+  }, 0);
+
+  const parts = [];
+  parts.push('<defs><linearGradient id="chartFade" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0%" stop-color="' + series[fillIdx].color + '" stop-opacity=".15"/>' +
+    '<stop offset="55%" stop-color="' + series[fillIdx].color + '" stop-opacity=".05"/>' +
+    '<stop offset="100%" stop-color="' + series[fillIdx].color + '" stop-opacity="0"/>' +
+    '</linearGradient></defs>');
+
+  ticks.forEach(v => {
+    const yy = yAt(v);
+    parts.push('<line x1="' + pad.l + '" y1="' + yy.toFixed(1) + '" x2="' + (pad.l + iw) + '" y2="' + yy.toFixed(1) +
+      '" stroke="rgba(160,104,32,.17)" stroke-width="1"/>');
+    parts.push('<text x="' + (pad.l - 10) + '" y="' + (yy + 4).toFixed(1) + '" text-anchor="end" ' +
+      'font-size="11" fill="#8c7a63" style="font-variant-numeric:tabular-nums">' + v + '</text>');
+  });
+
+  const xCount = Math.max(2, Math.min(7, Math.floor(iw / 64)));
+  for (let k = 0; k <= xCount; k++) {
+    const t = t0 + (t1 - t0) * k / xCount;
+    parts.push('<text x="' + xAt(t).toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle" ' +
+      'font-size="11" fill="#8c7a63" style="font-variant-numeric:tabular-nums">' + tsShort(t) + '</text>');
+  }
+
+  series.forEach((s, si) => {
+    const pts = s.points;
+    // Step line: a rating holds until the next result, so it never slopes between events
+    let dPath = 'M' + xAt(pts[0]._t).toFixed(1) + ' ' + yAt(pts[0].value).toFixed(1);
+    for (let i = 1; i < pts.length; i++) {
+      dPath += ' L' + xAt(pts[i]._t).toFixed(1) + ' ' + yAt(pts[i-1].value).toFixed(1) +
+               ' L' + xAt(pts[i]._t).toFixed(1) + ' ' + yAt(pts[i].value).toFixed(1);
+    }
+    if (si === fillIdx) {
+      parts.push('<path d="' + dPath + ' L' + xAt(pts[pts.length-1]._t).toFixed(1) + ' ' + (pad.t + ih) +
+        ' L' + xAt(pts[0]._t).toFixed(1) + ' ' + (pad.t + ih) + ' Z" fill="url(#chartFade)"/>');
+    }
+    parts.push('<path d="' + dPath + '" fill="none" stroke="' + s.color +
+      '" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>');
+
+    // Dense series would turn into a bead necklace — mark only the ends and the peak
+    const peakI = pts.reduce((m, p, i) => p.value > pts[m].value ? i : m, 0);
+    const marks = pts.length > 20
+      ? [0, peakI, pts.length - 1]
+      : pts.map((p, i) => i).filter(i => i === 0 || i === pts.length - 1 || pts[i].value !== pts[i-1].value);
+    Array.from(new Set(marks)).forEach(i => {
+      parts.push('<circle cx="' + xAt(pts[i]._t).toFixed(1) + '" cy="' + yAt(pts[i].value).toFixed(1) +
+        '" r="4" fill="' + s.color + '" stroke="#f2ece1" stroke-width="2"/>');
+    });
+
+    const last = pts[pts.length - 1];
+    parts.push('<text x="' + (xAt(last._t) + 10).toFixed(1) + '" y="' + (yAt(last.value) + 4).toFixed(1) +
+      '" font-size="13" font-weight="600" fill="' + s.color +
+      '" style="font-variant-numeric:tabular-nums">' + last.value + '</text>');
+  });
+
+  parts.push('<line id="chartCross" x1="0" y1="' + pad.t + '" x2="0" y2="' + (pad.t + ih) +
+    '" stroke="rgba(120,80,30,.40)" stroke-width="1" opacity="0"/>');
+  svg.innerHTML = parts.join('');
+
+  const prim = series[0].points;
+  const peak = prim.reduce((m, p) => p.value > m.value ? p : m, prim[0]);
+  document.getElementById('chartHeroVal').textContent = peak.value;
+  const heroLbl = document.getElementById('chartHeroLbl');
+  if (heroLbl) heroLbl.textContent =
+    ({ en: 'Career high', ru: 'Личный рекорд', fr: 'Record personnel' }[lang] || 'Career high') + ' · ' + series[0].org;
+  const sub = document.getElementById('chartSub');
+  if (sub) sub.textContent = tsShort(t0) + ' → ' + tsShort(t1);
+  svg.setAttribute('aria-label', series.map(s =>
+    seriesLabel(s) + ': ' + s.points[0].value + ' (' + ymFull(s.points[0].date) + ') → ' +
+    s.points[s.points.length-1].value + ' (' + ymFull(s.points[s.points.length-1].date) + ')').join('. '));
+
+  const leg = document.getElementById('chartLegend');
+  leg.innerHTML = series.length < 2 ? '' : series.map(s =>
+    '<div class="chart-legend-item"><span class="chart-legend-swatch" style="background:' + s.color +
+    '"></span>' + seriesLabel(s) + '</div>').join('');
+
+  // Snap points for hover: every date at which any series changed
+  const snapT = Array.from(new Set(allPts.map(p => p._t))).sort((a, b) => a - b);
+  // Keep the original date string per snap so month-only points never gain a fake day
+  const snapLabel = {};
+  allPts.forEach(p => {
+    const cur = snapLabel[p._t];
+    if (!cur || p.date.length < cur.length) snapLabel[p._t] = p.date;
+  });
+  chartGeom = { series: series, snapT: snapT, snapLabel: snapLabel, t0: t0, t1: t1,
+                xAt: xAt, yAt: yAt, pad: pad, iw: iw, ih: ih, W: W, H: H };
+  if (chartTableOpen) buildChartTable();
+  bindChartHover();
+}
+
+let chartHoverBound = false;
+function bindChartHover() {
+  const svg = document.getElementById('ratingChart');
+  if (chartHoverBound || !svg) return;
+  chartHoverBound = true;
+  let idx = -1;
+
+  const show = i => {
+    const g = chartGeom; if (!g) return;
+    const t = g.snapT[i];
+    if (t == null) return;
+    idx = i;
+    const tip = document.getElementById('chartTip'), cross = document.getElementById('chartCross');
+    const scale = svg.getBoundingClientRect().width / g.W;
+    const rows = g.series.map(s => {
+      const p = valueAsOf(s, t);
+      if (!p) return null;
+      const exact = p._t === t;
+      return '<span style="color:' + s.color + '">●</span> ' + seriesLabel(s) +
+             ' <b>' + p.value + '</b>' + (exact ? '' : ' <span style="opacity:.6">· ' + tsShort(p._t) + '</span>');
+    }).filter(Boolean);
+    if (!rows.length) return;
+    tip.innerHTML = ymFull(g.snapLabel[t]) + '<br>' + rows.join('<br>');
+    const px = g.xAt(t) * scale;
+    tip.style.left = Math.max(70, Math.min(px, svg.getBoundingClientRect().width - 70)) + 'px';
+    tip.style.top  = (g.pad.t * scale) + 'px';
+    tip.classList.add('on');
+    if (cross) { cross.setAttribute('x1', g.xAt(t)); cross.setAttribute('x2', g.xAt(t)); cross.setAttribute('opacity', '1'); }
+  };
+  const hide = () => {
+    idx = -1;
+    document.getElementById('chartTip').classList.remove('on');
+    const cross = document.getElementById('chartCross');
+    if (cross) cross.setAttribute('opacity', '0');
+  };
+  const nearest = clientX => {
+    const g = chartGeom; if (!g) return -1;
+    const r = svg.getBoundingClientRect();
+    const px = (clientX - r.left) / (r.width / g.W);
+    const t = g.t0 + Math.max(0, Math.min(1, (px - g.pad.l) / g.iw)) * (g.t1 - g.t0);
+    let best = 0, bd = Infinity;
+    g.snapT.forEach((v, i) => { const d = Math.abs(v - t); if (d < bd) { bd = d; best = i; } });
+    return best;
+  };
+
+  svg.addEventListener('pointermove', e => show(nearest(e.clientX)));
+  svg.addEventListener('pointerleave', hide);
+  svg.addEventListener('blur', hide);
+  svg.addEventListener('keydown', e => {
+    const g = chartGeom; if (!g) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const next = idx < 0 ? (e.key === 'ArrowRight' ? 0 : g.snapT.length - 1)
+                           : idx + (e.key === 'ArrowRight' ? 1 : -1);
+      show(Math.max(0, Math.min(g.snapT.length - 1, next)));
+    } else if (e.key === 'Escape') hide();
+  });
+}
+
+function buildChartTable() {
+  const g = chartGeom; if (!g) return;
+  const head = '<tr><th>' + ({ en: 'Date', ru: 'Дата', fr: 'Date' }[lang] || 'Date') + '</th>' +
+    g.series.map(s => '<th>' + seriesLabel(s) + '</th>').join('') + '</tr>';
+  const body = g.snapT.slice().reverse().map(t =>
+    '<tr><td>' + ymFull(g.snapLabel[t]) + '</td>' +
+    g.series.map(s => {
+      const p = s.points.filter(p => p._t === t)[0];
+      return '<td>' + (p ? p.value : '—') + '</td>';
+    }).join('') + '</tr>').join('');
+  document.getElementById('chartTableWrap').innerHTML =
+    '<table class="chart-table"><thead>' + head + '</thead><tbody>' + body + '</tbody></table>';
+}
+
+function toggleChartTable() {
+  chartTableOpen = !chartTableOpen;
+  const wrap = document.getElementById('chartTableWrap');
+  const btn  = document.getElementById('chartTableBtn');
+  if (chartTableOpen) buildChartTable();
+  wrap.style.display = chartTableOpen ? 'block' : 'none';
+  const labels = chartTableOpen
+    ? { en: 'Hide data table', ru: 'Скрыть таблицу', fr: 'Masquer le tableau' }
+    : { en: 'Show data table', ru: 'Показать таблицу', fr: 'Afficher le tableau' };
+  btn.setAttribute('data-en', labels.en);
+  btn.setAttribute('data-ru', labels.ru);
+  btn.setAttribute('data-fr', labels.fr);
+  btn.textContent = labels[lang] || labels.en;
+}
+
+// ══════════════════════════════════════════
+//  WINS OVER STRONGER OPPONENTS
+// ══════════════════════════════════════════
+function parseRated(s) {
+  const t = (s || '').trim();
+  const m = t.match(/^(.*?)[\s,]*(\d{3,4})$/);
+  if (m) return { name: m[1].replace(/[,\s]+$/, '').trim(), rating: +m[2] };
+  return { name: t, rating: null };
+}
+function outcomeFor(result, isWhite) {
+  const r = (result || '').replace(/[—–]/g, '-').replace(/\s+/g, '');
+  if (r === '1-0') return isWhite ? 'win' : 'loss';
+  if (r === '0-1') return isWhite ? 'loss' : 'win';
+  if (r.indexOf('1/2') === 0) return 'draw';
+  return null;
+}
+function lichessUrlOf(raw) {
+  if (!raw) return '';
+  const m = raw.match(/src=["']([^"']+)["']/);
+  let u = m ? m[1] : (raw.trim().indexOf('http') === 0 ? raw.trim() : '');
+  return u.replace(/(lichess\.org\/study\/)(?!embed\/)([a-zA-Z0-9]+\/[a-zA-Z0-9#]+)/, '$1embed/$2');
+}
+
+let upsetsExtra = [];
+let upsetsShowAll = false;
+function toggleUpsetsAll() { upsetsShowAll = !upsetsShowAll; renderUpsets(); }
+
+function collectUpsets() {
+  const out = [];
+  // Results entered by hand (no PGN on file) — same shape as the ones read from games_library
+  (upsetsExtra || []).forEach(u => {
+    const diff = (u.opp_rating || 0) - (u.my_rating || 0);
+    if (diff <= 0) return;
+    out.push({ opp: u.opp, oppRating: u.opp_rating, mine: u.my_rating, diff: diff,
+               res: u.result, white: u.color === 'white', event: u.event,
+               tournament: u.event, date: u.date || '', note: u.note || '', url: u.link || '' });
+  });
+  (gamesLibrary || []).forEach(yr => (yr.tournaments || []).forEach(tn => {
+    const games = tn.games || [];
+    // Some games omit Kirill's rating — reuse the one recorded elsewhere in the same event
+    let fallback = null;
+    games.forEach(g => [g.white, g.black].forEach(side => {
+      const p = parseRated(side);
+      if (fallback === null && p.rating && /evenko/i.test(p.name)) fallback = p.rating;
+    }));
+    games.forEach(g => {
+      const w = parseRated(g.white), b = parseRated(g.black);
+      const kW = /evenko/i.test(w.name), kB = /evenko/i.test(b.name);
+      if (!kW && !kB) return;
+      const me = kW ? w : b, opp = kW ? b : w;
+      const mine = me.rating || fallback;
+      if (!mine || !opp.rating) return;
+      const diff = opp.rating - mine;
+      if (diff <= 0) return;
+      const res = outcomeFor(g.result, kW);
+      if (res !== 'win' && res !== 'draw') return;
+      out.push({
+        opp: opp.name, oppRating: opp.rating, mine: mine, diff: diff, res: res,
+        white: kW, event: g.event || tn.name, tournament: tn.name,
+        date: tn.date || '', url: lichessUrlOf(g.lichess)
+      });
+    });
+  }));
+  out.sort((a, b) => a.res === b.res ? b.diff - a.diff : (a.res === 'win' ? -1 : 1));
+  return out;
+}
+
+function renderUpsets() {
+  const tiles = document.getElementById('upsetTiles');
+  const list  = document.getElementById('upsetList');
+  if (!tiles || !list) return;
+
+  const rows = collectUpsets();
+  const wins  = rows.filter(r => r.res === 'win');
+  const draws = rows.filter(r => r.res === 'draw');
+  if (!rows.length) { tiles.innerHTML = ''; list.innerHTML = ''; return; }
+
+  const best   = wins.length  ? Math.max.apply(null, wins.map(r => r.diff))       : 0;
+  const beaten = wins.length  ? Math.max.apply(null, wins.map(r => r.oppRating))  : 0;
+  const held   = draws.length ? Math.max.apply(null, draws.map(r => r.oppRating)) : 0;
+
+  const tile = (val, en, ru, fr) =>
+    '<div class="upset-tile"><div class="upset-tile-val">' + val +
+    '</div><div class="upset-tile-lbl" data-en="' + en + '" data-ru="' + ru + '" data-fr="' + fr + '">' +
+    ({ en: en, ru: ru, fr: fr }[lang] || en) + '</div></div>';
+
+  tiles.innerHTML =
+    tile(wins.length,  'Wins vs higher-rated',  'Побед над сильнее',      'Victoires contre plus forts') +
+    tile(draws.length, 'Draws vs higher-rated', 'Ничьих с сильнее',       'Nulles contre plus forts') +
+    tile('+' + best,   'Biggest upset',         'Крупнейший апсет',       'Plus gros exploit') +
+    tile(beaten || held, beaten ? 'Strongest opponent beaten' : 'Strongest opponent held',
+                        beaten ? 'Сильнейший обыгранный' : 'Сильнейший удержанный',
+                        beaten ? 'Adversaire le plus fort battu' : 'Adversaire le plus fort tenu');
+
+  const L = {
+    win:   { en: 'Win',   ru: 'Победа', fr: 'Victoire' },
+    draw:  { en: 'Draw',  ru: 'Ничья',  fr: 'Nulle' },
+    white: { en: 'as White', ru: 'белыми', fr: 'avec les Blancs' },
+    black: { en: 'as Black', ru: 'чёрными', fr: 'avec les Noirs' }
+  };
+  const t = o => o[lang] || o.en;
+
+  const CAP = 10;
+  const shown = upsetsShowAll ? rows : rows.slice(0, CAP);
+  list.innerHTML = shown.map(r => {
+    const side = r.white ? L.white : L.black;
+    const badge = r.res === 'win' ? L.win : L.draw;
+    const inner =
+      '<div class="upset-badge ' + r.res + '" data-en="' + badge.en + '" data-ru="' + badge.ru +
+        '" data-fr="' + badge.fr + '">' + t(badge) + '</div>' +
+      '<div class="upset-main"><div class="upset-opp">' + r.opp + '</div>' +
+        '<div class="upset-ev">' + r.event + (r.date ? ' · ' + r.date : '') + (r.note ? ' · ' + r.note : '') + '</div></div>' +
+      '<div class="upset-rat">' + r.mine + ' vs <strong>' + r.oppRating + '</strong> · ' +
+        '<span data-en="' + side.en + '" data-ru="' + side.ru + '" data-fr="' + side.fr + '">' + t(side) + '</span></div>' +
+      '<div class="upset-diff">+' + r.diff + '</div>';
+    return r.url
+      ? '<a class="upset-row" href="#" onclick="openLichess(\'' + r.url + '\');return false;">' + inner + '</a>'
+      : '<div class="upset-row">' + inner + '</div>';
+  }).join('');
+
+  const more = document.getElementById('upsetMore');
+  if (more) {
+    if (rows.length <= CAP) { more.style.display = 'none'; }
+    else {
+      more.style.display = 'inline-block';
+      more.textContent = upsetsShowAll
+        ? ({ en: 'Show fewer', ru: 'Свернуть', fr: 'Afficher moins' }[lang] || 'Show fewer')
+        : ({ en: 'Show all ' + rows.length, ru: 'Показать все ' + rows.length, fr: 'Afficher les ' + rows.length }[lang]
+           || ('Show all ' + rows.length));
+    }
+  }
+}
+
+// Redraw the chart when the viewport changes size
+let chartResizeTimer = null;
+window.addEventListener('resize', function () {
+  clearTimeout(chartResizeTimer);
+  chartResizeTimer = setTimeout(renderRatingChart, 150);
 });
 
 // ── Start ──
