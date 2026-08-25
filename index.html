@@ -1921,14 +1921,25 @@ function renderRatingChart() {
   if (!svg || !wrap || !ratingHistory) return;
 
   // Series flagged "plot": false are kept in the data but stay off the chart.
+  const winStart = ratingHistory.start ? tsOf(ratingHistory.start) : null;
   const series = (ratingHistory.series || [])
     .filter(s => s.plot !== false && (s.points || []).length >= 2)
-    .map((s, i) => Object.assign({}, s, {
-      color: SERIES_COLORS[i % SERIES_COLORS.length],
-      points: s.points.slice()
+    .map((s, i) => {
+      let pts = s.points.slice()
         .map(p => ({ date: p.date, value: p.value, _t: tsOf(p.date) }))
-        .sort((a, b) => a._t - b._t)
-    }));
+        .sort((a, b) => a._t - b._t);
+      if (winStart != null) {
+        const before = pts.filter(p => p._t < winStart);
+        pts = pts.filter(p => p._t >= winStart);
+        // The rating that was already standing when the window opens — carried, not a new result
+        if (before.length && pts.length) {
+          const last = before[before.length - 1];
+          pts.unshift({ date: last.date, value: last.value, _t: winStart, _carried: true });
+        }
+      }
+      return Object.assign({}, s, { color: SERIES_COLORS[i % SERIES_COLORS.length], points: pts });
+    })
+    .filter(s => s.points.length >= 2);
   if (!series.length) { svg.innerHTML = ''; return; }
 
   const W  = Math.max(wrap.clientWidth || 640, 300);
@@ -1947,7 +1958,7 @@ function renderRatingChart() {
 
   // Round gridline values inside the padded range
   const NICE = [5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
-  const tickStep = NICE.filter(n => n >= (hi - lo) / 5)[0] || 1000;
+  const tickStep = NICE.filter(n => n >= (hi - lo) / 6)[0] || 1000;
   const ticks = [];
   for (let v = Math.ceil(lo / tickStep) * tickStep; v <= hi; v += tickStep) ticks.push(v);
 
@@ -2005,7 +2016,7 @@ function renderRatingChart() {
     const marks = pts.length > 20
       ? [0, peakI, pts.length - 1]
       : pts.map((p, i) => i).filter(i => i === 0 || i === pts.length - 1 || pts[i].value !== pts[i-1].value);
-    Array.from(new Set(marks)).forEach(i => {
+    Array.from(new Set(marks)).filter(i => !pts[i]._carried).forEach(i => {
       parts.push('<circle cx="' + xAt(pts[i]._t).toFixed(1) + '" cy="' + yAt(pts[i].value).toFixed(1) +
         '" r="4" fill="' + s.color + '" stroke="#f2ece1" stroke-width="2"/>');
     });
@@ -2028,8 +2039,9 @@ function renderRatingChart() {
     ({ en: 'Career high', ru: 'Личный рекорд', fr: 'Record personnel' }[lang] || 'Career high') + ' · ' + series[0].org;
   const sub = document.getElementById('chartSub');
   if (sub) sub.textContent = tsShort(t0) + ' → ' + tsShort(t1);
+  // (t0 is the window edge, so this already reads as the visible range)
   svg.setAttribute('aria-label', series.map(s =>
-    seriesLabel(s) + ': ' + s.points[0].value + ' (' + ymFull(s.points[0].date) + ') → ' +
+    seriesLabel(s) + ': ' + s.points[0].value + ' (' + tsShort(s.points[0]._t) + ') → ' +
     s.points[s.points.length-1].value + ' (' + ymFull(s.points[s.points.length-1].date) + ')').join('. '));
 
   const leg = document.getElementById('chartLegend');
@@ -2038,10 +2050,11 @@ function renderRatingChart() {
     '"></span>' + seriesLabel(s) + '</div>').join('');
 
   // Snap points for hover: every date at which any series changed
-  const snapT = Array.from(new Set(allPts.map(p => p._t))).sort((a, b) => a - b);
+  const realPts = allPts.filter(p => !p._carried);
+  const snapT = Array.from(new Set(realPts.map(p => p._t))).sort((a, b) => a - b);
   // Keep the original date string per snap so month-only points never gain a fake day
   const snapLabel = {};
-  allPts.forEach(p => {
+  realPts.forEach(p => {
     const cur = snapLabel[p._t];
     if (!cur || p.date.length < cur.length) snapLabel[p._t] = p.date;
   });
@@ -2068,9 +2081,9 @@ function bindChartHover() {
     const rows = g.series.map(s => {
       const p = valueAsOf(s, t);
       if (!p) return null;
-      const exact = p._t === t;
+      const exact = p._t === t && !p._carried;
       return '<span style="color:' + s.color + '">●</span> ' + seriesLabel(s) +
-             ' <b>' + p.value + '</b>' + (exact ? '' : ' <span style="opacity:.6">· ' + tsShort(p._t) + '</span>');
+             ' <b>' + p.value + '</b>' + (exact ? '' : ' <span style="opacity:.6">· ' + tsShort(tsOf(p.date)) + '</span>');
     }).filter(Boolean);
     if (!rows.length) return;
     tip.innerHTML = ymFull(g.snapLabel[t]) + '<br>' + rows.join('<br>');
