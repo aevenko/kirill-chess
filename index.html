@@ -1915,6 +1915,41 @@ function valueAsOf(s, t) {
   return out;
 }
 
+// Smooth curve through the points (monotone cubic, Fritsch-Carlson).
+// Monotone matters here: a plain spline would bulge past ratings that were never held.
+function smoothLinePath(pts, xAt, yAt) {
+  const X = [], Y = [];
+  pts.forEach(p => {
+    const x = xAt(p._t);
+    if (X.length && Math.abs(x - X[X.length - 1]) < 0.01) { Y[Y.length - 1] = yAt(p.value); return; }
+    X.push(x); Y.push(yAt(p.value));
+  });
+  const n = X.length;
+  const f = v => v.toFixed(1);
+  let d = 'M' + f(X[0]) + ' ' + f(Y[0]);
+  if (n < 3) {
+    for (let i = 1; i < n; i++) d += ' L' + f(X[i]) + ' ' + f(Y[i]);
+    return d;
+  }
+  const dx = [], m = [];
+  for (let i = 0; i < n - 1; i++) { dx[i] = X[i + 1] - X[i]; m[i] = (Y[i + 1] - Y[i]) / dx[i]; }
+  const t = new Array(n);
+  t[0] = m[0];
+  t[n - 1] = m[n - 2];
+  for (let i = 1; i < n - 1; i++) {
+    if (m[i - 1] * m[i] <= 0) { t[i] = 0; continue; }
+    const w1 = 2 * dx[i] + dx[i - 1], w2 = dx[i] + 2 * dx[i - 1];
+    t[i] = (w1 + w2) / (w1 / m[i - 1] + w2 / m[i]);
+  }
+  for (let i = 0; i < n - 1; i++) {
+    const h = dx[i] / 3;
+    d += ' C' + f(X[i] + h) + ' ' + f(Y[i] + t[i] * h) +
+         ' ' + f(X[i + 1] - h) + ' ' + f(Y[i + 1] - t[i + 1] * h) +
+         ' ' + f(X[i + 1]) + ' ' + f(Y[i + 1]);
+  }
+  return d;
+}
+
 function renderRatingChart() {
   const svg  = document.getElementById('ratingChart');
   const wrap = document.getElementById('chartWrap');
@@ -1998,12 +2033,9 @@ function renderRatingChart() {
 
   series.forEach((s, si) => {
     const pts = s.points;
-    // Step line: a rating holds until the next result, so it never slopes between events
-    let dPath = 'M' + xAt(pts[0]._t).toFixed(1) + ' ' + yAt(pts[0].value).toFixed(1);
-    for (let i = 1; i < pts.length; i++) {
-      dPath += ' L' + xAt(pts[i]._t).toFixed(1) + ' ' + yAt(pts[i-1].value).toFixed(1) +
-               ' L' + xAt(pts[i]._t).toFixed(1) + ' ' + yAt(pts[i].value).toFixed(1);
-    }
+    // Smooth line between results. The dots stay the real, rated values;
+    // the curve only carries the eye from one to the next.
+    const dPath = smoothLinePath(pts, xAt, yAt);
     if (si === fillIdx) {
       parts.push('<path d="' + dPath + ' L' + xAt(pts[pts.length-1]._t).toFixed(1) + ' ' + (pad.t + ih) +
         ' L' + xAt(pts[0]._t).toFixed(1) + ' ' + (pad.t + ih) + ' Z" fill="url(#chartFade)"/>');
