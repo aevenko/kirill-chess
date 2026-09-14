@@ -35,8 +35,8 @@
     },
     {
       "org": "Chess.com",
-      "value": 2180,
-      "delta": "-8",
+      "value": 2174,
+      "delta": "-6",
       "direction": "down",
       "link": ""
     }
@@ -64,14 +64,14 @@
     "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
     "years_playing": 8,
     "prize_places": 12,
-    "games_recorded": 1477358,
-    "games_classical": 167,
+    "games_recorded": 1477363,
+    "games_classical": 172,
     "games_rapid": 1477161,
     "games_blitz": 30,
-    "games_federation": 291,
+    "games_federation": 296,
     "games_scholastic_cma": 1477067,
-    "games_updated": "2026-09-07",
-    "games_sources_note": "FQÉ (lente 155 / rapide 94 / blitz 30) + внешние турниры CFC (12 классика, 0 рапид) + школьный циркуит CMA (1477067, считается как рапид). Сверено 2026-09-07."
+    "games_updated": "2026-09-14",
+    "games_sources_note": "FQÉ (lente 160 / rapide 94 / blitz 30) + внешние турниры CFC (12 классика, 0 рапид) + школьный циркуит CMA (1477067, считается как рапид). Сверено 2026-09-14."
   },
   "tournaments_past": [
     {
@@ -914,7 +914,7 @@
       "updated": "2026-09-10",
       "regular": 2089,
       "quick": 1690,
-      "games_regular": 72,
+      "games_regular": 77,
       "games_quick": 36,
       "external_events": [
         {
@@ -937,7 +937,7 @@
       "url": "https://www.fqechecs.qc.ca/membres/index.php?Id=109477",
       "classical": [
         1945,
-        155
+        160
       ],
       "rapid": [
         1690,
