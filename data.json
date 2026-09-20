@@ -503,27 +503,19 @@
       "place": "17 of 45",
       "place_tag": "place-other",
       "link": "https://chesspass.blitzbishops.com/tournaments/FXaci6x3qLJg70IQI6u0"
-    }
-  ],
-  "tournaments_upcoming": [
-    {
-      "name": "34th ANNUAL EASTERN CLASS CHAMPIONSHIPS",
-      "date": "Oct 16-18, 2026",
-      "city": "CONNECTICUT",
-      "format": "Classical",
-      "link": "https://new.uschess.org/34th-annual-eastern-class-championships",
-      "status": "Registered",
-      "status_en": "Planned"
     },
     {
       "name": "Championnat Ouvert d'Échecs des Laurentides",
       "date": "Sep 25–27, 2026",
       "city": "Blainville, QC",
       "format": "Classical",
-      "link": "https://www.fqechecs.qc.ca/vue/clubs/content.php?Id=16497",
-      "status": "Planned",
-      "status_en": "Planned"
-    },
+      "score": "1.5 / 5",
+      "place": "",
+      "place_tag": "place-other",
+      "link": ""
+    }
+  ],
+  "tournaments_upcoming": [
     {
       "name": "Championnat d'échecs du Haut-Richelieu",
       "date": "Oct 23–25, 2026",
