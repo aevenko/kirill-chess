@@ -64,14 +64,14 @@
     "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
     "years_playing": 8,
     "prize_places": 12,
-    "games_recorded": 1477363,
-    "games_classical": 172,
+    "games_recorded": 1477367,
+    "games_classical": 176,
     "games_rapid": 1477161,
     "games_blitz": 30,
-    "games_federation": 296,
+    "games_federation": 300,
     "games_scholastic_cma": 1477067,
-    "games_updated": "2026-09-14",
-    "games_sources_note": "FQÉ (lente 160 / rapide 94 / blitz 30) + внешние турниры CFC (12 классика, 0 рапид) + школьный циркуит CMA (1477067, считается как рапид). Сверено 2026-09-14."
+    "games_updated": "2026-09-21",
+    "games_sources_note": "FQÉ (lente 164 / rapide 94 / blitz 30) + внешние турниры CFC (12 классика, 0 рапид) + школьный циркуит CMA (1477067, считается как рапид). Сверено 2026-09-21."
   },
   "tournaments_past": [
     {
@@ -899,14 +899,14 @@
     "email": "a.evenko@gmail.com"
   },
   "sources": {
-    "checked_at": "2026-09-14",
+    "checked_at": "2026-09-21",
     "fide": null,
     "cfc": {
       "url": "https://www.chess.ca/en/ratings/p/?id=187189",
-      "updated": "2026-09-10",
-      "regular": 2089,
+      "updated": "2026-09-17",
+      "regular": 2034,
       "quick": 1690,
-      "games_regular": 77,
+      "games_regular": 81,
       "games_quick": 36,
       "external_events": [
         {
@@ -928,8 +928,8 @@
     "fqe": {
       "url": "https://www.fqechecs.qc.ca/membres/index.php?Id=109477",
       "classical": [
-        1945,
-        160
+        1891,
+        164
       ],
       "rapid": [
         1690,
