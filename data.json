@@ -28,16 +28,16 @@
     },
     {
       "org": "FQÉ (Québec)",
-      "value": 1894,
-      "delta": "+25",
-      "direction": "up",
+      "value": 1869,
+      "delta": "-25",
+      "direction": "down",
       "link": "https://www.fqechecs.qc.ca/membres/index.php?Id=109477"
     },
     {
       "org": "Chess.com",
-      "value": 2158,
-      "delta": "+8",
-      "direction": "up",
+      "value": 2153,
+      "delta": "-5",
+      "direction": "down",
       "link": ""
     }
   ],
