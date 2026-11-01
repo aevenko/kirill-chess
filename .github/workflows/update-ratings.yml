@@ -67,6 +67,6 @@ jobs:
             echo "### Рейтинги и партии"
             echo ""
             echo '```json'
-            python -c "import json;d=json.load(open('data.json'));a=d['about'];print(json.dumps({'ratings':d['ratings'],'games':{k:a.get(k) for k in ['games_classical','games_rapid','games_blitz','games_scholastic_cma','games_recorded']}},ensure_ascii=False,indent=2))"
+            python -c "import json;d=json.load(open('data.json'));a=d['about'];print(json.dumps({'ratings':d['ratings'],'games':{k:a.get(k) for k in ['games_classical','games_rapid','games_blitz','games_recorded']}},ensure_ascii=False,indent=2))"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
