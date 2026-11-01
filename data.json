@@ -14,8 +14,8 @@
   "ratings": [
     {
       "org": "FIDE",
-      "value": 1850,
-      "delta": "-23",
+      "value": 1849,
+      "delta": "-1",
       "direction": "down",
       "link": "https://ratings.fide.com/profile/2666243"
     },
@@ -42,8 +42,8 @@
     }
   ],
   "hero_stats": {
-    "fide_rating": 1850,
-    "fide_delta": "-23",
+    "fide_rating": 1849,
+    "fide_delta": "-1",
     "cfc_rating": 1999,
     "age": 13,
     "since_year": 2018
