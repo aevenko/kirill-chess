@@ -513,43 +513,26 @@
       "place": "",
       "place_tag": "place-other",
       "link": ""
-    }
-  ],
-  "tournaments_upcoming": [
+    },
     {
       "name": "Championnat d'échecs du Haut-Richelieu",
       "date": "Oct 23–25, 2026",
       "city": "St-Jean-sur-Richelieu",
       "format": "Classical",
-      "link": "https://www.echecs-sjsr.com/championat-du-haut-richelieu#Section-A",
-      "status": "Registered",
-      "status_en": "Planned"
-    },
+      "score": "2 / 5",
+      "place": "",
+      "place_tag": "place-other",
+      "link": "https://s1.chess-results.com/tnr1461779.aspx?lan=1&art=1&turdet=YES&flag=30&SNode=S0"
+    }
+  ],
+  "tournaments_upcoming": [
     {
       "name": "Grand Prix #1 (AEM)",
       "date": "Nov 8, 2026",
       "city": "Montréal, QC",
       "format": "Classical",
-      "link": "",
-      "status": "Planned",
-      "status_en": "Planned"
-    },
-    {
-      "name": "Take 5 (Blitz Bishops)",
-      "date": "Nov 13–15, 2026",
-      "city": "Montreal",
-      "format": "Classical",
-      "link": "",
-      "status": "Planned",
-      "status_en": "Planned"
-    },
-    {
-      "name": "Take 5 (Blitz Bishops)",
-      "date": "Dec 11–13, 2026",
-      "city": "Montreal",
-      "format": "Classical",
-      "link": "",
-      "status": "Planned",
+      "link": "https://chess-math.org/grand-prix-2026-2027?v=138",
+      "status": "Registered",
       "status_en": "Planned"
     },
     {
@@ -566,7 +549,7 @@
       "date": "Jan 17, 2027",
       "city": "Montréal, QC",
       "format": "Rapid",
-      "link": "",
+      "link": "https://chess-math.org/grand-prix-2026-2027?v=138",
       "status": "Planned",
       "status_en": "Planned"
     },
@@ -638,7 +621,7 @@
       "date": "May 2, 2027",
       "city": "Montréal, QC",
       "format": "Rapid",
-      "link": "",
+      "link": "https://chess-math.org/grand-prix-2026-2027?v=138",
       "status": "Planned",
       "status_en": "Planned"
     },
@@ -667,6 +650,15 @@
       "format": "Classical",
       "link": "",
       "status": "Planned",
+      "status_en": "Planned"
+    },
+    {
+      "name": "Open de Gatineau",
+      "date": "Nov 20–22, 2026",
+      "city": "Gatineau",
+      "format": "Classical",
+      "link": "https://www.fqechecs.qc.ca/vue/clubs/content.php?Id=16489",
+      "status": "Планируется",
       "status_en": "Planned"
     }
   ],
