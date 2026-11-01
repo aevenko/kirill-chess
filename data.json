@@ -545,6 +545,15 @@
       "status_en": "Planned"
     },
     {
+      "name": "Open de Gatineau",
+      "date": "Nov 20–22, 2026",
+      "city": "Gatineau",
+      "format": "Classical",
+      "link": "https://www.fqechecs.qc.ca/vue/clubs/content.php?Id=16489",
+      "status": "Planned",
+      "status_en": "Planned"
+    },
+    {
       "name": "Tournoi du Père Noël 2026",
       "date": "Dec 26–30, 2026",
       "city": "Montréal, QC",
@@ -659,15 +668,6 @@
       "format": "Classical",
       "link": "",
       "status": "Planned",
-      "status_en": "Planned"
-    },
-    {
-      "name": "Open de Gatineau",
-      "date": "Nov 20–22, 2026",
-      "city": "Gatineau",
-      "format": "Classical",
-      "link": "https://www.fqechecs.qc.ca/vue/clubs/content.php?Id=16489",
-      "status": "Планируется",
       "status_en": "Planned"
     }
   ],
