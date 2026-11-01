@@ -504,14 +504,24 @@
       "link": "https://chesspass.blitzbishops.com/tournaments/FXaci6x3qLJg70IQI6u0"
     },
     {
+      "name": "Take 5 - Septembre 2026",
+      "date": "Sep 11–13, 2026",
+      "city": "Montréal",
+      "format": "Classical",
+      "score": "2.5 / 5",
+      "place": "7 of 11",
+      "place_tag": "place-other",
+      "link": ""
+    },
+    {
       "name": "Championnat Ouvert d'Échecs des Laurentides",
       "date": "Sep 25–27, 2026",
       "city": "Blainville, QC",
       "format": "Classical",
       "score": "1.5 / 5",
-      "place": "",
+      "place": "20 of 26",
       "place_tag": "place-other",
-      "link": ""
+      "link": "https://s3.chess-results.com/tnr1497946.aspx?lan=1&art=1&SNode=S0"
     },
     {
       "name": "Championnat d'échecs du Haut-Richelieu",
@@ -519,7 +529,7 @@
       "city": "St-Jean-sur-Richelieu",
       "format": "Classical",
       "score": "2 / 5",
-      "place": "",
+      "place": "22 of 30",
       "place_tag": "place-other",
       "link": "https://s1.chess-results.com/tnr1461779.aspx?lan=1&art=1&turdet=YES&flag=30&SNode=S0"
     }
@@ -1004,6 +1014,14 @@
           {
             "date": "2026-09",
             "value": 1873
+          },
+          {
+            "date": "2026-10",
+            "value": 1850
+          },
+          {
+            "date": "2026-11",
+            "value": 1849
           }
         ]
       },
@@ -1144,6 +1162,18 @@
           {
             "date": "2026-09-09",
             "value": 1945
+          },
+          {
+            "date": "2026-09-17",
+            "value": 1891
+          },
+          {
+            "date": "2026-10-06",
+            "value": 1869
+          },
+          {
+            "date": "2026-10-29",
+            "value": 1874
           }
         ]
       },
@@ -1200,6 +1230,18 @@
           {
             "date": "2026-09-07",
             "value": 2089
+          },
+          {
+            "date": "2026-09-13",
+            "value": 2034
+          },
+          {
+            "date": "2026-09-20",
+            "value": 2000
+          },
+          {
+            "date": "2026-10-25",
+            "value": 1999
           }
         ]
       },
@@ -1318,6 +1360,16 @@
       "event": "Ouvert du Québec · A & B · R8",
       "date": "Jul 2026",
       "note": "CFC 1776 vs 1908"
+    },
+    {
+      "opp": "Genzling, Jérôme",
+      "opp_rating": 2040,
+      "my_rating": 1850,
+      "result": "win",
+      "color": "white",
+      "event": "Haut-Richelieu · Section A · R1",
+      "date": "Oct 2026",
+      "note": "CFC 2000 vs 2216"
     }
   ]
 }
