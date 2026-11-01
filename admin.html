@@ -298,7 +298,32 @@ function getDefaultData() {
   };
 }
 
+// ── SORT TOURNAMENTS BY START DATE ──
+// Understands "Nov 8, 2026", "Nov 20–22, 2026", "Feb 27 – Mar 1, 2026", "March 2027".
+// Rows whose date can't be read keep their place at the end.
+function tourDateKey(str) {
+  const s = String(str || '').trim();
+  const y = s.match(/(\d{4})/);
+  const m = s.match(/[A-Za-zÀ-ÿ]{3,}/);
+  if (!y || !m) return Infinity;
+  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+  const mi = months.indexOf(m[0].slice(0,3).toLowerCase());
+  if (mi < 0) return Infinity;
+  const d = s.slice(m.index + m[0].length).match(/^\s*(\d{1,2})(?!\d)/);
+  const day = d ? +d[1] : 15;
+  return (+y[1]) * 10000 + (mi + 1) * 100 + day;
+}
+function sortTournaments() {
+  ['tournaments_past', 'tournaments_upcoming'].forEach(k => {
+    if (!Array.isArray(D[k])) return;
+    D[k] = D[k].map((t, i) => ({t, i, key: tourDateKey(t.date)}))
+      .sort((a, b) => (a.key - b.key) || (a.i - b.i))
+      .map(x => x.t);
+  });
+}
+
 function renderAll() {
+  sortTournaments();
   // Hero
   document.getElementById('hero_slogan_en').value = D.hero?.slogan_en || '';
   document.getElementById('hero_slogan_ru').value = D.hero?.slogan_ru || '';
@@ -569,6 +594,7 @@ function collectData() {
 
 function downloadAll() {
   collectData();
+  sortTournaments();
   // Download data.json
   const blob = new Blob([JSON.stringify(D, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
