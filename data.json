@@ -64,13 +64,13 @@
     "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
     "years_playing": 8,
     "prize_places": 12,
-    "games_recorded": 309,
-    "games_classical": 185,
-    "games_rapid": 94,
+    "games_recorded": 331,
+    "games_classical": 199,
+    "games_rapid": 102,
     "games_blitz": 30,
-    "games_federation": 309,
-    "games_updated": "2026-10-26",
-    "games_sources_note": "FQÉ (lente 173 / rapide 94 / blitz 30) + внешние турниры CFC (12 классика, 0 рапид). Партии CMA не считаются. Сверено 2026-11-01."
+    "games_federation": 331,
+    "games_updated": "2026-11-02",
+    "games_sources_note": "FQÉ (lente 178 / rapide 97 / blitz 30) + внешние турниры CFC (21 классика, 5 рапид). Партии CMA не считаются. Сверено 2026-11-02."
   },
   "tournaments_past": [
     {
@@ -900,14 +900,14 @@
     "email": "a.evenko@gmail.com"
   },
   "sources": {
-    "checked_at": "2026-10-26",
+    "checked_at": "2026-11-02",
     "fide": null,
     "cfc": {
       "url": "https://www.chess.ca/en/ratings/p/?id=187189",
-      "updated": "2026-10-22",
-      "regular": 2000,
+      "updated": "2026-10-29",
+      "regular": 1999,
       "quick": 1690,
-      "games_regular": 86,
+      "games_regular": 91,
       "games_quick": 36,
       "external_events": [
         {
@@ -923,18 +923,32 @@
           "province": "ON",
           "type": "R",
           "games": 5
+        },
+        {
+          "name": "NAYCC 2025 Open U12",
+          "date": "2025-08-23",
+          "province": "ON",
+          "type": "R",
+          "games": 9
+        },
+        {
+          "name": "Ottawa Youth Qualifier U12",
+          "date": "2024-11-23",
+          "province": "ON",
+          "type": "Q",
+          "games": 5
         }
       ]
     },
     "fqe": {
       "url": "https://www.fqechecs.qc.ca/membres/index.php?Id=109477",
       "classical": [
-        1869,
-        173
+        1874,
+        178
       ],
       "rapid": [
-        1690,
-        94
+        1688,
+        97
       ],
       "blitz": [
         1313,
