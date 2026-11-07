@@ -455,6 +455,28 @@
     margin-bottom: 22px;
   }
 
+  /* About: Kirill in his own words */
+  .own-words { margin-top: 48px; }
+  .own-words-title {
+    font-family: 'Anton', 'Arial Black', Impact, sans-serif;
+    font-size: 26px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text); margin: 0 0 24px;
+  }
+  .own-words-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .own-words-item {
+    background: var(--bg-alt); border-left: 3px solid var(--gold);
+    padding: 24px 28px; border-radius: 4px;
+  }
+  .own-words-q {
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 10px;
+  }
+  .own-words-a { font-size: 16px; line-height: 1.75; color: var(--text-mid); margin: 0; }
+  @media (max-width: 768px) {
+    .own-words-grid { grid-template-columns: 1fr; }
+    .own-words-item { padding: 20px; }
+  }
+
   /* About right stats card */
   .about-stats-card {
     background: var(--bg-alt);
@@ -1402,6 +1424,10 @@
     <p id="about_p2" class="about-para" data-en="" data-ru=""></p>
     <p id="about_p3" class="about-para" data-en="" data-ru=""></p>
   </div>
+  <div id="own_words" class="own-words" style="display:none">
+    <h3 class="own-words-title" id="own_words_title" data-en="" data-ru="" data-fr=""></h3>
+    <div class="own-words-grid" id="own_words_grid"></div>
+  </div>
 </section>
 
 <!-- TOURNAMENTS -->
@@ -1591,6 +1617,22 @@ function applyData(D) {
     p3.setAttribute('data-ru', ab.para3_ru || '');
     p3.setAttribute('data-fr', ab.para3_fr || ab.para3_en || '');
     p3.innerHTML = ab.para3_en || '';
+    // In Kirill's own words (Q&A)
+    const ow = ab.own_words;
+    if (ow && Array.isArray(ow.items) && ow.items.length) {
+      const esc = s => String(s || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+      const t = document.getElementById('own_words_title');
+      t.setAttribute('data-en', ow.title_en || '');
+      t.setAttribute('data-ru', ow.title_ru || ow.title_en || '');
+      t.setAttribute('data-fr', ow.title_fr || ow.title_en || '');
+      t.innerHTML = ow.title_en || '';
+      document.getElementById('own_words_grid').innerHTML = ow.items.map(it =>
+        '<div class="own-words-item">' +
+          '<div class="own-words-q" data-en="' + esc(it.q_en) + '" data-ru="' + esc(it.q_ru || it.q_en) + '" data-fr="' + esc(it.q_fr || it.q_en) + '">' + esc(it.q_en) + '</div>' +
+          '<p class="own-words-a" data-en="' + esc(it.a_en) + '" data-ru="' + esc(it.a_ru || it.a_en) + '" data-fr="' + esc(it.a_fr || it.a_en) + '">' + esc(it.a_en) + '</p>' +
+        '</div>').join('');
+      document.getElementById('own_words').style.display = '';
+    }
   }
   // Tournaments past
   if (D.tournaments_past) {

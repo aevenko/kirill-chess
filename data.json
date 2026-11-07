@@ -70,7 +70,47 @@
     "games_blitz": 30,
     "games_federation": 331,
     "games_updated": "2026-11-02",
-    "games_sources_note": "FQÉ (lente 178 / rapide 97 / blitz 30) + внешние турниры CFC (21 классика, 5 рапид). Партии CMA не считаются. Сверено 2026-11-02."
+    "games_sources_note": "FQÉ (lente 178 / rapide 97 / blitz 30) + внешние турниры CFC (21 классика, 5 рапид). Партии CMA не считаются. Сверено 2026-11-02.",
+    "own_words": {
+      "title_en": "In Kirill's Own Words",
+      "title_ru": "Кирилл о себе",
+      "title_fr": "Kirill, dans ses propres mots",
+      "added": "2026-11-07",
+      "items": [
+        {
+          "q_en": "How it all started",
+          "q_ru": "Как всё началось",
+          "q_fr": "Comment tout a commencé",
+          "a_en": "My dad taught me to play chess when I was five. But I truly understood that chess was more than a game when I came back to it after a break. That's when I knew it was mine.",
+          "a_ru": "Играть в шахматы меня научил папа, когда мне было пять лет. Но по-настоящему я понял, что шахматы для меня больше чем игра, когда вернулся к ним после перерыва. Тогда стало ясно: это моё.",
+          "a_fr": "C'est mon père qui m'a appris à jouer aux échecs quand j'avais cinq ans. Mais j'ai vraiment compris que c'était plus qu'un jeu quand j'y suis revenu après une pause. C'est là que j'ai su que c'était fait pour moi."
+        },
+        {
+          "q_en": "The tournament I remember most",
+          "q_ru": "Турнир, который запомнился больше всего",
+          "q_fr": "Le tournoi qui m'a le plus marqué",
+          "a_en": "A tournament at the chess club in Chambly. I scored 4.5 out of 5 and gained almost 180 rating points. I beat several opponents rated more than 200 points above me. For me it was a huge breakthrough.",
+          "a_ru": "Турнир в шахматном клубе в Шамбли. Я набрал 4,5 очка из 5 и получил почти 180 пунктов рейтинга. Я обыграл нескольких соперников, у которых рейтинг был выше моего больше чем на 200 пунктов. Для меня это был огромный прорыв.",
+          "a_fr": "Un tournoi au club d'échecs de Chambly. J'ai fait 4,5 points sur 5 et gagné près de 180 points de classement. J'ai battu plusieurs adversaires qui avaient plus de 200 points de plus que moi. Pour moi, ça a été une énorme percée."
+        },
+        {
+          "q_en": "What I love about chess",
+          "q_ru": "Что я люблю в шахматах",
+          "q_fr": "Ce que j'aime aux échecs",
+          "a_en": "Most of all, I love calculating variations and finding the best move. I don't have a favourite phase of the game, whether it's the opening, the middlegame or the endgame. What I enjoy is the process itself: working through several lines and finding the strongest one. With White I currently play the Italian Game; before that I played the English Opening for two years. With Black my favourite is the Petrov Defence, also called the Russian Game. The first moves are symmetrical, and then it becomes an interesting positional fight where the player who understands the position better wins. The lines are easy to remember, so for me it's a very efficient opening, and I play it all the time.",
+          "a_ru": "Больше всего я люблю считать варианты и искать лучший ход. Любимой стадии партии у меня нет, будь то дебют, миттельшпиль или эндшпиль. Мне нравится сам процесс: просчитать несколько продолжений и найти самое сильное. Белыми сейчас играю итальянскую партию, а до этого два года играл английское начало. Чёрными мой любимый дебют это защита Петрова, её ещё называют русской партией. Первые ходы там симметричные, а дальше начинается интересная позиционная борьба, где выигрывает тот, кто лучше понимает позицию. Варианты легко запомнить, поэтому для меня это очень эффективный дебют, и я играю его постоянно.",
+          "a_fr": "Ce que j'aime le plus, c'est calculer des variantes et trouver le meilleur coup. Je n'ai pas de phase préférée, que ce soit l'ouverture, le milieu de partie ou la finale. Ce qui me plaît, c'est le processus lui-même : analyser plusieurs suites et trouver la plus forte. Avec les Blancs, je joue maintenant la partie italienne; avant, j'ai joué l'ouverture anglaise pendant deux ans. Avec les Noirs, mon ouverture préférée est la défense Petrov, qu'on appelle aussi la partie russe. Les premiers coups sont symétriques, puis ça devient une lutte positionnelle intéressante, où gagne celui qui comprend le mieux la position. Les variantes sont faciles à retenir, alors pour moi c'est une ouverture très efficace, et je la joue tout le temps."
+        },
+        {
+          "q_en": "My goals",
+          "q_ru": "Мои цели",
+          "q_fr": "Mes objectifs",
+          "a_en": "In the next two years, by the time I'm 15, I want to become at least a Candidate Master. I think that's an ambitious but realistic goal. My big dream is to become a Grandmaster. I don't dream of being the next Magnus Carlsen. If I become a Grandmaster, I'll know my life has worked out.",
+          "a_ru": "В ближайшие два года, к пятнадцати годам, я хочу стать хотя бы кандидатом в мастера. Мне кажется, это амбициозная, но реальная цель. А моя большая мечта: стать гроссмейстером. Я не мечтаю быть вторым Магнусом Карлсеном. Если я стану гроссмейстером, значит, жизнь удалась.",
+          "a_fr": "D'ici deux ans, quand j'aurai 15 ans, je veux devenir au moins Candidat Maître. Je pense que c'est un objectif ambitieux, mais réaliste. Mon grand rêve, c'est de devenir Grand Maître. Je ne rêve pas d'être le prochain Magnus Carlsen. Si je deviens Grand Maître, je saurai que j'ai réussi ma vie."
+        }
+      ]
+    }
   },
   "tournaments_past": [
     {
