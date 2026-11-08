@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — Kirill Chess</title>
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -96,9 +97,11 @@ textarea { min-height:80px; resize:vertical; }
   <div class="login-box">
     <div class="login-logo">KE ♟</div>
     <p class="login-sub">Admin Panel — Kirill Chess</p>
-    <input type="password" id="pwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+    <input type="text" name="username" value="admin" autocomplete="username" style="display:none" aria-hidden="true">
+    <input type="password" id="pwInput" autocomplete="current-password" autofocus placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="btn-gold" onclick="doLogin()">Login</button>
     <div class="login-error" id="loginError">Wrong password. Try again.</div>
+    <a href="/" style="display:inline-block;margin-top:22px;color:var(--muted);font-size:14px;text-decoration:none">← Back to site</a>
   </div>
 </div>
 
@@ -108,6 +111,7 @@ textarea { min-height:80px; resize:vertical; }
     <div class="admin-nav-logo">♟ Admin Panel</div>
     <div class="admin-nav-right">
       <a href="/" class="btn-sm btn-back">← View Site</a>
+      <button class="btn-sm btn-back" onclick="doLogout()">Logout</button>
       <button class="btn-sm btn-save" onclick="downloadAll()">💾 Save &amp; Download</button>
       <button class="btn-sm" id="deployBtn" onclick="deployToVercel()" style="background:#0070f3;color:#fff">📁 GitHub</button>
     </div>
@@ -252,6 +256,7 @@ async function doLogin() {
   const pw = document.getElementById('pwInput').value;
   const hash = await sha256(pw);
   if (hash === ADMIN_PASSWORD_HASH) {
+    try { sessionStorage.setItem('kc_admin', ADMIN_PASSWORD_HASH); } catch (e) {}
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminPanel').style.display = 'block';
     loadData();
@@ -259,6 +264,22 @@ async function doLogin() {
     document.getElementById('loginError').style.display = 'block';
   }
 }
+
+function doLogout() {
+  try { sessionStorage.removeItem('kc_admin'); } catch (e) {}
+  location.href = '/';
+}
+
+// Stay logged in while this browser tab is open (cleared when the tab is closed)
+document.addEventListener('DOMContentLoaded', function () {
+  var ok = false;
+  try { ok = sessionStorage.getItem('kc_admin') === ADMIN_PASSWORD_HASH; } catch (e) {}
+  if (ok) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    loadData();
+  }
+});
 
 // ── DATA ──
 let D = {};

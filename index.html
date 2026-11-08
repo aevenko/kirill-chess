@@ -514,6 +514,9 @@
     .next-tourn-lbl, .next-tourn-meta, .next-tourn-link { grid-column: 1; grid-row: auto; }
   }
 
+  .admin-link { color: rgba(255,255,255,.35); font-size: 12px; letter-spacing: 1px; text-decoration: none; transition: color .2s; order: 3; }
+  .admin-link:hover { color: var(--gold); }
+
   /* About right stats card */
   .about-stats-card {
     background: var(--bg-alt);
@@ -1610,6 +1613,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="nav-logo"><img src="/logo-queen.png" alt="Kirill Evenko Chess">KE</div>
+  <a class="admin-link" href="/admin" rel="nofollow" title="Admin login" data-en="🔒 Admin" data-ru="🔒 Вход для админа" data-fr="🔒 Admin">🔒 Admin</a>
   <p data-en="© 2026 Kirill Evenko · kirillchess.com · Brossard, Québec · Canada" data-ru="© 2026 Kirill Evenko · kirillchess.com · Броссар, Квебек · Канада" data-fr="© 2026 Kirill Evenko · kirillchess.com · Brossard, Québec · Canada">© 2026 Kirill Evenko · kirillchess.com · Brossard, Québec · Canada</p>
 </footer>
 

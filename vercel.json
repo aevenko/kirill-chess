@@ -3,6 +3,10 @@
     {
       "source": "/(about|progress|tournaments|games|gallery|contact)",
       "destination": "/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
     }
   ],
   "headers": [
