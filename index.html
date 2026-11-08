@@ -477,6 +477,43 @@
     .own-words-item { padding: 20px; }
   }
 
+  /* ── Multi-page ── */
+  section[hidden], .ratings-bar[hidden] { display: none !important; }
+  body.subpage section { padding-top: 130px; min-height: 70vh; }
+  .nav-links a.active, #mobileMenu a.active { color: var(--gold); }
+  #home-hub { background: var(--bg); padding-top: 72px; }
+  .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .hub-card {
+    position: relative; display: flex; flex-direction: column; gap: 8px;
+    padding: 28px 28px 30px; background: var(--bg-alt); border: 1px solid var(--border);
+    border-radius: 6px; text-decoration: none; color: var(--text);
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .hub-card:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 10px 24px rgba(0,0,0,.06); }
+  .hub-icon { font-size: 34px; color: var(--gold); line-height: 1; }
+  .hub-title { font-family: 'Anton','Arial Black',Impact,sans-serif; font-size: 24px; letter-spacing: 2px; text-transform: uppercase; }
+  .hub-desc { font-size: 15px; line-height: 1.6; color: var(--text-mid); padding-right: 24px; }
+  .hub-arrow { position: absolute; right: 24px; bottom: 26px; color: var(--gold); font-size: 20px; transition: transform .2s; }
+  .hub-card:hover .hub-arrow { transform: translateX(4px); }
+  .next-tourn {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 6px 28px;
+    margin-bottom: 28px; padding: 22px 28px; border-left: 3px solid var(--gold);
+    background: var(--bg-alt); border-radius: 4px;
+  }
+  .next-tourn-lbl { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 600; grid-row: span 2; }
+  .next-tourn-name { font-size: 20px; font-weight: 600; color: var(--text); }
+  .next-tourn-meta { font-size: 15px; color: var(--text-mid); grid-column: 2; }
+  .next-tourn-link { grid-column: 3; grid-row: 1 / span 2; color: var(--gold); text-decoration: none; font-size: 14px; letter-spacing: 1px; white-space: nowrap; }
+  @media (max-width: 900px) { .hub-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) {
+    body.subpage section { padding-top: 100px; }
+    #home-hub { padding-top: 48px; }
+    .hub-grid { grid-template-columns: 1fr; gap: 12px; }
+    .hub-card { padding: 20px 22px; }
+    .next-tourn { grid-template-columns: 1fr; padding: 18px 20px; }
+    .next-tourn-lbl, .next-tourn-meta, .next-tourn-link { grid-column: 1; grid-row: auto; }
+  }
+
   /* About right stats card */
   .about-stats-card {
     background: var(--bg-alt);
@@ -1309,17 +1346,29 @@
   </style>
 </head>
 <body>
+<script>
+// ── Simple multi-page router: one index.html, one URL per section ──
+(function () {
+  var PAGES = ['about','progress','tournaments','games','gallery','contact'];
+  var h = (location.hash || '').slice(1);
+  var path = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
+  if ((path === '' || path === 'index') && PAGES.indexOf(h) >= 0) { location.replace('/' + h); return; }
+  window.PAGE = PAGES.indexOf(path) >= 0 ? path : 'home';
+  document.body.classList.add(window.PAGE === 'home' ? 'home' : 'subpage', 'pg-' + window.PAGE);
+})();
+</script>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess">KE</div>
+  <a class="nav-logo" href="/" style="text-decoration:none;color:inherit"><img src="/logo-queen.png" alt="Kirill Evenko Chess">KE</a>
   <div class="nav-links">
-    <a href="#about"       data-en="About" data-ru="О нас" data-fr="À propos">About</a>
-    <a href="#progress"    data-en="Progress" data-ru="Прогресс" data-fr="Progrès">Progress</a>
-    <a href="#tournaments" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
-    <a href="#games"       data-en="Games" data-ru="Партии" data-fr="Parties">Games</a>
-    <a href="#gallery"     data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</a>
-    <a href="#contact"     data-en="Contact" data-ru="Контакт" data-fr="Contact">Contact</a>
+    <a href="/" data-en="Home" data-ru="Главная" data-fr="Accueil">Home</a>
+    <a href="/about"       data-en="About" data-ru="О нас" data-fr="À propos">About</a>
+    <a href="/progress"    data-en="Progress" data-ru="Прогресс" data-fr="Progrès">Progress</a>
+    <a href="/tournaments" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
+    <a href="/games"       data-en="Games" data-ru="Партии" data-fr="Parties">Games</a>
+    <a href="/gallery"     data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</a>
+    <a href="/contact"     data-en="Contact" data-ru="Контакт" data-fr="Contact">Contact</a>
   </div>
   <div class="nav-lang">
     <button onclick="setLang('en')" class="active">EN</button>
@@ -1333,12 +1382,13 @@
 
 <!-- MOBILE MENU -->
 <div id="mobileMenu" style="display:none">
-  <a href="#about"       onclick="toggleMenu()" data-en="About" data-ru="О нас" data-fr="À propos">About</a>
-  <a href="#progress"    onclick="toggleMenu()" data-en="Progress" data-ru="Прогресс" data-fr="Progrès">Progress</a>
-  <a href="#tournaments" onclick="toggleMenu()" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
-  <a href="#games"       onclick="toggleMenu()" data-en="Games" data-ru="Партии" data-fr="Parties">Games</a>
-  <a href="#gallery"     onclick="toggleMenu()" data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</a>
-  <a href="#contact"     onclick="toggleMenu()" data-en="Contact" data-ru="Контакт" data-fr="Contact">Contact</a>
+  <a href="/" onclick="toggleMenu()" data-en="Home" data-ru="Главная" data-fr="Accueil">Home</a>
+  <a href="/about"       onclick="toggleMenu()" data-en="About" data-ru="О нас" data-fr="À propos">About</a>
+  <a href="/progress"    onclick="toggleMenu()" data-en="Progress" data-ru="Прогресс" data-fr="Progrès">Progress</a>
+  <a href="/tournaments" onclick="toggleMenu()" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</a>
+  <a href="/games"       onclick="toggleMenu()" data-en="Games" data-ru="Партии" data-fr="Parties">Games</a>
+  <a href="/gallery"     onclick="toggleMenu()" data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</a>
+  <a href="/contact"     onclick="toggleMenu()" data-en="Contact" data-ru="Контакт" data-fr="Contact">Contact</a>
   <button style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:24px;color:inherit;cursor:pointer" onclick="toggleMenu()">CLOSE</button>
 </div>
 
@@ -1381,6 +1431,55 @@
     <!-- filled by JS -->
   </div>
 </div>
+
+
+<!-- HOME HUB (home page only) -->
+<section id="home-hub">
+  <div class="next-tourn" id="nextTourn" style="display:none">
+    <div class="next-tourn-lbl" data-en="Next tournament" data-ru="Ближайший турнир" data-fr="Prochain tournoi">Next tournament</div>
+    <div class="next-tourn-name" id="nextTournName"></div>
+    <div class="next-tourn-meta" id="nextTournMeta"></div>
+    <a class="next-tourn-link" href="/tournaments" data-en="All tournaments →" data-ru="Все турниры →" data-fr="Tous les tournois →">All tournaments →</a>
+  </div>
+  <div class="hub-grid">
+    <a class="hub-card" href="/about">
+      <span class="hub-icon">♔</span>
+      <span class="hub-title" data-en="About" data-ru="О Кирилле" data-fr="À propos">About</span>
+      <span class="hub-desc" data-en="Kirill's story in his own words" data-ru="История Кирилла его словами" data-fr="L'histoire de Kirill, dans ses propres mots">Kirill's story in his own words</span>
+      <span class="hub-arrow">→</span>
+    </a>
+    <a class="hub-card" href="/progress">
+      <span class="hub-icon">♕</span>
+      <span class="hub-title" data-en="Progress" data-ru="Прогресс" data-fr="Progrès">Progress</span>
+      <span class="hub-desc" data-en="Rating chart and wins over stronger opponents" data-ru="График рейтинга и победы над более сильными" data-fr="Courbe de classement et victoires contre plus forts">Rating chart and wins over stronger opponents</span>
+      <span class="hub-arrow">→</span>
+    </a>
+    <a class="hub-card" href="/tournaments">
+      <span class="hub-icon">♖</span>
+      <span class="hub-title" data-en="Tournaments" data-ru="Турниры" data-fr="Tournois">Tournaments</span>
+      <span class="hub-desc" data-en="Tournaments played and coming up" data-ru="Сыгранные и предстоящие турниры" data-fr="Tournois joués et à venir">Tournaments played and coming up</span>
+      <span class="hub-arrow">→</span>
+    </a>
+    <a class="hub-card" href="/games">
+      <span class="hub-icon">♘</span>
+      <span class="hub-title" data-en="Games" data-ru="Партии" data-fr="Parties">Games</span>
+      <span class="hub-desc" data-en="Selected games to replay move by move" data-ru="Избранные партии, ход за ходом" data-fr="Parties choisies, coup par coup">Selected games to replay move by move</span>
+      <span class="hub-arrow">→</span>
+    </a>
+    <a class="hub-card" href="/gallery">
+      <span class="hub-icon">♗</span>
+      <span class="hub-title" data-en="Gallery" data-ru="Галерея" data-fr="Galerie">Gallery</span>
+      <span class="hub-desc" data-en="Moments from 2017 to today" data-ru="Моменты с 2017 года до сегодня" data-fr="Moments de 2017 à aujourd'hui">Moments from 2017 to today</span>
+      <span class="hub-arrow">→</span>
+    </a>
+    <a class="hub-card" href="/contact">
+      <span class="hub-icon">♙</span>
+      <span class="hub-title" data-en="Contact" data-ru="Контакт" data-fr="Contact">Contact</span>
+      <span class="hub-desc" data-en="Get in touch" data-ru="Связаться с нами" data-fr="Nous joindre">Get in touch</span>
+      <span class="hub-arrow">→</span>
+    </a>
+  </div>
+</section>
 
 <!-- PROGRESS -->
 <section id="progress" class="reveal">
@@ -1510,7 +1609,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="nav-logo"><img src="logo-queen.png" alt="Kirill Evenko Chess">KE</div>
+  <div class="nav-logo"><img src="/logo-queen.png" alt="Kirill Evenko Chess">KE</div>
   <p data-en="© 2026 Kirill Evenko · kirillchess.com · Brossard, Québec · Canada" data-ru="© 2026 Kirill Evenko · kirillchess.com · Броссар, Квебек · Канада" data-fr="© 2026 Kirill Evenko · kirillchess.com · Brossard, Québec · Canada">© 2026 Kirill Evenko · kirillchess.com · Brossard, Québec · Canada</p>
 </footer>
 
@@ -1536,10 +1635,15 @@ async function loadSiteData() {
     const r = await fetch('/data.json?_=' + Date.now());
     const D = await r.json();
     applyData(D);
+    try { renderNextTournament(D.tournaments_upcoming); } catch (e2) {}
   } catch(e) {
     console.warn('Could not load data.json, using static content');
   }
+  applyPage();
   initPage();
+  var saved = null;
+  try { saved = localStorage.getItem('kc_lang'); } catch (e) {}
+  if (saved && saved !== 'en' && ['ru','fr'].indexOf(saved) >= 0) setLang(saved);
 }
 
 function applyData(D) {
@@ -1851,6 +1955,48 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+
+// ── Multi-page: show only the current page's sections ──
+function applyPage() {
+  var page = window.PAGE || 'home';
+  var ids = ['hero','home-hub','progress','about','tournaments','games','gallery','contact'];
+  ids.forEach(function (id) {
+    var el = document.getElementById(id); if (!el) return;
+    el.hidden = page === 'home' ? !(id === 'hero' || id === 'home-hub') : id !== page;
+  });
+  var rb = document.querySelector('.ratings-bar'); if (rb) rb.hidden = page !== 'home';
+  document.querySelectorAll('.nav-links a, #mobileMenu a').forEach(function (a) {
+    var hr = (a.getAttribute('href') || '').replace(/^\//, '');
+    a.classList.toggle('active', (hr || 'home') === page);
+  });
+  var T = { about:'About', progress:'Progress', tournaments:'Tournaments', games:'Games', gallery:'Gallery', contact:'Contact' };
+  if (page !== 'home') {
+    document.title = T[page] + ' · Kirill Evenko Chess';
+    var can = document.querySelector('link[rel=canonical]'); if (can) can.href = 'https://kirillchess.com/' + page;
+  }
+}
+
+// Next upcoming tournament on the home page (dates like "Nov 20–22, 2026")
+function renderNextTournament(list) {
+  var box = document.getElementById('nextTourn'); if (!box || !Array.isArray(list)) return;
+  var M = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+  function endDate(s) {
+    var m = String(s || '').match(/([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2})(?:\s*[–-]\s*(?:([A-Za-z]{3})[a-z]*\.?\s+)?(\d{1,2}))?,?\s+(\d{4})/);
+    if (!m) return null;
+    var mon = M[(m[3] || m[1]).toLowerCase()]; if (mon === undefined) return null;
+    return new Date(+m[5], mon, +(m[4] || m[2]), 23, 59);
+  }
+  var now = new Date();
+  var next = list.map(function (t) { return { t: t, d: endDate(t.date) }; })
+                 .filter(function (x) { return x.d && x.d >= now; })
+                 .sort(function (a, b) { return a.d - b.d; })[0];
+  if (!next) return;
+  var t = next.t;
+  document.getElementById('nextTournName').textContent = t.name || '';
+  document.getElementById('nextTournMeta').textContent = [t.date, t.city, t.format].filter(Boolean).join(' · ');
+  box.style.display = '';
+}
+
 // ── Tabs ──
 function switchTab(tab) {
   document.getElementById('panel-past').style.display     = tab === 'past'     ? 'block' : 'none';
@@ -1863,6 +2009,7 @@ function switchTab(tab) {
 let lang = 'en';
 function setLang(l) {
   lang = l;
+  try { localStorage.setItem('kc_lang', l); } catch (e) {}
   document.querySelectorAll('.nav-lang button').forEach(b => b.classList.remove('active'));
   document.querySelector('.nav-lang button[onclick="setLang(\''+l+'\')"]').classList.add('active');
   document.querySelectorAll('[data-en]').forEach(el => {
@@ -2368,6 +2515,7 @@ window.addEventListener('resize', function () {
 });
 
 // ── Start ──
+applyPage();
 loadSiteData();
 </script>
 </body>
