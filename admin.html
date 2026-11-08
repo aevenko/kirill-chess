@@ -70,7 +70,24 @@ textarea { min-height:80px; resize:vertical; }
 .add-row-btn:hover { border-color:var(--gold); color:var(--gold); }
 
 /* Gallery */
-.gallery-editor { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+.gallery-editor { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:12px; }
+.gallery-slot { position:relative; }
+.gallery-slot .g-del { position:absolute; top:6px; right:6px; background:rgba(0,0,0,.55); color:#fff; border:none; border-radius:50%; width:26px; height:26px; cursor:pointer; font-size:16px; line-height:26px; z-index:2; }
+.gallery-slot .g-move { display:flex; gap:6px; justify-content:center; margin-top:4px; }
+.gallery-slot .g-move button { background:var(--bg-alt); border:1px solid var(--border); border-radius:4px; cursor:pointer; padding:2px 10px; font-size:14px; }
+.gallery-slot .g-new { position:absolute; top:6px; left:6px; background:var(--gold); color:#fff; font-size:11px; padding:2px 8px; border-radius:10px; z-index:2; }
+.upload-zone { display:block; border:2px dashed var(--gold); border-radius:8px; padding:22px; text-align:center; color:var(--gold); font-size:16px; cursor:pointer; margin-bottom:16px; background:rgba(160,104,32,.05); }
+.upload-zone input { display:none; }
+.unsaved-bar { display:none; position:sticky; top:64px; z-index:50; background:#fff4e0; border:1px solid var(--gold); color:var(--text); padding:10px 16px; border-radius:6px; margin-bottom:16px; font-size:14px; }
+.unsaved-bar.show { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.ow-item { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:16px; margin-bottom:12px; position:relative; }
+@media (max-width:700px) {
+  .row2,.row3,.row4 { grid-template-columns:1fr !important; }
+  .admin-nav { flex-wrap:wrap; gap:8px; }
+  .admin-nav-right { flex-wrap:wrap; gap:6px; }
+  .login-box { width:92vw; padding:36px 22px; }
+  .rating-row { grid-template-columns:1fr 1fr; }
+}
 .gallery-slot { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:14px; text-align:center; }
 .gallery-slot .emoji { font-size:24px; margin-bottom:8px; }
 .gallery-slot input[type=text] { font-size:13px; text-align:center; margin-bottom:8px; }
@@ -112,12 +129,13 @@ textarea { min-height:80px; resize:vertical; }
     <div class="admin-nav-right">
       <a href="/" class="btn-sm btn-back">← View Site</a>
       <button class="btn-sm btn-back" onclick="doLogout()">Logout</button>
-      <button class="btn-sm btn-save" onclick="downloadAll()">💾 Save &amp; Download</button>
-      <button class="btn-sm" id="deployBtn" onclick="deployToVercel()" style="background:#0070f3;color:#fff">📁 GitHub</button>
+      <button class="btn-sm btn-back" onclick="downloadAll()" title="Резервная копия data.json">⬇ Backup</button>
+      <button class="btn-sm btn-save" id="publishBtn" onclick="publishSite()">🚀 Опубликовать</button>
     </div>
   </nav>
 
   <div class="admin-body">
+    <div class="unsaved-bar" id="unsavedBar"><span>Есть неопубликованные изменения</span><button class="btn-sm btn-save" onclick="publishSite()">🚀 Опубликовать</button></div>
 
     <!-- RATINGS -->
     <div class="section-card">
@@ -133,6 +151,7 @@ textarea { min-height:80px; resize:vertical; }
           <div><label>Slogan (English)</label><input type="text" id="hero_slogan_en"></div>
           <div><label>Slogan (Russian)</label><input type="text" id="hero_slogan_ru"></div>
         </div>
+        <div><label>Slogan (French)</label><input type="text" id="hero_slogan_fr"></div>
         <div class="row3">
           <div><label>FIDE Rating (Hero)</label><input type="number" id="hero_fide"></div>
           <div><label>FIDE Delta (Hero, e.g. +38)</label><input type="text" id="hero_fide_delta"></div>
@@ -156,10 +175,27 @@ textarea { min-height:80px; resize:vertical; }
         <div><label>Games Recorded</label><input type="number" id="about_games" style="max-width:200px"></div>
         <label>Paragraph 1 (English)</label><textarea id="about_p1_en"></textarea>
         <label>Paragraph 1 (Russian)</label><textarea id="about_p1_ru"></textarea>
+        <label>Paragraph 1 (French)</label><textarea id="about_p1_fr"></textarea>
         <label>Paragraph 2 (English)</label><textarea id="about_p2_en"></textarea>
         <label>Paragraph 2 (Russian)</label><textarea id="about_p2_ru"></textarea>
+        <label>Paragraph 2 (French)</label><textarea id="about_p2_fr"></textarea>
         <label>Paragraph 3 (English)</label><textarea id="about_p3_en"></textarea>
         <label>Paragraph 3 (Russian)</label><textarea id="about_p3_ru"></textarea>
+        <label>Paragraph 3 (French)</label><textarea id="about_p3_fr"></textarea>
+      </div>
+    </div>
+
+    <!-- OWN WORDS -->
+    <div class="section-card">
+      <div class="section-card-header"><h2>💬 Кирилл о себе (вопросы и ответы)</h2></div>
+      <div class="section-card-body">
+        <div class="row3">
+          <div><label>Title (English)</label><input type="text" id="ow_title_en"></div>
+          <div><label>Title (Russian)</label><input type="text" id="ow_title_ru"></div>
+          <div><label>Title (French)</label><input type="text" id="ow_title_fr"></div>
+        </div>
+        <div id="ownWordsEditor"></div>
+        <button class="add-row-btn" onclick="addOwnWord()">+ Добавить вопрос</button>
       </div>
     </div>
 
@@ -196,47 +232,15 @@ textarea { min-height:80px; resize:vertical; }
     <div class="section-card">
       <div class="section-card-header"><h2>📸 Gallery Photos</h2></div>
       <div class="section-card-body">
-        <div style="background:rgba(160,104,32,.1);border:1px solid rgba(160,104,32,.3);border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:14px;line-height:1.7"><strong>📸 Как добавить фото:</strong><br>1. Откройте <a href="https://github.com/aevenko/kirill-chess/tree/main/photos" target="_blank" style="color:#0070f3"><strong>папку photos на GitHub</strong></a><br>2. Нажмите кнопку <strong>Add file</strong> → <strong>Upload files</strong><br>3. Перетащите ваше фото в окно загрузки<br>4. Нажмите <strong>Commit changes</strong> внизу страницы<br>5. Через ~30 секунд фото появится на сайте автоматически</div>
+        <label class="upload-zone">📷 Добавить фото (можно сразу несколько)
+          <input type="file" accept="image/*" multiple onchange="addPhotos(this)">
+        </label>
+        <p style="color:var(--muted);font-size:13px;margin:-6px 0 14px">Первое фото в списке самое крупное в галерее. Стрелками можно менять порядок, × убирает фото с сайта. После изменений нажмите «Опубликовать».</p>
         <div class="gallery-editor" id="galleryEditor"></div>
       </div>
     </div>
 
-    <!-- SAVE INSTRUCTIONS -->
-    <div>
-          <h2>✅ Как обновить сайт</h2>
-          <ol style="margin:0;padding-left:22px;line-height:2.2;font-size:15px">
-            <li>Нажмите <strong>💾 Save &amp; Download</strong> — скачается новый <code>data.json</code></li>
-            <li>Откройте GitHub: <a href="https://github.com/aevenko/kirill-chess" target="_blank" style="color:#0070f3">github.com/aevenko/kirill-chess</a></li>
-            <li>Нажмите на файл <code>data.json</code> → кнопка редактирования ✏️ → вставьте содержимое нового файла</li>
-            <li>Нажмите <strong>Commit changes</strong> — сайт обновится автоматически через ~30 секунд</li>
-          </ol>
-          <p style="margin:14px 0 0;color:var(--muted);font-size:13px">📸 Для фото: зайдите в папку <code>photos/</code> на GitHub → кнопка <strong>+</strong> → <strong>Upload files</strong> → перетащите фото → <strong>Commit changes</strong></p>
-        </div>
-
-    <div>
-          <h2>&#128640; &#1054;&#1087;&#1091;&#1073;&#1083;&#1080;&#1082;&#1086;&#1074;&#1072;&#1090;&#1100; &#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103;</h2>
-          <p style="color:var(--muted);margin:0 0 16px">
-            &#1055;&#1086;&#1089;&#1083;&#1077; &#1090;&#1086;&#1075;&#1086; &#1082;&#1072;&#1082; &#1085;&#1072;&#1078;&#1072;&#1083;&#1080; <strong>&#128190; &#1057;&#1086;&#1093;&#1088;&#1072;&#1085;&#1080;&#1090;&#1100; &#1080; &#1057;&#1082;&#1072;&#1095;&#1072;&#1090;&#1100;</strong> &#8212; &#1089;&#1082;&#1072;&#1095;&#1072;&#1085;&#1085;&#1099;&#1081; <code>data.json</code> (&#1080; &#1092;&#1086;&#1090;&#1086;, &#1077;&#1089;&#1083;&#1080; &#1076;&#1086;&#1073;&#1072;&#1074;&#1083;&#1103;&#1083;&#1080;) &#1085;&#1091;&#1078;&#1085;&#1086; &#1087;&#1086;&#1083;&#1086;&#1078;&#1080;&#1090;&#1100; &#1074; &#1087;&#1072;&#1087;&#1082;&#1091; <code>kirill-chess</code>. &#1055;&#1086;&#1090;&#1086;&#1084; &#1085;&#1072;&#1078;&#1084;&#1080;&#1090;&#1077; &#1082;&#1085;&#1086;&#1087;&#1082;&#1091; &#1085;&#1080;&#1078;&#1077;.
-          </p>
-          <a href="https://vercel.com/anton-evenkos-projects/project-w45ap" target="_blank"
-             style="display:inline-block;background:#0070f3;color:#fff;font-weight:700;font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;margin-bottom:12px">
-            &#128640; &#1054;&#1090;&#1082;&#1088;&#1099;&#1090;&#1100; Vercel Dashboard
-          </a>
-          <div>
-          <h2>🚀 Открыть GitHub</h2>
-          <p style="color:var(--muted);margin:0 0 16px">Все обновления сайта делаются через GitHub. Нажмите кнопку ниже:</p>
-          <a href="https://github.com/aevenko/kirill-chess" target="_blank"
-             style="display:inline-block;background:#24292f;color:#fff;font-weight:700;font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;margin-bottom:16px">
-            📁 Открыть GitHub репозиторий
-          </a>
-          <div style="background:rgba(0,200,100,.07);border:1px solid rgba(0,200,100,.3);border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.8">
-            <strong>Как это работает:</strong><br>
-            1. Обновите файл на GitHub (data.json или фото)<br>
-            2. Нажмите <strong>Commit changes</strong><br>
-            3. Vercel автоматически задеплоит изменения за ~30 секунд ✅
-          </div>
-        </div>
-        </div>
+    <p style="color:var(--muted);font-size:14px;text-align:center;margin:28px 0 40px">После нажатия «🚀 Опубликовать» сайт обновится примерно через минуту.</p>
 
   </div>
 </div>
@@ -244,55 +248,84 @@ textarea { min-height:80px; resize:vertical; }
 <div id="toast"></div>
 
 <script>
-const ADMIN_PASSWORD_HASH = 'bfe9586bdca203e0a6f62f3bde29dfa7245be81de9942ba05a45159ff3eeeb3a';
+// ── API ──
+let SESSION = null;
+try { SESSION = sessionStorage.getItem('kc_admin_session'); } catch (e) {}
 
-async function sha256(str) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+async function api(action, payload) {
+  const r = await fetch('/api/admin', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(Object.assign({ action, session: SESSION }, payload || {}))
+  });
+  let j = {}; try { j = await r.json(); } catch (e) {}
+  if (r.status === 401 && action !== 'login') { showLogin('Сессия истекла, войдите снова.'); throw new Error('session'); }
+  if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+  return j;
+}
+
+function showLogin(msg) {
+  SESSION = null; try { sessionStorage.removeItem('kc_admin_session'); } catch (e) {}
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  const er = document.getElementById('loginError');
+  if (msg) { er.textContent = msg; er.style.display = 'block'; }
+}
+function showPanel() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  loadData();
 }
 
 // ── AUTH ──
 async function doLogin() {
   const pw = document.getElementById('pwInput').value;
-  const hash = await sha256(pw);
-  if (hash === ADMIN_PASSWORD_HASH) {
-    try { sessionStorage.setItem('kc_admin', ADMIN_PASSWORD_HASH); } catch (e) {}
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminPanel').style.display = 'block';
-    loadData();
-  } else {
-    document.getElementById('loginError').style.display = 'block';
+  const er = document.getElementById('loginError');
+  er.style.display = 'none';
+  try {
+    const j = await api('login', { password: pw });
+    SESSION = j.session;
+    try { sessionStorage.setItem('kc_admin_session', SESSION); } catch (e) {}
+    showPanel();
+  } catch (e) {
+    er.textContent = e.message === 'Wrong password' ? 'Неверный пароль. Попробуйте ещё раз.' : e.message;
+    er.style.display = 'block';
   }
 }
 
 function doLogout() {
-  try { sessionStorage.removeItem('kc_admin'); } catch (e) {}
+  if (dirty() && !confirm('Есть неопубликованные изменения. Всё равно выйти?')) return;
+  try { sessionStorage.removeItem('kc_admin_session'); } catch (e) {}
   location.href = '/';
 }
 
-// Stay logged in while this browser tab is open (cleared when the tab is closed)
-document.addEventListener('DOMContentLoaded', function () {
-  var ok = false;
-  try { ok = sessionStorage.getItem('kc_admin') === ADMIN_PASSWORD_HASH; } catch (e) {}
-  if (ok) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminPanel').style.display = 'block';
-    loadData();
-  }
+document.addEventListener('DOMContentLoaded', async function () {
+  if (!SESSION) return;
+  try { await api('check'); showPanel(); } catch (e) {}
+});
+
+window.addEventListener('beforeunload', function (e) {
+  if (dirty()) { e.preventDefault(); e.returnValue = ''; }
 });
 
 // ── DATA ──
 let D = {};
 
+let ORIG = null;
+const pendingPhotos = {};   // filename -> dataURL (resized), uploaded on publish
+
 async function loadData() {
   try {
+    const j = await api('load');
+    D = j.data;
+  } catch (e) {
+    if (e.message === 'session') return;
+    showToast('Не удалось загрузить данные с GitHub: ' + e.message);
     const r = await fetch('/data.json?_=' + Date.now());
     D = await r.json();
-  } catch(e) {
-    showToast('Could not load data.json — using defaults');
-    D = getDefaultData();
   }
+  ORIG = JSON.parse(JSON.stringify(D));
   renderAll();
+  setInterval(updateDirty, 1500);
 }
 
 function getDefaultData() {
@@ -348,6 +381,7 @@ function renderAll() {
   // Hero
   document.getElementById('hero_slogan_en').value = D.hero?.slogan_en || '';
   document.getElementById('hero_slogan_ru').value = D.hero?.slogan_ru || '';
+  document.getElementById('hero_slogan_fr').value = D.hero?.slogan_fr || '';
   document.getElementById('hero_fide').value = D.hero_stats?.fide_rating || '';
   document.getElementById('hero_fide_delta').value = D.hero_stats?.fide_delta || '';
   document.getElementById('hero_cfc').value = D.hero_stats?.cfc_rating || '';
@@ -363,6 +397,8 @@ function renderAll() {
   document.getElementById('about_p2_ru').value = D.about?.para2_ru || '';
   document.getElementById('about_p3_en').value = D.about?.para3_en || '';
   document.getElementById('about_p3_ru').value = D.about?.para3_ru || '';
+  ['1','2','3'].forEach(n => document.getElementById('about_p'+n+'_fr').value = D.about?.['para'+n+'_fr'] || '');
+  renderOwnWords();
   // Ratings
   renderRatings();
   // Tournaments
@@ -563,34 +599,143 @@ function addYearGroup() {
 }
 
 // ── GALLERY ──
+function photoSrc(f) { return pendingPhotos[f] || ('/photos/' + f); }
 function renderGallery() {
   const el = document.getElementById('galleryEditor');
-  el.innerHTML = (D.gallery||[]).map((g,i) => `
+  const G = D.gallery || [];
+  el.innerHTML = G.map((g,i) => `
     <div class="gallery-slot">
-      <div class="emoji">${g.emoji}</div>
-      <img id="gimg_${i}" class="gallery-img-preview" src="${g.file ? '/photos/'+g.file : ''}" style="${g.file?'display:block':'display:none'}">
-      <input type="text" value="${g.label_ru}" placeholder="Label (RU)" onchange="D.gallery[${i}].label_ru=this.value">
-      <input type="file" accept="image/*" onchange="handlePhoto(${i},this)">
-      ${g.file ? `<small style="color:var(--muted);font-size:11px">${g.file}</small>` : ''}
+      ${pendingPhotos[g.file] ? '<span class="g-new">новое</span>' : ''}
+      <button class="g-del" title="Убрать с сайта" onclick="removePhoto(${i})">×</button>
+      <img class="gallery-img-preview" src="${g.file ? escHtml(photoSrc(g.file)) : ''}" style="display:${g.file?'block':'none'};height:130px">
+      <input type="text" value="${escHtml(g.label_ru||'')}" placeholder="Подпись (RU)" onchange="D.gallery[${i}].label_ru=this.value">
+      <input type="text" value="${escHtml(g.label_en||'')}" placeholder="Caption (EN)" onchange="D.gallery[${i}].label_en=this.value">
+      <input type="text" value="${escHtml(g.label_fr||'')}" placeholder="Légende (FR)" onchange="D.gallery[${i}].label_fr=this.value">
+      <div class="g-move">
+        <button onclick="movePhoto(${i},-1)" ${i===0?'disabled':''}>←</button>
+        <button onclick="movePhoto(${i},1)" ${i===G.length-1?'disabled':''}>→</button>
+      </div>
     </div>
   `).join('');
 }
+function removePhoto(i) {
+  if (!confirm('Убрать это фото с сайта?')) return;
+  const g = D.gallery.splice(i,1)[0];
+  if (g && pendingPhotos[g.file]) delete pendingPhotos[g.file];
+  renderGallery();
+}
+function movePhoto(i, d) {
+  const j = i + d; if (j < 0 || j >= D.gallery.length) return;
+  const t = D.gallery[i]; D.gallery[i] = D.gallery[j]; D.gallery[j] = t;
+  renderGallery();
+}
+function resizeImage(file, max) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      let w = img.naturalWidth, h = img.naturalHeight;
+      const k = Math.min(1, max / Math.max(w, h)); w = Math.round(w*k); h = Math.round(h*k);
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL('image/jpeg', 0.85));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Не удалось прочитать фото ' + file.name)); };
+    img.src = url;
+  });
+}
+async function addPhotos(input) {
+  const files = Array.from(input.files || []); input.value = '';
+  if (!files.length) return;
+  if (!D.gallery) D.gallery = [];
+  showToast('Готовлю фото…');
+  for (const f of files) {
+    try {
+      const dataUrl = await resizeImage(f, 1600);
+      const name = 'p_' + new Date().toISOString().slice(0,10) + '_' + Math.random().toString(36).slice(2,8) + '.jpg';
+      pendingPhotos[name] = dataUrl;
+      D.gallery.unshift({ emoji:'📸', label_en:'', label_ru:'', label_fr:'', file:name });
+    } catch (e) { showToast(e.message); }
+  }
+  renderGallery();
+  showToast('Фото добавлены. Добавьте подписи и нажмите «Опубликовать».');
+}
 
-const photoFiles = {};
-function handlePhoto(i, input) {
-  const file = input.files[0];
-  if (!file) return;
-  const ext = file.name.split('.').pop();
-  const fname = 'photo_' + i + '_' + Date.now() + '.' + ext;
-  D.gallery[i].file = fname;
-  photoFiles[fname] = file;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = document.getElementById('gimg_' + i);
-    img.src = e.target.result;
-    img.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
+// ── OWN WORDS ──
+function renderOwnWords() {
+  const ow = D.about && D.about.own_words;
+  ['en','ru','fr'].forEach(l => document.getElementById('ow_title_'+l).value = ow ? (ow['title_'+l]||'') : '');
+  const items = ow ? ow.items : [];
+  document.getElementById('ownWordsEditor').innerHTML = items.map((it,i) => `
+    <div class="ow-item">
+      <button class="delete-row" style="position:absolute;top:10px;right:10px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:18px" onclick="if(confirm('Удалить вопрос?')){D.about.own_words.items.splice(${i},1);renderOwnWords()}">×</button>
+      ${['en','ru','fr'].map(l => `
+        <label>Question (${l.toUpperCase()})</label><input type="text" value="${escHtml(it['q_'+l]||'')}" onchange="D.about.own_words.items[${i}].q_${l}=this.value">
+        <label>Answer (${l.toUpperCase()})</label><textarea onchange="D.about.own_words.items[${i}].a_${l}=this.value">${escHtml(it['a_'+l]||'')}</textarea>`).join('')}
+    </div>`).join('');
+}
+function addOwnWord() {
+  if (!D.about.own_words) D.about.own_words = { title_en:"In Kirill's Own Words", title_ru:'Кирилл о себе', title_fr:'Kirill, dans ses propres mots', items:[] };
+  D.about.own_words.items.push({ q_en:'', q_ru:'', q_fr:'', a_en:'', a_ru:'', a_fr:'' });
+  renderOwnWords();
+}
+
+// ── PUBLISH ──
+function isObj(x) { return x && typeof x === 'object' && !Array.isArray(x); }
+function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+function diffChanges(o, n) {
+  const out = [];
+  const keys = new Set([...Object.keys(o||{}), ...Object.keys(n||{})]);
+  keys.forEach(k => {
+    if (same(o[k], n[k])) return;
+    if (isObj(o[k]) && isObj(n[k])) {
+      new Set([...Object.keys(o[k]), ...Object.keys(n[k])]).forEach(k2 => {
+        if (same(o[k][k2], n[k][k2])) return;
+        if (isObj(o[k][k2]) && isObj(n[k][k2])) {
+          new Set([...Object.keys(o[k][k2]), ...Object.keys(n[k][k2])]).forEach(k3 => {
+            if (!same(o[k][k2][k3], n[k][k2][k3])) out.push({ path:[k,k2,k3], value:n[k][k2][k3] });
+          });
+        } else out.push({ path:[k,k2], value:n[k][k2] });
+      });
+    } else out.push({ path:[k], value:n[k] });
+  });
+  return out;
+}
+function currentChanges() {
+  if (!ORIG) return [];
+  try { collectData(); } catch (e) {}
+  sortTournaments();
+  return diffChanges(ORIG, D);
+}
+function dirty() { return ORIG && (currentChanges().length > 0 || Object.keys(pendingPhotos).length > 0); }
+function updateDirty() { document.getElementById('unsavedBar').classList.toggle('show', !!dirty()); }
+
+let publishing = false;
+async function publishSite() {
+  if (publishing) return;
+  const changes = currentChanges();
+  const used = new Set((D.gallery||[]).map(g => g.file));
+  const toUpload = Object.keys(pendingPhotos).filter(f => used.has(f));
+  if (!changes.length && !toUpload.length) { showToast('Нет изменений для публикации'); return; }
+  publishing = true;
+  const btn = document.getElementById('publishBtn'); const old = btn.textContent;
+  try {
+    const photos = [];
+    for (let i = 0; i < toUpload.length; i++) {
+      btn.textContent = '⏳ Фото ' + (i+1) + '/' + toUpload.length;
+      const j = await api('upload', { base64: pendingPhotos[toUpload[i]] });
+      photos.push({ name: toUpload[i], sha: j.sha });
+    }
+    btn.textContent = '⏳ Публикую…';
+    await api('publish', { changes, photos, message: 'Admin: update site' + (photos.length ? ' (+' + photos.length + ' photo)' : '') });
+    Object.keys(pendingPhotos).forEach(k => delete pendingPhotos[k]);
+    ORIG = JSON.parse(JSON.stringify(D));
+    renderGallery(); updateDirty();
+    showToast('✅ Опубликовано! Сайт обновится примерно через минуту.');
+  } catch (e) {
+    if (e.message !== 'session') showToast('Ошибка публикации: ' + e.message);
+  } finally { publishing = false; btn.textContent = old; }
 }
 
 // ── COLLECT & DOWNLOAD ──
@@ -611,6 +756,9 @@ function collectData() {
   D.about.para2_ru = document.getElementById('about_p2_ru').value;
   D.about.para3_en = document.getElementById('about_p3_en').value;
   D.about.para3_ru = document.getElementById('about_p3_ru').value;
+  D.hero.slogan_fr = document.getElementById('hero_slogan_fr').value;
+  ['1','2','3'].forEach(n => D.about['para'+n+'_fr'] = document.getElementById('about_p'+n+'_fr').value);
+  if (D.about.own_words) ['en','ru','fr'].forEach(l => D.about.own_words['title_'+l] = document.getElementById('ow_title_'+l).value);
 }
 
 function downloadAll() {
@@ -624,18 +772,7 @@ function downloadAll() {
   document.body.appendChild(a); a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  // Download photos
-  setTimeout(() => {
-    Object.entries(photoFiles).forEach(([name, file]) => {
-      const u = URL.createObjectURL(file);
-      const b = document.createElement('a');
-      b.href = u; b.download = name;
-      document.body.appendChild(b); b.click();
-      document.body.removeChild(b);
-      URL.revokeObjectURL(u);
-    });
-    showToast('✅ data.json скачан! Теперь загрузите его на GitHub');
-  }, 300);
+  showToast('⬇ Резервная копия data.json скачана');
 }
 
 function showToast(msg) {
@@ -646,10 +783,6 @@ function showToast(msg) {
 }
 
 
-// ══ OPEN GITHUB ══
-function deployToVercel() {
-  window.open('https://github.com/aevenko/kirill-chess', '_blank');
-}
 </script>
 </body>
 </html>
