@@ -64,13 +64,13 @@
     "para3_ru": "Этот сайт создан, чтобы следить за каждым шагом этого пути — победами и поражениями, прорывами и уроками. Чтобы сохранить лучшие моменты истории, которая ещё только пишется.",
     "years_playing": 8,
     "prize_places": 12,
-    "games_recorded": 331,
-    "games_classical": 199,
+    "games_recorded": 334,
+    "games_classical": 202,
     "games_rapid": 102,
     "games_blitz": 30,
-    "games_federation": 331,
-    "games_updated": "2026-11-02",
-    "games_sources_note": "FQÉ (lente 178 / rapide 97 / blitz 30) + внешние турниры CFC (21 классика, 5 рапид). Партии CMA не считаются. Сверено 2026-11-02.",
+    "games_federation": 334,
+    "games_updated": "2026-11-09",
+    "games_sources_note": "FQÉ (lente 181 / rapide 97 / blitz 30) + внешние турниры CFC (21 классика, 5 рапид). Партии CMA не считаются. Сверено 2026-11-09.",
     "own_words": {
       "title_en": "In Kirill's Own Words",
       "title_ru": "Кирилл о себе",
@@ -1046,11 +1046,11 @@
     "email": "a.evenko@gmail.com"
   },
   "sources": {
-    "checked_at": "2026-11-02",
+    "checked_at": "2026-11-09",
     "fide": null,
     "cfc": {
       "url": "https://www.chess.ca/en/ratings/p/?id=187189",
-      "updated": "2026-10-29",
+      "updated": "2026-11-05",
       "regular": 1999,
       "quick": 1690,
       "games_regular": 91,
@@ -1089,8 +1089,8 @@
     "fqe": {
       "url": "https://www.fqechecs.qc.ca/membres/index.php?Id=109477",
       "classical": [
-        1874,
-        178
+        1848,
+        181
       ],
       "rapid": [
         1688,
