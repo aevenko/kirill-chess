@@ -1075,6 +1075,40 @@
     font-family: sans-serif;
   }
   #lightbox-close:hover { color: #fff; }
+  .lb-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,.12);
+    color: rgba(255,255,255,.85);
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, color .2s;
+    font-family: sans-serif;
+    padding: 0 0 4px;
+  }
+  .lb-nav:hover { background: rgba(255,255,255,.25); color: #fff; }
+  #lightbox-prev { left: 20px; }
+  #lightbox-next { right: 20px; }
+  #lightbox-counter {
+    position: absolute;
+    bottom: 18px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,.7);
+    font-size: 14px;
+    font-family: sans-serif;
+    letter-spacing: .05em;
+  }
+  @media (max-width: 768px) {
+    .lb-nav { width: 42px; height: 42px; font-size: 26px; }
+    #lightbox-prev { left: 8px; }
+    #lightbox-next { right: 8px; }
+  }
 
   /* ── LICHESS MODAL ── */
   #lichessModal {
@@ -1620,7 +1654,10 @@
 <!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()">
   <button id="lightbox-close" onclick="closeLightbox()">×</button>
-  <img id="lightbox-img" src="" alt="">
+  <button class="lb-nav" id="lightbox-prev" aria-label="Previous" onclick="event.stopPropagation(); lightboxStep(-1)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  <button class="lb-nav" id="lightbox-next" aria-label="Next" onclick="event.stopPropagation(); lightboxStep(1)">&#8250;</button>
+  <div id="lightbox-counter"></div>
 </div>
 
 <!-- LICHESS MODAL -->
@@ -2038,11 +2075,41 @@ function checkMobile() {
 }
 
 // ── Lightbox ──
+var lbList = [], lbIndex = 0;
 function openLightbox(src) {
-  document.getElementById('lightbox-img').src = src;
+  lbList = Array.prototype.map.call(document.querySelectorAll('#galleryGrid .gallery-item img'), function(i){ return i.getAttribute('src'); });
+  lbIndex = Math.max(0, lbList.indexOf(src));
+  if (!lbList.length) lbList = [src];
+  showLightboxImage();
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+function showLightboxImage() {
+  document.getElementById('lightbox-img').src = lbList[lbIndex];
+  var many = lbList.length > 1;
+  document.getElementById('lightbox-prev').style.display = many ? '' : 'none';
+  document.getElementById('lightbox-next').style.display = many ? '' : 'none';
+  document.getElementById('lightbox-counter').textContent = many ? (lbIndex + 1) + ' / ' + lbList.length : '';
+  // preload neighbours
+  if (many) {
+    [1, -1].forEach(function(d){ var im = new Image(); im.src = lbList[(lbIndex + d + lbList.length) % lbList.length]; });
+  }
+}
+function lightboxStep(d) {
+  if (lbList.length < 2) return;
+  lbIndex = (lbIndex + d + lbList.length) % lbList.length;
+  showLightboxImage();
+}
+(function(){
+  var lb = document.getElementById('lightbox'), x0 = null, y0 = null;
+  lb.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, {passive:true});
+  lb.addEventListener('touchend', function(e){
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { lightboxStep(dx < 0 ? 1 : -1); }
+    x0 = y0 = null;
+  });
+})();
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.getElementById('lightbox-img').src = '';
@@ -2064,6 +2131,10 @@ function closeLichessModal() {
 // Close modals with Escape key
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { closeLightbox(); closeLichessModal(); }
+  if (document.getElementById('lightbox').classList.contains('open')) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); lightboxStep(1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); lightboxStep(-1); }
+  }
 });
 
 // ══════════════════════════════════════════
