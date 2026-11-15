@@ -572,18 +572,19 @@
       "place": "22 of 30",
       "place_tag": "place-other",
       "link": "https://s1.chess-results.com/tnr1461779.aspx?lan=1&art=1&turdet=YES&flag=30&SNode=S0"
+    },
+    {
+      "name": "Grand Prix #1 (AEM), U14",
+      "date": "Nov 8, 2026",
+      "city": "Montréal, QC",
+      "format": "Rapid",
+      "score": "3.5 / 5",
+      "place": "6–8 of 33",
+      "place_tag": "place-other",
+      "link": "https://www.chessroster.com/tournaments/hj5wQEPTGqQN/reports?section=3"
     }
   ],
   "tournaments_upcoming": [
-    {
-      "name": "Grand Prix #1 (AEM)",
-      "date": "Nov 8, 2026",
-      "city": "Montréal, QC",
-      "format": "Classical",
-      "link": "https://chess-math.org/grand-prix-2026-2027?v=138",
-      "status": "Registered",
-      "status_en": "Planned"
-    },
     {
       "name": "Open de Gatineau",
       "date": "Nov 20–22, 2026",
