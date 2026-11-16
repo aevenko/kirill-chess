@@ -937,6 +937,21 @@
       "file": "photo_4_1777730868270.jpeg"
     },
     {
+      "emoji": "♟",
+      "label_en": "Haut-Richelieu Championship, October 2026",
+      "label_ru": "Чемпионат Haut-Richelieu, октябрь 2026",
+      "label_fr": "Championnat du Haut-Richelieu, octobre 2026",
+      "file": "g_2026-10-24_richelieu.jpg"
+    },
+    {
+      "emoji": "🎥",
+      "label_en": "Video: Montreal Open 2026",
+      "label_ru": "Видео: Montreal Open 2026",
+      "label_fr": "Vidéo : Omnium de Montréal 2026",
+      "file": "v_2026-09-07_montreal_open_poster.jpg",
+      "video": "v_2026-09-07_montreal_open.mp4"
+    },
+    {
       "emoji": "🎯",
       "label_en": "Full focus at the board",
       "label_ru": "Полная концентрация",
@@ -944,11 +959,25 @@
       "file": "g_2026-09-05_180.jpg"
     },
     {
+      "emoji": "🤝",
+      "label_en": "Handshake before the game, September 2026",
+      "label_ru": "Рукопожатие перед партией, сентябрь 2026",
+      "label_fr": "Poignée de main avant la partie, septembre 2026",
+      "file": "g_2026-09-02_handshake.jpg"
+    },
+    {
       "emoji": "♟",
       "label_en": "Canadian Youth Championship, Ottawa 2026",
       "label_ru": "Чемпионат Канады среди юношей, Оттава 2026",
       "label_fr": "Championnat canadien jeunesse, Ottawa 2026",
       "file": "g_2026-07-23_169.jpg"
+    },
+    {
+      "emoji": "🎯",
+      "label_en": "Deep in thought, Laval Open 2026",
+      "label_ru": "Глубокое раздумье, Laval Open 2026",
+      "label_fr": "En pleine réflexion, Omnium de Laval 2026",
+      "file": "g_2026-06-26_laval.jpg"
     },
     {
       "emoji": "🏆",
@@ -970,6 +999,13 @@
       "label_ru": "Défi Échiquéen du Québec 2026",
       "label_fr": "Défi Échiquéen du Québec 2026",
       "file": "g_2026-04-26_148.jpg"
+    },
+    {
+      "emoji": "🏆",
+      "label_en": "With Dad and the trophy, April 2026",
+      "label_ru": "С папой и кубком, апрель 2026",
+      "label_fr": "Avec papa et le trophée, avril 2026",
+      "file": "g_2026-04-26_dad_trophy.jpg"
     },
     {
       "emoji": "🤝",

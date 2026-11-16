@@ -606,6 +606,7 @@ function renderGallery() {
   el.innerHTML = G.map((g,i) => `
     <div class="gallery-slot">
       ${pendingPhotos[g.file] ? '<span class="g-new">новое</span>' : ''}
+      ${g.video ? '<span class="g-new" style="left:auto;right:40px">▶ видео</span>' : ''}
       <button class="g-del" title="Убрать с сайта" onclick="removePhoto(${i})">×</button>
       <img class="gallery-img-preview" src="${g.file ? escHtml(photoSrc(g.file)) : ''}" style="display:${g.file?'block':'none'};height:130px">
       <input type="text" value="${escHtml(g.label_ru||'')}" placeholder="Подпись (RU)" onchange="D.gallery[${i}].label_ru=this.value">

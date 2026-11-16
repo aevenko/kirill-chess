@@ -1056,6 +1056,22 @@
     cursor: zoom-out;
   }
   #lightbox.open { display: flex; }
+  .gallery-play {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(0,0,0,.55); color: #fff;
+    font-size: 24px; display: flex; align-items: center; justify-content: center;
+    padding-left: 4px; pointer-events: none; font-family: sans-serif;
+  }
+  #lightbox-video {
+    max-width: 90vw;
+    max-height: 88vh;
+    border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.7);
+    background: #000;
+    cursor: default;
+  }
   #lightbox img {
     max-width: 90vw;
     max-height: 88vh;
@@ -1659,6 +1675,7 @@
   <button id="lightbox-close" onclick="closeLightbox()">×</button>
   <button class="lb-nav" id="lightbox-prev" aria-label="Previous" onclick="event.stopPropagation(); lightboxStep(-1)">&#8249;</button>
   <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+  <video id="lightbox-video" controls playsinline preload="metadata" style="display:none" onclick="event.stopPropagation()"></video>
   <button class="lb-nav" id="lightbox-next" aria-label="Next" onclick="event.stopPropagation(); lightboxStep(1)">&#8250;</button>
   <div id="lightbox-counter"></div>
 </div>
@@ -1845,7 +1862,7 @@ function applyData(D) {
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = D.gallery.map(g => {
       if (g.file) {
-        return `<div class="gallery-item" onclick="openLightbox('/photos/${g.file}')"><img src="/photos/${g.file}" alt="${g['label_' + lang] || g.label_en}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:${g.pos || 'center 30%'};border-radius:4px"><div class="gallery-overlay">🔍</div></div>`;
+        return `<div class="gallery-item" onclick="openLightbox('/photos/${g.file}')"><img src="/photos/${g.file}"${g.video ? ` data-video="/photos/${g.video}"` : ''} alt="${g['label_' + lang] || g.label_en}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:${g.pos || 'center 30%'};border-radius:4px">${g.video ? '<div class="gallery-play">▶</div>' : ''}<div class="gallery-overlay">${g.video ? '▶' : '🔍'}</div></div>`;
       } else {
         return `<div class="gallery-item"><div class="gallery-placeholder">${g.emoji}${g.label_ru}</div><div class="gallery-overlay">🔍</div></div>`;
       }
@@ -2078,9 +2095,11 @@ function checkMobile() {
 }
 
 // ── Lightbox ──
-var lbList = [], lbIndex = 0;
+var lbList = [], lbVideo = [], lbIndex = 0;
 function openLightbox(src) {
-  lbList = Array.prototype.map.call(document.querySelectorAll('#galleryGrid .gallery-item img'), function(i){ return i.getAttribute('src'); });
+  var imgs = document.querySelectorAll('#galleryGrid .gallery-item img');
+  lbList = Array.prototype.map.call(imgs, function(i){ return i.getAttribute('src'); });
+  lbVideo = Array.prototype.map.call(imgs, function(i){ return i.getAttribute('data-video') || ''; });
   lbIndex = Math.max(0, lbList.indexOf(src));
   if (!lbList.length) lbList = [src];
   showLightboxImage();
@@ -2088,7 +2107,17 @@ function openLightbox(src) {
   document.body.style.overflow = 'hidden';
 }
 function showLightboxImage() {
-  document.getElementById('lightbox-img').src = lbList[lbIndex];
+  var img = document.getElementById('lightbox-img'), vid = document.getElementById('lightbox-video');
+  var v = lbVideo[lbIndex];
+  vid.pause();
+  if (v) {
+    img.style.display = 'none'; img.src = '';
+    vid.poster = lbList[lbIndex]; vid.src = v; vid.style.display = '';
+    var p = vid.play(); if (p && p.catch) p.catch(function(){});
+  } else {
+    vid.removeAttribute('src'); vid.load(); vid.style.display = 'none';
+    img.style.display = ''; img.src = lbList[lbIndex];
+  }
   var many = lbList.length > 1;
   document.getElementById('lightbox-prev').style.display = many ? '' : 'none';
   document.getElementById('lightbox-next').style.display = many ? '' : 'none';
@@ -2116,6 +2145,8 @@ function lightboxStep(d) {
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.getElementById('lightbox-img').src = '';
+  var vid = document.getElementById('lightbox-video');
+  vid.pause(); vid.removeAttribute('src'); vid.load(); vid.style.display = 'none';
   document.body.style.overflow = '';
 }
 
