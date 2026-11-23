@@ -69,8 +69,8 @@
     "games_rapid": 102,
     "games_blitz": 38,
     "games_federation": 342,
-    "games_updated": "2026-11-16",
-    "games_sources_note": "FQÉ (lente 181 / rapide 97 / blitz 38) + внешние турниры CFC (21 классика, 5 рапид). Партии CMA не считаются. Сверено 2026-11-16.",
+    "games_updated": "2026-11-23",
+    "games_sources_note": "FQÉ (lente 181 / rapide 97 / blitz 38) + внешние турниры CFC (21 классика, 5 рапид). Партии CMA не считаются. Сверено 2026-11-23.",
     "own_words": {
       "title_en": "In Kirill's Own Words",
       "title_ru": "Кирилл о себе",
@@ -1084,11 +1084,11 @@
     "email": "a.evenko@gmail.com"
   },
   "sources": {
-    "checked_at": "2026-11-16",
+    "checked_at": "2026-11-23",
     "fide": null,
     "cfc": {
       "url": "https://www.chess.ca/en/ratings/p/?id=187189",
-      "updated": "2026-11-12",
+      "updated": "2026-11-19",
       "regular": 1999,
       "quick": 1690,
       "games_regular": 91,
