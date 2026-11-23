@@ -582,18 +582,19 @@
       "place": "6–8 of 33",
       "place_tag": "place-other",
       "link": "https://www.chessroster.com/tournaments/hj5wQEPTGqQN/reports?section=3"
+    },
+    {
+      "name": "Open de Gatineau (section 2000+)",
+      "date": "Nov 20–22, 2026",
+      "city": "Gatineau, QC",
+      "format": "Classical",
+      "score": "1.5 / 5",
+      "place": "27–30 of 38",
+      "place_tag": "place-other",
+      "link": "https://www.chessroster.com/tournaments/drE1IaQbnU6i/reports?section=0"
     }
   ],
   "tournaments_upcoming": [
-    {
-      "name": "Open de Gatineau",
-      "date": "Nov 20–22, 2026",
-      "city": "Gatineau",
-      "format": "Classical",
-      "link": "https://www.fqechecs.qc.ca/vue/clubs/content.php?Id=16489",
-      "status": "Planned",
-      "status_en": "Planned"
-    },
     {
       "name": "Tournoi du Père Noël 2026",
       "date": "Dec 26–30, 2026",
@@ -1474,7 +1475,7 @@
     ],
     "start": "2024-07"
   },
-  "upsets_extra_note": "Результаты без записанных партий (нет PGN/Lichess). Рейтинги — FIDE, у обеих сторон, как их показывает chess-results на момент турнира. В поле note — та же пара по национальной шкале CFC.",
+  "upsets_extra_note": "Результаты без записанных партий (нет PGN/Lichess). Рейтинги — FIDE, у обеих сторон, как их показывает chess-results на момент турнира. В поле note — та же пара по национальной шкале CFC. Исключение: Open de Gatineau 2026 — там в таблице только рейтинги CFC, поэтому и в opp_rating/my_rating стоят CFC.",
   "upsets_extra": [
     {
       "opp": "Vu, Huy Minh",
@@ -1575,6 +1576,26 @@
       "event": "Haut-Richelieu · Section A · R1",
       "date": "Oct 2026",
       "note": "CFC 2000 vs 2216"
+    },
+    {
+      "opp": "Fritzsche, Helmut",
+      "opp_rating": 2026,
+      "my_rating": 1999,
+      "result": "win",
+      "color": "white",
+      "event": "Open de Gatineau · 2000+ · R5",
+      "date": "Nov 2026",
+      "note": "CFC 1999 vs 2026 (рейтинги турнира, FIDE не указан)"
+    },
+    {
+      "opp": "Guiza, David",
+      "opp_rating": 2062,
+      "my_rating": 1999,
+      "result": "draw",
+      "color": "white",
+      "event": "Open de Gatineau · 2000+ · R4",
+      "date": "Nov 2026",
+      "note": "CFC 1999 vs 2062 (рейтинги турнира, FIDE не указан)"
     }
   ]
 }
