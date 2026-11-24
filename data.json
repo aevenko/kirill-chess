@@ -596,6 +596,24 @@
   ],
   "tournaments_upcoming": [
     {
+      "name": "Grand Tour Jeunesse du Québec · Phase 1 (Tour de la Réussite)",
+      "date": "Nov 29, 2026",
+      "city": "Montréal, QC",
+      "format": "Rapid",
+      "link": "https://www.tourdelareussite.org/grand-tour",
+      "status": "Registered",
+      "status_en": "Registered"
+    },
+    {
+      "name": "Tournoi de qualification #1 (AEM)",
+      "date": "Dec 13, 2026",
+      "city": "Montréal, QC",
+      "format": "Rapid",
+      "link": "https://chess-math.org/event/qualification-tournament-2026-2027",
+      "status": "Registered",
+      "status_en": "Registered"
+    },
+    {
       "name": "Tournoi du Père Noël 2026",
       "date": "Dec 26–30, 2026",
       "city": "Montréal, QC",
